@@ -15,6 +15,15 @@ export default [
 				...globals.browser,
 				...globals.node
 			}
+		},
+		rules: {
+			'no-unused-vars': [
+				'warn',
+				{
+					argsIgnorePattern: '^_'
+				}
+			],
+			'svelte/no-at-html-tags': 'off'
 		}
 	},
 	{
