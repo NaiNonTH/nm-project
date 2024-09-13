@@ -1,31 +1,19 @@
+import { CalcError, LinearAlgebraAnswer } from './classes.js';
+
 export function rootOfEquation(func, expr, ...args) {
-	if (!expr) {
-		return {
-			type: 'error',
-			message: 'Expression cannot be empty.'
-		};
-	}
+	if (!expr) return new CalcError('Expression cannot be empty.');
 
 	try {
-		const answer = func(expr, ...args);
-		return {
-			type: 'answer',
-			answer
-		};
+		return func(expr, ...args);
 	} catch (err) {
-		return {
-			type: 'error',
-			message: err.toString()
-		};
+		return new CalcError(err.toString());
 	}
 }
 
 export function linearAlgebra(func, ...matrices) {
-	const [x, y, z] = func(...matrices);
-	return {
-		type: 'answer',
-		answer: `x = ${x}, y = ${y}, z = ${z}`
-	};
+	let values = func(...matrices);
+	console.log(values)
+	return new LinearAlgebraAnswer(values);
 }
 
 export function generateMatrix(rows) {
