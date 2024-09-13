@@ -13,11 +13,11 @@
 		<p>
 			{#if result.type === 'error'}
 				{result.message}
-			{:else if result.topic === "root-of-equation"}
+			{:else if result.topic === 'root-of-equation'}
 				{result.value}
-			{:else if result.topic === "linear-algebra"}
+			{:else if result.topic === 'linear-algebra'}
 				{#each result.values as value, i}
-					x<sub>{i + 1}</sub> = {value}{i == result.values.length ? "" : ", "}
+					x<sub>{i + 1}</sub> = {value}{i == result.values.length ? '' : ', '}
 				{/each}
 			{/if}
 		</p>

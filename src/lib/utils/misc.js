@@ -12,7 +12,7 @@ export function rootOfEquation(func, expr, ...args) {
 
 export function linearAlgebra(func, ...matrices) {
 	let values = func(...matrices);
-	console.log(values)
+	console.log(values);
 	return new LinearAlgebraAnswer(values);
 }
 

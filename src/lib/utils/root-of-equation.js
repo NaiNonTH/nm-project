@@ -188,7 +188,7 @@ export function newtonRaphson(expr, init, error = 0.000001) {
 
 	const fn = (x) => evaluate(expr, { x });
 	const fn1 = (x) => evaluate(derivative(expr, 'x').toString(), { x });
-	
+
 	let x0,
 		x1,
 		x_error,
