@@ -76,29 +76,27 @@ export function jacobi(A, B, error = 0.000001) {
 	let iteration = 0;
 
 	while (iteration < 999) {
-	    for (let i = 0; i < A.length; ++i) {
-	        let ans = B[i][0];
-		
-	        for (let j = 0; j < A[0].length; ++j) {
-	            if (j != i)
-	                ans -= A[i][j] * x0[j];
-	        }
-		
-	        x1[i] = ans / A[i][i];
-	    }
+		for (let i = 0; i < A.length; ++i) {
+			let ans = B[i][0];
 
-	    let ok = true;
-	    for (let i = 0; i < x0.length; ++i) {
-	        if (Math.abs(x1[i] - x0[i]) > error) {
-	            ok = false;
-	            break;
-	        }
-	    }
+			for (let j = 0; j < A[0].length; ++j) {
+				if (j != i) ans -= A[i][j] * x0[j];
+			}
 
-	    if (ok)
-	        return x1;
-	
-	    x0 = [...x1];
-	    ++iteration;
+			x1[i] = ans / A[i][i];
+		}
+
+		let ok = true;
+		for (let i = 0; i < x0.length; ++i) {
+			if (Math.abs(x1[i] - x0[i]) > error) {
+				ok = false;
+				break;
+			}
+		}
+
+		if (ok) return x1;
+
+		x0 = [...x1];
+		++iteration;
 	}
 }

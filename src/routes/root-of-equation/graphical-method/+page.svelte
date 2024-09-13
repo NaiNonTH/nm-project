@@ -2,8 +2,8 @@
 	import Input from '$lib/components/Input.svelte';
 	import Answer from '$lib/components/Answer.svelte';
 	import Math from '$lib/components/Math.svelte';
-	import { rootOfEquation } from '$lib/utils/misc.js';
 
+	import { rootOfEquation } from '$lib/utils/misc.js';
 	import { graphicalMethod } from '$lib/utils/root-of-equation.js';
 
 	let expr = '',
