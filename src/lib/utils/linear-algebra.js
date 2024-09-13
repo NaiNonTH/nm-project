@@ -1,8 +1,56 @@
+function det(A) {
+	const size = A.length;
+
+	let sum = 0,
+		difference = 0;
+
+	for (let i = 0; i < size; ++i) {
+		let multiplied = 1;
+
+		for (let j = 0; j < size; ++j) {
+			multiplied *= A[j][(j + i) % size];
+		}
+
+		sum += multiplied;
+	}
+
+	for (let i = 0; i < size; ++i) {
+		let multiplied = 1;
+
+		for (let j = size - 1; j >= 0; --j) {
+			multiplied *= A[j][(Math.abs(j - i - size) - 1) % size];
+		}
+
+		difference += multiplied;
+	}
+
+	return sum - difference;
+}
+
+export function cramersRule(A, B) {
+	const size = A.length;
+	let returnArr = [];
+
+	const detA = det(A);
+
+	for (let i = 0; i < size; ++i) {
+		const tempMatrix = structuredClone(A);
+
+		for (let j = 0; j < size; ++j) {
+			tempMatrix[j][i] = B[j][0];
+		}
+
+		returnArr.push(det(tempMatrix) / detA);
+	}
+
+	return returnArr;
+}
+
 export function gauss(matrix) {
 	const size = matrix.length;
 
 	for (let i = 0; i < size - 1; ++i) {
-		const row = structuredClone(matrix[i]);
+		const row = [...matrix[i]];
 		const diagonal = row[i];
 
 		for (let j = i + 1; j < size; ++j) {
@@ -35,7 +83,7 @@ export function gaussJordan(matrix) {
 	const size = matrix.length;
 
 	for (let i = 0; i < size - 1; ++i) {
-		const row = structuredClone(matrix[i]);
+		const row = [...matrix[i]];
 		const diagonal = row[i];
 
 		for (let j = i + 1; j < size; ++j) {
@@ -48,7 +96,7 @@ export function gaussJordan(matrix) {
 	}
 
 	for (let i = size - 1; i > 0; --i) {
-		const row = structuredClone(matrix[i]);
+		const row = [...matrix[i]];
 		const diagonal = row[i];
 
 		for (let j = i - 1; j >= 0; --j) {
