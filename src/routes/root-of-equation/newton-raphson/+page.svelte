@@ -21,29 +21,31 @@
 
 <Math iterative {expr} bind:isInvalid={expr_isInvalid} />
 <form on:submit|preventDefault={() => (result = rootOfEquation(newtonRaphson, expr, init, error))}>
-	<Input
-		label="Math Formula"
-		type="text"
-		name="expr"
-		placeholder="(x * x) / 7"
-		bind:value={expr}
-		bind:isInvalid={expr_isInvalid}
-	/>
-	<Input
-		label="Initial Value"
-		type="number"
-		name="init"
-		bind:value={init}
-		bind:isInvalid={init_isInvalid}
-	/>
-	<Input
-		label="Error Threshold"
-		type="number"
-		name="error"
-		bind:value={error}
-		bind:isInvalid={error_isInvalid}
-	/>
-	<div class="button-zone">
+	<div class="same-line">
+		<Input
+			label="Math Formula"
+			type="text"
+			name="expr"
+			placeholder="(x * x) / 7"
+			bind:value={expr}
+			bind:isInvalid={expr_isInvalid}
+		/>
+		<Input
+			label="Initial Value"
+			type="number"
+			name="init"
+			bind:value={init}
+			bind:isInvalid={init_isInvalid}
+		/>
+		<Input
+			label="Error Threshold"
+			type="number"
+			name="error"
+			bind:value={error}
+			bind:isInvalid={error_isInvalid}
+		/>
+	</div>
+	<div>
 		<button disabled={expr_isInvalid || init_isInvalid || error_isInvalid} type="submit"
 			>Calculate</button
 		>

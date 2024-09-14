@@ -14,7 +14,7 @@
 	}
 </script>
 
-<div class="size-config">
+<div class="size-config same-line">
 	<label for="matrixSize">Matrix Size</label>
 	<input
 		on:wheel|preventDefault={changeSizeThroughWheel}
@@ -37,7 +37,7 @@
 		bind:value={size}
 	/>
 </div>
-<div class="matrix-input">
+<div class="matrix-input same-line">
 	<div style:grid-template-columns="repeat({size}, 3.5rem)" class="a-input">
 		{#each Array(size) as _, i}
 			{#each Array(size) as _, j}
@@ -66,17 +66,10 @@
 </div>
 
 <style>
-	.size-config,
-	.matrix-input {
-		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
-		gap: 1rem;
-	}
 	.size-config {
-		min-width: 100%;
 		align-items: center;
 	}
+
 	.matrix-input {
 		gap: 8px;
 	}
@@ -95,9 +88,7 @@
 
 		font-size: 1.5em;
 	}
-	label {
-		display: block;
-	}
+	
 	input[type='range'] {
 		appearance: none;
 

@@ -25,30 +25,32 @@
 <form
 	on:submit|preventDefault={() => (result = rootOfEquation(falsePosition, expr, start, end, error))}
 >
-	<Input
-		label="Math Formula"
-		type="text"
-		name="expr"
-		placeholder="(x ^ 4) - 13"
-		bind:value={expr}
-		bind:isInvalid={expr_isInvalid}
-	/>
-	<Input
-		label="Start"
-		type="number"
-		name="start"
-		bind:value={start}
-		bind:isInvalid={start_isInvalid}
-	/>
-	<Input label="End" type="number" name="end" bind:value={end} bind:isInvalid={end_isInvalid} />
-	<Input
-		label="Error Threshold"
-		type="number"
-		name="error"
-		bind:value={error}
-		bind:isInvalid={error_isInvalid}
-	/>
-	<div class="button-zone">
+	<div class="same-line">
+		<Input
+			label="Math Formula"
+			type="text"
+			name="expr"
+			placeholder="(x ^ 4) - 13"
+			bind:value={expr}
+			bind:isInvalid={expr_isInvalid}
+		/>
+		<Input
+			label="Start"
+			type="number"
+			name="start"
+			bind:value={start}
+			bind:isInvalid={start_isInvalid}
+		/>
+		<Input label="End" type="number" name="end" bind:value={end} bind:isInvalid={end_isInvalid} />
+		<Input
+			label="Error Threshold"
+			type="number"
+			name="error"
+			bind:value={error}
+			bind:isInvalid={error_isInvalid}
+		/>
+	</div>
+	<div>
 		<button
 			disabled={expr_isInvalid || start_isInvalid || end_isInvalid || error_isInvalid}
 			type="submit">Calculate</button

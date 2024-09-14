@@ -23,35 +23,37 @@
 
 <Math iterative {expr} bind:isInvalid={expr_isInvalid} />
 <form on:submit|preventDefault={() => (result = rootOfEquation(secantMethod, expr, init1, error))}>
-	<Input
-		label="Math Formula"
-		type="text"
-		name="expr"
-		placeholder="(x * x) / 7"
-		bind:value={expr}
-		bind:isInvalid={expr_isInvalid}
-	/>
-	<Input
-		label="First Initial Value"
-		type="number"
-		name="init1"
-		bind:value={init1}
-		bind:isInvalid={init1_isInvalid}
-	/>
-	<Input
-		label="Second Initial Value"
-		type="number"
-		name="init1"
-		bind:value={init2}
-		bind:isInvalid={init2_isInvalid}
-	/>
-	<Input
-		label="Error Threshold"
-		type="number"
-		name="error"
-		bind:value={error}
-		bind:isInvalid={error_isInvalid}
-	/>
+	<div class="same-line">
+		<Input
+			label="Math Formula"
+			type="text"
+			name="expr"
+			placeholder="(x * x) / 7"
+			bind:value={expr}
+			bind:isInvalid={expr_isInvalid}
+		/>
+		<Input
+			label="First Initial Value"
+			type="number"
+			name="init1"
+			bind:value={init1}
+			bind:isInvalid={init1_isInvalid}
+		/>
+		<Input
+			label="Second Initial Value"
+			type="number"
+			name="init1"
+			bind:value={init2}
+			bind:isInvalid={init2_isInvalid}
+		/>
+		<Input
+			label="Error Threshold"
+			type="number"
+			name="error"
+			bind:value={error}
+			bind:isInvalid={error_isInvalid}
+		/>
+	</div>
 	<div class="button-zone">
 		<button
 			disabled={expr_isInvalid || init1_isInvalid || init2_isInvalid || error_isInvalid}

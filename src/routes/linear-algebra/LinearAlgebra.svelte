@@ -23,7 +23,7 @@
 
 <form on:submit|preventDefault={submit}>
 	<MatrixInput bind:size bind:A bind:B />
-	<div class="button-zone">
+	<div>
 		<button disabled={AisInvalid || BisInvalid} type="submit">Calculate</button>
 	</div>
 </form>

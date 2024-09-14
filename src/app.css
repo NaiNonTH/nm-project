@@ -53,16 +53,16 @@ button:disabled {
 	cursor: not-allowed;
 }
 
-form {
+form > * {
+	margin: 1rem 0;
+}
+form .same-line {
 	display: flex;
-	justify-content: center;
 	flex-wrap: wrap;
+	justify-content: center;
 	gap: 1rem;
 }
-form .button-zone {
-	min-width: 100%;
-}
-form .button-zone button {
+form button[type="submit"] {
 	display: block;
 	margin: auto;
 }
@@ -132,21 +132,15 @@ main > section {
 
 	color: inherit;
 }
-.site-nav a[aria-current='true']::after {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 50%;
-	transform: translateY(-50%);
-
-	background: #bcbdf5;
-	width: 1rem;
-	height: 0.75rem;
-
-	clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+.site-nav li:first-of-type a {
+	border-top-left-radius: 1rem;
 }
-.site-nav a:hover,
-.site-nav a:focus-visible {
+.site-nav a[aria-current='true'] {
+	background: #eaeafa;
+	box-shadow: inset -1px -3px 3px #fff, inset 1px 2px 2px #0005;
+}
+.site-nav a:not([aria-current="true"]):hover,
+.site-nav a:not([aria-current="true"]):focus-visible {
 	background: #fff;
 }
 
