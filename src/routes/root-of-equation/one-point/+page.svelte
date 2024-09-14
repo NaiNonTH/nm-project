@@ -46,10 +46,7 @@
 		/>
 	</div>
 	<div>
-		<button
-			disabled={expr_isInvalid || init_isInvalid || error_isInvalid}
-			type="submit"
-		>
+		<button disabled={expr_isInvalid || init_isInvalid || error_isInvalid} type="submit">
 			Calculate
 		</button>
 	</div>

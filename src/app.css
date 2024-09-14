@@ -62,7 +62,7 @@ form .same-line {
 	justify-content: center;
 	gap: 1rem;
 }
-form button[type="submit"] {
+form button[type='submit'] {
 	display: block;
 	margin: auto;
 }
@@ -137,10 +137,12 @@ main > section {
 }
 .site-nav a[aria-current='true'] {
 	background: #eaeafa;
-	box-shadow: inset -1px -3px 3px #fff, inset 1px 2px 2px #0005;
+	box-shadow:
+		inset -1px -3px 3px #fff,
+		inset 1px 2px 2px #0005;
 }
-.site-nav a:not([aria-current="true"]):hover,
-.site-nav a:not([aria-current="true"]):focus-visible {
+.site-nav a:not([aria-current='true']):hover,
+.site-nav a:not([aria-current='true']):focus-visible {
 	background: #fff;
 }
 

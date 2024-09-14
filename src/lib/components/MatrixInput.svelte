@@ -88,7 +88,7 @@
 
 		font-size: 1.5em;
 	}
-	
+
 	input[type='range'] {
 		appearance: none;
 

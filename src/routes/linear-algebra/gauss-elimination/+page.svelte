@@ -1,5 +1,5 @@
 <script>
-	import LinearAlgebra from "../LinearAlgebra.svelte";
+	import LinearAlgebra from '../LinearAlgebra.svelte';
 	import { gauss } from '$lib/utils/linear-algebra.js';
 </script>
 

@@ -29,7 +29,7 @@
 	on:submit|preventDefault={() =>
 		(result = rootOfEquation(graphicalMethod, expr, start, end, error))}
 >
-	<div class='same-line'>
+	<div class="same-line">
 		<Input
 			label="Math Formula"
 			type="text"

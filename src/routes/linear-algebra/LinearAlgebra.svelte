@@ -2,8 +2,8 @@
 	import MatrixInput from '$lib/components/MatrixInput.svelte';
 	import Answer from '$lib/components/Answer.svelte';
 
-    export let func;
-    export let joinMatrix = false;
+	export let func;
+	export let joinMatrix = false;
 
 	import { joinedMatrix, matrixIsInvalid, linearAlgebra } from '$lib/utils/misc.js';
 
@@ -13,12 +13,10 @@
 	$: AisInvalid = matrixIsInvalid(A, size, size);
 	$: BisInvalid = matrixIsInvalid(B, size, 1);
 
-    function submit() {
-        if (joinMatrix)
-            result = linearAlgebra(func, joinedMatrix(A, B));
-        else
-            result = linearAlgebra(func, A, B);
-    }
+	function submit() {
+		if (joinMatrix) result = linearAlgebra(func, joinedMatrix(A, B));
+		else result = linearAlgebra(func, A, B);
+	}
 </script>
 
 <form on:submit|preventDefault={submit}>
