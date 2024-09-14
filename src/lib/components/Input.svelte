@@ -5,7 +5,7 @@
 	export let placeholder = '';
 
 	export let value = '';
-	export let isInvalid;
+	export let isInvalid = false;
 
 	export let step = 'any';
 </script>
