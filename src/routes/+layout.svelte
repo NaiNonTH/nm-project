@@ -10,6 +10,10 @@
 		{
 			title: 'Linear Algebra',
 			href: '/linear-algebra'
+		},
+		{
+			title: 'Interpolation',
+			href: '/interpolation'
 		}
 	];
 </script>
@@ -27,8 +31,9 @@
 		<hr />
 		{#each links as { title, href }}
 			<li>
-				<a aria-current={$page.url.pathname.includes(href) && $page.status == 200} {href}>{title}</a
-				>
+				<a aria-current={$page.url.pathname.includes(href) && $page.status == 200} {href}>
+					{title}
+				</a>
 			</li>
 		{/each}
 	</ul>
