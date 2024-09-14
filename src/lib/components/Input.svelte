@@ -1,5 +1,5 @@
 <script>
-	export let label = 'unlabelled';
+	export let label = null;
 	export let name = 'untitled';
 	export let type = 'text';
 	export let placeholder = '';
@@ -11,7 +11,9 @@
 </script>
 
 <div>
-	<label for={name}>{label}:</label>
+	{#if label}
+		<label for={name}>{label}:</label>
+	{/if}
 	{#if type === 'text'}
 		<input
 			required
