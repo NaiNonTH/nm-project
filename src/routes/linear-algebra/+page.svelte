@@ -12,4 +12,7 @@
 	<li>
 		<a href="/linear-algebra/jacobi-method">Jacobi Method</a>
 	</li>
+	<li>
+		<a href="/linear-algebra/gauss-seidel">Gauss-Seidel</a>
+	</li>
 </ul>
