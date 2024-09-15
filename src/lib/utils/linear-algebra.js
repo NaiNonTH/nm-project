@@ -123,7 +123,7 @@ export function jacobi(A, B, error = 0.000001) {
 
 	let iteration = 0;
 
-	while (iteration < 999) {
+	while (iteration <= 999) {
 		for (let i = 0; i < A.length; ++i) {
 			let ans = B[i][0];
 
