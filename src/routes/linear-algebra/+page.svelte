@@ -9,4 +9,7 @@
 	<li>
 		<a href="/linear-algebra/gauss-jordan">Gauss-Jordan</a>
 	</li>
+	<li>
+		<a href="/linear-algebra/jacobi-method">Jacobi Method</a>
+	</li>
 </ul>
