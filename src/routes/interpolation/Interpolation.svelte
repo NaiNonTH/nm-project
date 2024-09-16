@@ -21,8 +21,6 @@
 		y_data.some((num, i) => i < count && typeof num !== 'number') ||
 		filter.size < 2;
 
-	$: console.log(x_filtered, y_filtered);
-
 	function toggleFilter(checked, i) {
 		if (!checked) filter.delete(i);
 		else filter.add(i);
