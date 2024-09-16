@@ -3,11 +3,11 @@
 *::after {
 	box-sizing: border-box;
 }
-:first-child {
-	margin-top: 0;
+#site :first-child {
+	margin-top: 0 !important;
 }
-:last-child {
-	margin-bottom: 0;
+#site :last-child {
+	margin-bottom: 0 !important;
 }
 
 html {
@@ -196,6 +196,11 @@ input.invalid {
 	box-shadow: 0 0 3px red;
 }
 
+#answer > * {
+	margin: 1rem 0;
+	padding: 1rem;
+}
+
 #output {
 	position: relative;
 	padding: 1rem;
@@ -214,6 +219,22 @@ input.invalid {
 	border-left: 1px solid #dcdcff;
 	border-right: 1px solid #dcdcff;
 	background: #fcfcff;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+table tr:nth-child(odd) td {
+	background: #fafaff;
+}
+table th,
+table td {
+	padding: 0.5em;
+}
+table th {
+	text-align: left;
+	background: #dcdcff;
 }
 
 @media (max-width: 48rem) {
