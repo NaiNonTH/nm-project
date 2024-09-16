@@ -118,8 +118,8 @@ export function gaussJordan(matrix) {
 }
 
 export function jacobi(A, B, error = 0.000001) {
-	let x0 = [0, 0, 0, 0];
-	let x1 = [0, 0, 0, 0];
+	let x0 = new Array(A.length).fill(0);
+	let x1 = new Array(A.length).fill(0);
 
 	let iteration = 0;
 
@@ -136,34 +136,38 @@ export function jacobi(A, B, error = 0.000001) {
 
 		let ok = true;
 		for (let i = 0; i < x0.length; ++i) {
-			if (Math.abs(x1[i] - x0[i]) > error) {
+			if (Math.abs(x1[i] - x0[i]) >= error) {
 				ok = false;
 				break;
 			}
 		}
 
-		if (ok) return x1;
+		if (ok) break;
 
 		x0 = [...x1];
 		++iteration;
 	}
+
+	return x1;
 }
 
 export function gaussSeidel(A, B, error = 0.000001) {
-	let x0 = [0, 0, 0, 0];
-	let x1 = [0, 0, 0, 0];
+	let x0 = new Array(A.length).fill(0);
+	let x1 = new Array(A.length).fill(0);
 
 	let iteration = 0;
 
 	while (iteration <= 999) {
 		for (let i = 0; i < A.length; ++i) {
-			let ans = B[i];
+			let ans = B[i][0];
 
 			for (let j = 0; j < A[0].length; ++j) {
 				if (j != i) ans -= A[i][j] * x1[j];
 			}
 
 			x1[i] = ans / A[i][i];
+
+			console.log(x1);
 		}
 
 		let ok = true;
@@ -174,9 +178,11 @@ export function gaussSeidel(A, B, error = 0.000001) {
 			}
 		}
 
-		if (ok) return x1;
+		if (ok) break;
 
 		x0 = [...x1];
 		++iteration;
 	}
+
+	return x1;
 }
