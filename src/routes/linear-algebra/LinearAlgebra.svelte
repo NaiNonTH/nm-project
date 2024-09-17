@@ -1,6 +1,6 @@
 <script>
 	import MatrixInput from '$lib/components/MatrixInput.svelte';
-	import Answer from '$lib/components/Answer.svelte';
+	import LinearAlgebraAnswer from '$lib/components/Answer/LinearAlgebraAnswer.svelte';
 
 	export let func;
 	export let joinMatrix = false;
@@ -26,4 +26,4 @@
 	</div>
 </form>
 
-<Answer {result} />
+<LinearAlgebraAnswer {result} />

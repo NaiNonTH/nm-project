@@ -1,7 +1,7 @@
 <script>
 	import Input from '$lib/components/Input.svelte';
 	import Math from '$lib/components/Math.svelte';
-	import Answer from '$lib/components/Answer.svelte';
+	import RootOfEquationAnswer from '$lib/components/Answer/RootOfEquationAnswer.svelte';
 
 	import { rootOfEquation } from '$lib/utils/misc.js';
 	import { newtonRaphson } from '$lib/utils/root-of-equation.js';
@@ -52,4 +52,4 @@
 	</div>
 </form>
 
-<Answer {result} />
+<RootOfEquationAnswer {result} />

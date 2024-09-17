@@ -6,60 +6,62 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 
 	let f = (x) => evaluate(expr, { x });
 
-	let i;
-	let previousError = Infinity;
+	let x;
+	let error_previous = Infinity;
 	let iteration = 0;
 	let rangeToRoute;
 
 	let progress = [];
 
-	for (i = start; i <= end; ++i) {
-		const value = f(i);
-		const valueError = Math.abs(value);
+	for (x = start; x <= end; ++x) {
+		const y = f(x);
+		const y_error = Math.abs(y);
 
 		progress.push({
 			Iteration: iteration,
-			x: i,
-			y: value,
-			'Error (%)': error
+			x,
+			y,
+			'Error (%)': y_error
 		});
 
-		if (previousError < valueError) {
-			rangeToRoute = i;
+		if (error_previous < y_error) {
+			rangeToRoute = x;
 			break;
-		} else previousError = valueError;
+		} else error_previous = y_error;
 		++iteration;
 	}
 
-	previousError = Infinity;
+	error_previous = Infinity;
 
-	for (i = rangeToRoute - 1; i < rangeToRoute; i += error) {
-		const value = f(i);
-		const valueError = Math.abs(value);
+	for (x = rangeToRoute - 1; x < rangeToRoute; x += error) {
+		const y = f(x);
+		const y_error = Math.abs(y);
 
 		if (iteration % 10000 === 0)
 			progress.push({
 				Iteration: iteration,
-				x: i,
-				y: value,
-				'Error (%)': error
+				x,
+				y,
+				'Error (%)': y_error
 			});
 
-		if (previousError < valueError) {
+		if (error_previous < y_error) {
 			progress.push({
 				Iteration: iteration,
-				x: i,
-				y: value,
-				'Error (%)': error
+				x,
+				y,
+				'Error (%)': y_error
 			});
 
 			return new RootOfEquationAnswer(
-				i,
+				x,
 				iteration,
 				progress,
 				(timeBegin - performance.now()).toFixed(2)
 			);
-		} else previousError = valueError;
+		}
+		
+		error_previous = y_error;
 		++iteration;
 	}
 }
