@@ -125,7 +125,7 @@ export function gaussJordan(matrix) {
 	return new LinearAlgebraAnswer(returnArr, (performance.now() - timeBegin).toFixed(2));
 }
 
-export function gaussSeidel(A, B, error = 0.000001) {
+export function jacobi(A, B, error = 0.000001) {
 	const timeBegin = performance.now();
 	
 	let x0 = new Array(A.length).fill(0);
