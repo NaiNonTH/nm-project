@@ -11,5 +11,8 @@
                 x<sub>{i + 1}</sub> = {value.toFixed(precision)}<br>
             {/each}
         </svelte:fragment>
+        <svelte:fragment slot="executionTime">
+            {result.executionTime}
+        </svelte:fragment>
     </Answer>
 {/if}

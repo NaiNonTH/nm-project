@@ -57,7 +57,7 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 				x,
 				iteration,
 				progress,
-				(timeBegin - performance.now()).toFixed(2)
+				(performance.now() - timeBegin).toFixed(2)
 			);
 		}
 		
@@ -103,7 +103,7 @@ export function bisection(expr, xl, xr, error = 0.000001) {
 		xm,
 		iteration,
 		progress,
-		(timeBegin - performance.now()).toFixed(2)
+		(performance.now() - timeBegin).toFixed(2)
 	);
 }
 
@@ -147,7 +147,7 @@ export function falsePosition(expr, xl, xr, error = 0.000001) {
 		x1,
 		iteration,
 		progress,
-		(timeBegin - performance.now()).toFixed(2)
+		(performance.now() - timeBegin).toFixed(2)
 	);
 }
 
@@ -181,7 +181,7 @@ export function onePoint(expr, init, error = 0.000001) {
 		x1,
 		iteration,
 		progress,
-		(timeBegin - performance.now()).toFixed(2)
+		(performance.now() - timeBegin).toFixed(2)
 	);
 }
 
@@ -216,7 +216,7 @@ export function newtonRaphson(expr, init, error = 0.000001) {
 		x1,
 		iteration,
 		progress,
-		(timeBegin - performance.now()).toFixed(2)
+		(performance.now() - timeBegin).toFixed(2)
 	);
 }
 
@@ -252,6 +252,6 @@ export function secantMethod(expr, init1, init2, error = 0.000001) {
 		x2,
 		iteration,
 		progress,
-		(timeBegin - performance.now()).toFixed(2)
+		(performance.now() - timeBegin).toFixed(2)
 	);
 }

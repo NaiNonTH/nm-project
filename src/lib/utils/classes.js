@@ -21,9 +21,14 @@ export class RootOfEquationAnswer extends Answer {
 }
 
 export class LinearAlgebraAnswer extends Answer {
-	constructor(values) {
+	constructor(values, executionTime) {
 		super();
 		this.topic = 'linear-algebra';
 		this.values = values;
+		this.executionTime = executionTime;
 	}
+}
+
+export class InterpolationAnswer extends Answer {
+	
 }

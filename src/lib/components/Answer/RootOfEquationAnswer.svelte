@@ -35,6 +35,9 @@
                 </table>
             </div>
         </svelte:fragment>
+        <svelte:fragment slot="executionTime">
+            {result.executionTime}
+        </svelte:fragment>
     </Answer>
     
 {/if}

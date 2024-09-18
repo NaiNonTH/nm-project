@@ -1,3 +1,5 @@
+import { LinearAlgebraAnswer } from "./classes";
+
 function det(A) {
 	const size = A.length;
 
@@ -28,6 +30,8 @@ function det(A) {
 }
 
 export function cramersRule(A, B) {
+	const timeBegin = performance.now();
+
 	const size = A.length;
 	let returnArr = [];
 
@@ -43,10 +47,12 @@ export function cramersRule(A, B) {
 		returnArr.push(det(tempMatrix) / detA);
 	}
 
-	return returnArr;
+	return new LinearAlgebraAnswer(returnArr, (performance.now() - timeBegin).toFixed(2));
 }
 
 export function gauss(matrix) {
+	const timeBegin = performance.now();
+	
 	const size = matrix.length;
 
 	for (let i = 0; i < size - 1; ++i) {
@@ -76,10 +82,12 @@ export function gauss(matrix) {
 		returnArr.push(difference / matrix[i][i]);
 	}
 
-	return returnArr;
+	return new LinearAlgebraAnswer(returnArr, (performance.now() - timeBegin).toFixed(2));
 }
 
 export function gaussJordan(matrix) {
+	const timeBegin = performance.now();
+	
 	const size = matrix.length;
 
 	for (let i = 0; i < size - 1; ++i) {
@@ -114,10 +122,12 @@ export function gaussJordan(matrix) {
 		returnArr.unshift(matrix[i].at(-1) / matrix[i][i]);
 	}
 
-	return returnArr;
+	return new LinearAlgebraAnswer(returnArr, (performance.now() - timeBegin).toFixed(2));
 }
 
-export function jacobi(A, B, error = 0.000001) {
+export function gaussSeidel(A, B, error = 0.000001) {
+	const timeBegin = performance.now();
+	
 	let x0 = new Array(A.length).fill(0);
 	let x1 = new Array(A.length).fill(0);
 
@@ -135,7 +145,7 @@ export function jacobi(A, B, error = 0.000001) {
 		}
 
 		let ok = true;
-		for (let i = 0; i < x0.length; ++i) {
+		for (let i = 0; i < x1.length; ++i) {
 			if (Math.abs(x1[i] - x0[i]) >= error) {
 				ok = false;
 				break;
@@ -148,10 +158,12 @@ export function jacobi(A, B, error = 0.000001) {
 		++iteration;
 	}
 
-	return x1;
+	return new LinearAlgebraAnswer(x1, (performance.now() - timeBegin).toFixed(2));
 }
 
 export function gaussSeidel(A, B, error = 0.000001) {
+	const timeBegin = performance.now();
+	
 	let x0 = new Array(A.length).fill(0);
 	let x1 = new Array(A.length).fill(0);
 
@@ -166,8 +178,6 @@ export function gaussSeidel(A, B, error = 0.000001) {
 			}
 
 			x1[i] = ans / A[i][i];
-
-			console.log(x1);
 		}
 
 		let ok = true;
@@ -184,5 +194,5 @@ export function gaussSeidel(A, B, error = 0.000001) {
 		++iteration;
 	}
 
-	return x1;
+	return new LinearAlgebraAnswer(x1, (performance.now() - timeBegin).toFixed(2));
 }

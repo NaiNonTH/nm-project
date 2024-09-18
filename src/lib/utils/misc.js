@@ -10,12 +10,6 @@ export function rootOfEquation(func, expr, ...args) {
 	}
 }
 
-export function linearAlgebra(func, ...matrices) {
-	let values = func(...matrices);
-	console.log(values);
-	return new LinearAlgebraAnswer(values);
-}
-
 export function generateMatrix(rows) {
 	const arr = [];
 

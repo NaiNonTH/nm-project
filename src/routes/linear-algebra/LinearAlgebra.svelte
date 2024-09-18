@@ -5,7 +5,7 @@
 	export let func;
 	export let joinMatrix = false;
 
-	import { joinedMatrix, matrixIsInvalid, linearAlgebra } from '$lib/utils/misc.js';
+	import { joinedMatrix, matrixIsInvalid } from '$lib/utils/misc.js';
 
 	let A, B, size;
 	let result = null;
@@ -14,8 +14,8 @@
 	$: BisInvalid = matrixIsInvalid(B, size, 1);
 
 	function submit() {
-		if (joinMatrix) result = linearAlgebra(func, joinedMatrix(A, B));
-		else result = linearAlgebra(func, A, B);
+		if (joinMatrix) result = func(joinedMatrix(A, B));
+		else result = func(A, B);
 	}
 </script>
 
