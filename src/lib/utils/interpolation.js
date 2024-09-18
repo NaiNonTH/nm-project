@@ -1,3 +1,5 @@
+import { InterpolationAnswer } from "./classes.js";
+
 const C = (function () {
 	const cache = {}; // memoization
 
@@ -21,6 +23,8 @@ const C = (function () {
 })();
 
 export function newtonDividedDifference(x, data_x, data_y) {
+	const timeBegin = performance.now();
+
 	let sum = 0;
 	for (let i = 0; i < data_x.length; ++i) {
 		let multiplied = C(i, data_x, data_y);
@@ -32,5 +36,5 @@ export function newtonDividedDifference(x, data_x, data_y) {
 		sum += multiplied;
 	}
 
-	return sum;
+	return new InterpolationAnswer(sum, (performance.now() - timeBegin).toFixed(2));
 }

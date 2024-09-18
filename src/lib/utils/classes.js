@@ -30,5 +30,10 @@ export class LinearAlgebraAnswer extends Answer {
 }
 
 export class InterpolationAnswer extends Answer {
-	
+	constructor(value, executionTime) {
+		super();
+		this.topic = 'interpolation';
+		this.value = value;
+		this.executionTime = executionTime;
+	}
 }

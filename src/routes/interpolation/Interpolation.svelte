@@ -1,5 +1,6 @@
 <script>
 	import Input from '$lib/components/Input.svelte';
+	import InterpolationAnswer from "$lib/components/Answer/InterpolationAnswer.svelte";
 
 	export let func;
 
@@ -71,4 +72,4 @@
 	</div>
 </form>
 
-<p>{result}</p>
+<InterpolationAnswer {result} />
