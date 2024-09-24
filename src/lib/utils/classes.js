@@ -10,12 +10,13 @@ class Answer {
 }
 
 export class RootOfEquationAnswer extends Answer {
-	constructor(value, iteration, progress, executionTime) {
+	constructor(value, iteration, progress, executionTime, graph = progress) {
 		super();
 		this.topic = 'root-of-equation';
 		this.value = value;
 		this.iteration = iteration;
 		this.progress = progress;
+		this.graph = graph;
 		this.executionTime = executionTime;
 	}
 }
