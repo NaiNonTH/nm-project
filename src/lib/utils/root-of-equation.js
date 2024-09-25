@@ -60,7 +60,7 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 				(performance.now() - timeBegin).toFixed(2)
 			);
 		}
-		
+
 		error_previous = y_error;
 		++iteration;
 	}
@@ -190,8 +190,7 @@ export function onePoint(expr, init, error = 0.000001) {
 		x1 = f(x0);
 		x_error = Math.abs(x1 - x0);
 
-		if (x1 > x1_max)
-			x1_max = x1;
+		if (x1 > x1_max) x1_max = x1;
 
 		progress.push({
 			Iteration: iteration,
@@ -205,7 +204,10 @@ export function onePoint(expr, init, error = 0.000001) {
 	} while (iteration < 100 && x_error > error);
 
 	graph[1] = createFunctionGraphData(f, init, x1_max);
-	graph[2] = [[init, init], [x1_max, x1_max]];
+	graph[2] = [
+		[init, init],
+		[x1_max, x1_max]
+	];
 
 	return new RootOfEquationAnswer(
 		x1,
@@ -236,8 +238,7 @@ export function newtonRaphson(expr, init, error = 0.000001) {
 		x1 = x0 - fn(x0) / fn1(x0);
 		x_error = Math.abs(x1 - x0);
 
-		if (x1 > x1_max)
-			x1_max = x1;
+		if (x1 > x1_max) x1_max = x1;
 
 		progress.push({
 			Iteration: iteration,
@@ -245,7 +246,10 @@ export function newtonRaphson(expr, init, error = 0.000001) {
 			y: fn(x0),
 			'Error (%)': x_error * 100
 		});
-		graph.push([[x0, fn(x0)], [x1, 0]]);
+		graph.push([
+			[x0, fn(x0)],
+			[x1, 0]
+		]);
 
 		++iteration;
 	} while (iteration < 100 && x_error > error);
@@ -282,8 +286,7 @@ export function secantMethod(expr, init1, init2, error = 0.000001) {
 		x2 = x1 - fn(x1) * ((x1 - x0) / (fn(x1) - fn(x0)));
 		x_error = Math.abs(x1 - x0);
 
-		if (x2 > x2_max)
-			x2_max = x2;
+		if (x2 > x2_max) x2_max = x2;
 
 		progress.push({
 			Iteration: iteration,
@@ -291,7 +294,10 @@ export function secantMethod(expr, init1, init2, error = 0.000001) {
 			y: fn(x1),
 			'Error (%)': x_error * 100
 		});
-		graph.push([[x1, fn(x1)], [x2, 0]]);
+		graph.push([
+			[x1, fn(x1)],
+			[x2, 0]
+		]);
 
 		++iteration;
 	} while (iteration < 100 && x_error > error);

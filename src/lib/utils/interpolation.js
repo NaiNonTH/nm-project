@@ -1,4 +1,4 @@
-import { InterpolationAnswer } from "./classes.js";
+import { InterpolationAnswer } from './classes.js';
 
 export function newtonDividedDifference(x, data_x, data_y) {
 	const cache = {};
@@ -12,12 +12,9 @@ export function newtonDividedDifference(x, data_x, data_y) {
 
 		let answer;
 
-		if (i <= 0)
-			answer = data_y[max];
-		else if (i === 1)
-			answer = (data_y[max] - data_y[min]) / (data_x[max] - data_x[min]);
-		else
-			answer = (C(i - 1, max, min + 1) - C(i - 1, max - 1, min)) / (data_x[max] - data_x[min]);
+		if (i <= 0) answer = data_y[max];
+		else if (i === 1) answer = (data_y[max] - data_y[min]) / (data_x[max] - data_x[min]);
+		else answer = (C(i - 1, max, min + 1) - C(i - 1, max - 1, min)) / (data_x[max] - data_x[min]);
 
 		cache[args] = answer;
 		return answer;

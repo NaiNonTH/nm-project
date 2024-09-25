@@ -1,6 +1,6 @@
 <script>
 	import Input from '$lib/components/Input.svelte';
-	import InterpolationAnswer from "$lib/components/Answer/InterpolationAnswer.svelte";
+	import InterpolationAnswer from '$lib/components/Answer/InterpolationAnswer.svelte';
 
 	export let func;
 

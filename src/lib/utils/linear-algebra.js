@@ -1,4 +1,4 @@
-import { LinearAlgebraAnswer } from "./classes";
+import { LinearAlgebraAnswer } from './classes';
 
 function det(A) {
 	const size = A.length;
@@ -52,7 +52,7 @@ export function cramersRule(A, B) {
 
 export function gauss(matrix) {
 	const timeBegin = performance.now();
-	
+
 	const size = matrix.length;
 
 	for (let i = 0; i < size - 1; ++i) {
@@ -87,7 +87,7 @@ export function gauss(matrix) {
 
 export function gaussJordan(matrix) {
 	const timeBegin = performance.now();
-	
+
 	const size = matrix.length;
 
 	for (let i = 0; i < size - 1; ++i) {
@@ -127,7 +127,7 @@ export function gaussJordan(matrix) {
 
 export function jacobi(A, B, error = 0.000001) {
 	const timeBegin = performance.now();
-	
+
 	let x0 = new Array(A.length).fill(0);
 	let x1 = new Array(A.length).fill(0);
 
@@ -163,7 +163,7 @@ export function jacobi(A, B, error = 0.000001) {
 
 export function gaussSeidel(A, B, error = 0.000001) {
 	const timeBegin = performance.now();
-	
+
 	let x0 = new Array(A.length).fill(0);
 	let x1 = new Array(A.length).fill(0);
 

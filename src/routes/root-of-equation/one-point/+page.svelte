@@ -52,4 +52,4 @@
 	</div>
 </form>
 
-<RootOfEquationAnswer graphKeys={[["x0", "x1"]]} {result} />
+<RootOfEquationAnswer graphKeys={[['x0', 'x1']]} {result} />
