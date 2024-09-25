@@ -35,3 +35,29 @@ export function newtonDividedDifference(x, data_x, data_y) {
 
 	return new InterpolationAnswer(sum, (performance.now() - timeBegin).toFixed(2));
 }
+
+export function lagrange(x, data_x, data_y) {
+	function L(n) {
+		let over = 1;
+		let under = 1;
+
+		for (let i = 0; i < data_x.length; ++i) {
+			if (i != n) {
+				over *= data_x[i] - x;
+				under *= data_x[i] - data_x[n];
+			}
+		}
+
+		return over / under;
+	}
+
+	const timeBegin = performance.now();
+
+	let sum = 0;
+
+	for (let i = 0; i < data_y.length; ++i) {
+		sum += L(i) * data_y[i];
+	}
+
+	return new InterpolationAnswer(sum, (performance.now() - timeBegin).toFixed(2));
+}
