@@ -1,5 +1,5 @@
 import { RootOfEquationAnswer } from './classes.js';
-import { create, derivative, evaluate } from 'mathjs';
+import { derivative, evaluate } from 'mathjs';
 
 export function graphicalMethod(expr, start, end, error = 0.000001) {
 	const timeBegin = performance.now();
@@ -156,16 +156,6 @@ function createFunctionGraphData(f, start, end) {
 
 	for (let x = start; x < end; x += 0.025) {
 		graphData.push([x, f(x)]);
-	}
-
-	return graphData;
-}
-
-function createLinearGraphData(start, end) {
-	const graphData = [];
-
-	for (let x = start; x < end; x += 0.025) {
-		graphData.push([x, x]);
 	}
 
 	return graphData;
