@@ -1,33 +1,33 @@
 import { InterpolationAnswer } from "./classes.js";
 
-const C = (function () {
-	const cache = {}; // memoization
+export function newtonDividedDifference(x, data_x, data_y) {
+	const cache = {};
 
-	return function (n, x, y, max = n, min = 0) {
-		const args = `${n},${max},${min}`;
+	function C(i, max = i, min = 0) {
+		const args = `${i},${max},${min}`;
 
 		if (args in cache) {
 			return cache[args];
 		}
 
-		const answer =
-			n <= 0
-				? y[max]
-				: n === 1
-					? (y[max] - y[min]) / (x[max] - x[min])
-					: (C(n - 1, x, y, max, min + 1) - C(n - 1, x, y, max - 1, min)) / (x[max] - x[min]);
+		let answer;
+
+		if (i <= 0)
+			answer = data_y[max];
+		else if (i === 1)
+			answer = (data_y[max] - data_y[min]) / (data_x[max] - data_x[min]);
+		else
+			answer = (C(i - 1, max, min + 1) - C(i - 1, max - 1, min)) / (data_x[max] - data_x[min]);
 
 		cache[args] = answer;
 		return answer;
-	};
-})();
+	}
 
-export function newtonDividedDifference(x, data_x, data_y) {
 	const timeBegin = performance.now();
 
 	let sum = 0;
 	for (let i = 0; i < data_x.length; ++i) {
-		let multiplied = C(i, data_x, data_y);
+		let multiplied = C(i);
 
 		for (let j = 0; j < i; ++j) {
 			multiplied *= x - data_x[j];
