@@ -1,4 +1,5 @@
 import { LinearAlgebraAnswer } from './classes';
+import { joinedMatrix } from './misc';
 
 function det(A) {
 	const size = A.length;
@@ -123,6 +124,71 @@ export function gaussJordan(matrix) {
 	}
 
 	return new LinearAlgebraAnswer(returnArr, (performance.now() - timeBegin).toFixed(2));
+}
+
+function createIdentityMatrix(size) {
+	const matrix = [];
+
+	for (let i = 0; i < size; ++i) {
+		matrix[i] = [];
+
+		for (let j = 0; j < size; ++j) {
+			matrix[i][j] = i === j ? 1 : 0;
+		}
+	}
+
+	return matrix;
+}
+
+export function matrixInversion(A, B) {
+	const timeBegin = performance.now();
+	let matrix = joinedMatrix(A, createIdentityMatrix(A.length));
+
+	const size = matrix.length;
+
+	for (let i = 0; i < size - 1; ++i) {
+		const row = [...matrix[i]];
+		const diagonal = row[i];
+
+		for (let j = i + 1; j < size; ++j) {
+			const modRow = row.map((n) => (n * matrix[j][i]) / diagonal);
+
+			for (let k = 0; k < matrix[j].length; ++k) {
+				matrix[j][k] -= modRow[k];
+			}
+		}
+	}
+
+	for (let i = size - 1; i > 0; --i) {
+		const row = [...matrix[i]];
+		const diagonal = row[i];
+
+		for (let j = i - 1; j >= 0; --j) {
+			const modRow = row.map((n) => (n * matrix[j][i]) / diagonal);
+
+			for (let k = 0; k < matrix[j].length; ++k) {
+				matrix[j][k] -= modRow[k];
+			}
+		}
+	}
+
+	for (let i = 0; i < matrix.length; ++i) {
+		matrix[i] = matrix[i].map((n) => n / matrix[i][i]);
+	}
+
+	const result = [];
+
+	for (let i = 0; i < matrix.length; ++i) {
+		let sum = 0;
+
+		for (let j = 3; j < matrix[0].length; ++j) {
+			sum += B[j - 3][0] * matrix[i][j];
+		}
+
+		result.push(sum);
+	}
+
+	return new LinearAlgebraAnswer(result, (timeBegin - performance.now()).toFixed(2));
 }
 
 export function jacobi(A, B, error = 0.000001) {
