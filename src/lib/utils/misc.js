@@ -22,10 +22,10 @@ export function generateMatrix(rows) {
 
 export function joinedMatrix(baseMatrix, matrix) {
 	const size = baseMatrix.length;
-	const newMatrix = structuredClone(baseMatrix);
+	const newMatrix = [];
 
 	for (let i = 0; i < size; ++i) {
-		newMatrix[i][size] = matrix[i][0];
+		newMatrix[i] = [...baseMatrix[i], ...matrix[i]];
 	}
 
 	return newMatrix;
