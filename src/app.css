@@ -130,11 +130,20 @@ main > section {
 .site-nav a {
 	position: relative;
 	display: block;
-	padding: 0.5rem 1rem;
-	padding-left: 1.5rem;
+	padding: 0.5rem 0.75rem;
 	text-decoration: none;
 
 	color: inherit;
+}
+.site-nav li a::before {
+	margin-right: 0.5ch;
+}
+.site-nav li a[data-icon]::before {
+	content: attr(data-icon);
+}
+.site-nav li a:not([data-icon])::before {
+	content: "❌";
+	visibility: hidden;
 }
 .site-nav ul:first-child li:first-of-type a {
 	border-top-left-radius: 1rem;

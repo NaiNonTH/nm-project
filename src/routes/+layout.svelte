@@ -5,15 +5,18 @@
 	const links = [
 		{
 			title: 'Root of Equation',
-			href: '/root-of-equation'
+			href: '/root-of-equation',
+			emoji: '🫚'
 		},
 		{
 			title: 'Linear Algebra',
-			href: '/linear-algebra'
+			href: '/linear-algebra',
+			emoji: '📅'
 		},
 		{
 			title: 'Interpolation',
-			href: '/interpolation'
+			href: '/interpolation',
+			emoji: '📈'
 		}
 	];
 </script>
@@ -24,14 +27,12 @@
 <nav class="site-nav">
 	<ul>
 		<li>
-			<a aria-current={$page.url.pathname === '/'} href="/"
-				><span aria-hidden="true">🏠</span> Home</a
-			>
+			<a data-icon="🏠" class="home" aria-current={$page.url.pathname === '/'} href="/">Home</a>
 		</li>
 		<hr />
-		{#each links as { title, href }}
+		{#each links as { title, href, emoji }}
 			<li>
-				<a aria-current={$page.url.pathname.includes(href) && $page.status == 200} {href}>
+				<a data-icon={emoji} aria-current={$page.url.pathname.includes(href) && $page.status == 200} {href}>
 					{title}
 				</a>
 			</li>
