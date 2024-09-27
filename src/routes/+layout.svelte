@@ -32,7 +32,11 @@
 		<hr />
 		{#each links as { title, href, emoji }}
 			<li>
-				<a data-icon={emoji} aria-current={$page.url.pathname.includes(href) && $page.status == 200} {href}>
+				<a
+					data-icon={emoji}
+					aria-current={$page.url.pathname.includes(href) && $page.status == 200}
+					{href}
+				>
 					{title}
 				</a>
 			</li>
@@ -40,7 +44,10 @@
 	</ul>
 	<ul>
 		<li>
-			<a aria-current={$page.url.pathname.includes("/credits") && $page.status == 200} href="/credits">Credits</a>
+			<a
+				aria-current={$page.url.pathname.includes('/credits') && $page.status == 200}
+				href="/credits">Credits</a
+			>
 		</li>
 	</ul>
 </nav>

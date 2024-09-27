@@ -146,7 +146,7 @@ main > section {
 	content: attr(data-icon);
 }
 .site-nav li a:not([data-icon])::before {
-	content: "❌";
+	content: '❌';
 	visibility: hidden;
 }
 .site-nav ul:first-child li:first-of-type a {

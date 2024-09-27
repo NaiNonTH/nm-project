@@ -1,5 +1,5 @@
 <section class="hero">
-	<img width="360" height="280" src="dashboard.svg" alt="Dashboard by unDraw">
+	<img width="360" height="280" src="dashboard.svg" alt="Dashboard by unDraw" />
 	<div>
 		<h1>Math, Data, Empowered.</h1>
 		<p>Please select one of the topics from the sidebar on your left.</p>
