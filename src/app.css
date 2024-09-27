@@ -112,6 +112,10 @@ main > section {
 .site-nav {
 	border-radius: 1rem 0 0 1rem;
 	background: #f2f2ff;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 .site-nav hr {
 	border: none;
@@ -132,8 +136,11 @@ main > section {
 
 	color: inherit;
 }
-.site-nav li:first-of-type a {
+.site-nav ul:first-child li:first-of-type a {
 	border-top-left-radius: 1rem;
+}
+.site-nav ul:last-child li:last-of-type a {
+	border-bottom-left-radius: 1rem;
 }
 .site-nav a[aria-current='true'] {
 	background: #eaeafa;

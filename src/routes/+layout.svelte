@@ -37,6 +37,11 @@
 			</li>
 		{/each}
 	</ul>
+	<ul>
+		<li>
+			<a aria-current={$page.url.pathname.includes("/credits") && $page.status == 200} href="/credits">Credits</a>
+		</li>
+	</ul>
 </nav>
 <main>
 	<slot />
