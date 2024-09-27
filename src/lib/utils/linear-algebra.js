@@ -1,5 +1,6 @@
 import { LinearAlgebraAnswer } from './classes';
 import { joinedMatrix } from './misc';
+import { lup, lusolve } from 'mathjs';
 
 function det(A) {
 	const size = A.length;
@@ -189,6 +190,15 @@ export function matrixInversion(A, B) {
 	}
 
 	return new LinearAlgebraAnswer(result, (timeBegin - performance.now()).toFixed(2));
+}
+
+export function lu(A, B) {
+	const timeBegin = performance.now();
+
+	const lu = lup(A);
+	const answer = lusolve(lu, B).toArray().flat();
+
+	return new LinearAlgebraAnswer(answer, (timeBegin - performance.now()).toFixed(2));
 }
 
 export function jacobi(A, B, error = 0.000001) {
