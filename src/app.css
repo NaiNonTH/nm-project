@@ -67,6 +67,10 @@ form button[type='submit'] {
 	margin: auto;
 }
 
+a {
+	color: #9b7ad7;
+}
+
 #site {
 	margin: 3rem auto;
 	max-width: 60rem;
