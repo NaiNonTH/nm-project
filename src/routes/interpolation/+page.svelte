@@ -6,4 +6,7 @@
 	<li>
 		<a href="/interpolation/lagrange">Lagrange Interpolation</a>
 	</li>
+	<li>
+		<a href="/interpolation/linear-spline">Linear Spline Interpolation</a>
+	</li>
 </ul>
