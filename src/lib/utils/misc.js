@@ -50,3 +50,7 @@ export function matrixIsInvalid(matrix, determinedRows, determinedCols) {
 
 	return false;
 }
+
+export function calculateExecutionTime(timeInit) {
+	return (performance.now() - timeInit).toFixed(2);
+}

@@ -1,4 +1,5 @@
 import { InterpolationAnswer } from './classes.js';
+import { calculateExecutionTime } from './misc.js';
 
 export function newtonDividedDifference(x, data_x, data_y) {
 	const cache = {};
@@ -33,7 +34,7 @@ export function newtonDividedDifference(x, data_x, data_y) {
 		sum += multiplied;
 	}
 
-	return new InterpolationAnswer(sum, (performance.now() - timeBegin).toFixed(2));
+	return new InterpolationAnswer(sum, calculateExecutionTime(timeBegin));
 }
 
 export function lagrange(x, data_x, data_y) {
@@ -59,5 +60,15 @@ export function lagrange(x, data_x, data_y) {
 		sum += L(i) * data_y[i];
 	}
 
-	return new InterpolationAnswer(sum, (performance.now() - timeBegin).toFixed(2));
+	return new InterpolationAnswer(sum, calculateExecutionTime(timeBegin));
+}
+
+export function linearSpline(x, data_x, data_y) {
+	const timeBegin = performance.now();
+
+    for (let i = 0; i < data_x.length - 1; ++i) {
+        if (x >= data_x[i] && x <= data_x[i + 1]) {
+            return new InterpolationAnswer(data_y[i] + (data_y[i + 1] - data_y[i]) / (data_x[i + 1] - data_x[i]) * (x - data_x[i]), calculateExecutionTime(timeBegin));
+        }
+    }
 }

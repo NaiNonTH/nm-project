@@ -1,5 +1,6 @@
 import { RootOfEquationAnswer } from './classes.js';
 import { derivative, evaluate } from 'mathjs';
+import { calculateExecutionTime } from './misc.js';
 
 export function graphicalMethod(expr, start, end, error = 0.000001) {
 	const timeBegin = performance.now();
@@ -57,7 +58,7 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 				x,
 				iteration,
 				progress,
-				(performance.now() - timeBegin).toFixed(2)
+				calculateExecutionTime(timeBegin)
 			);
 		}
 
@@ -103,7 +104,7 @@ export function bisection(expr, xl, xr, error = 0.000001) {
 		xm,
 		iteration,
 		progress,
-		(performance.now() - timeBegin).toFixed(2)
+		calculateExecutionTime(timeBegin)
 	);
 }
 
@@ -147,7 +148,7 @@ export function falsePosition(expr, xl, xr, error = 0.000001) {
 		x1,
 		iteration,
 		progress,
-		(performance.now() - timeBegin).toFixed(2)
+		calculateExecutionTime(timeBegin)
 	);
 }
 
@@ -203,7 +204,7 @@ export function onePoint(expr, init, error = 0.000001) {
 		x1,
 		iteration,
 		progress,
-		(performance.now() - timeBegin).toFixed(2),
+		calculateExecutionTime(timeBegin),
 		graph
 	);
 }
@@ -250,7 +251,7 @@ export function newtonRaphson(expr, init, error = 0.000001) {
 		x1,
 		iteration,
 		progress,
-		(performance.now() - timeBegin).toFixed(2),
+		calculateExecutionTime(timeBegin),
 		graph
 	);
 }
@@ -298,7 +299,7 @@ export function secantMethod(expr, init1, init2, error = 0.000001) {
 		x2,
 		iteration,
 		progress,
-		(performance.now() - timeBegin).toFixed(2),
+		calculateExecutionTime(timeBegin),
 		graph
 	);
 }

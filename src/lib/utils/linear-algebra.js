@@ -1,5 +1,5 @@
 import { LinearAlgebraAnswer } from './classes';
-import { joinedMatrix } from './misc';
+import { calculateExecutionTime, joinedMatrix } from './misc';
 import { lup, lusolve } from 'mathjs';
 
 function det(A) {
@@ -49,7 +49,7 @@ export function cramersRule(A, B) {
 		returnArr.push(det(tempMatrix) / detA);
 	}
 
-	return new LinearAlgebraAnswer(returnArr, (performance.now() - timeBegin).toFixed(2));
+	return new LinearAlgebraAnswer(returnArr, calculateExecutionTime(timeBegin));
 }
 
 export function gauss(matrix) {
@@ -84,7 +84,7 @@ export function gauss(matrix) {
 		returnArr.push(difference / matrix[i][i]);
 	}
 
-	return new LinearAlgebraAnswer(returnArr, (performance.now() - timeBegin).toFixed(2));
+	return new LinearAlgebraAnswer(returnArr, calculateExecutionTime(timeBegin));
 }
 
 export function gaussJordan(matrix) {
@@ -124,7 +124,7 @@ export function gaussJordan(matrix) {
 		returnArr.unshift(matrix[i].at(-1) / matrix[i][i]);
 	}
 
-	return new LinearAlgebraAnswer(returnArr, (performance.now() - timeBegin).toFixed(2));
+	return new LinearAlgebraAnswer(returnArr, calculateExecutionTime(timeBegin));
 }
 
 function createIdentityMatrix(size) {
@@ -189,7 +189,7 @@ export function matrixInversion(A, B) {
 		result.push(sum);
 	}
 
-	return new LinearAlgebraAnswer(result, (timeBegin - performance.now()).toFixed(2));
+	return new LinearAlgebraAnswer(result, calculateExecutionTime(timeBegin));
 }
 
 export function lu(A, B) {
@@ -198,7 +198,7 @@ export function lu(A, B) {
 	const lu = lup(A);
 	const answer = lusolve(lu, B).toArray().flat();
 
-	return new LinearAlgebraAnswer(answer, (timeBegin - performance.now()).toFixed(2));
+	return new LinearAlgebraAnswer(answer, calculateExecutionTime(timeBegin));
 }
 
 export function jacobi(A, B, error = 0.000001) {
@@ -234,7 +234,7 @@ export function jacobi(A, B, error = 0.000001) {
 		++iteration;
 	}
 
-	return new LinearAlgebraAnswer(x1, (performance.now() - timeBegin).toFixed(2));
+	return new LinearAlgebraAnswer(x1, calculateExecutionTime(timeBegin));
 }
 
 export function gaussSeidel(A, B, error = 0.000001) {
@@ -270,5 +270,5 @@ export function gaussSeidel(A, B, error = 0.000001) {
 		++iteration;
 	}
 
-	return new LinearAlgebraAnswer(x1, (performance.now() - timeBegin).toFixed(2));
+	return new LinearAlgebraAnswer(x1, calculateExecutionTime(timeBegin));
 }
