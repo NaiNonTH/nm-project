@@ -54,12 +54,7 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 				'Error (%)': y_error
 			});
 
-			return new RootOfEquationAnswer(
-				x,
-				iteration,
-				progress,
-				calculateExecutionTime(timeBegin)
-			);
+			return new RootOfEquationAnswer(x, iteration, progress, calculateExecutionTime(timeBegin));
 		}
 
 		error_previous = y_error;
@@ -100,12 +95,7 @@ export function bisection(expr, xl, xr, error = 0.000001) {
 		++iteration;
 	} while (iteration < 100 && (cmp == 0 || xm_error >= error));
 
-	return new RootOfEquationAnswer(
-		xm,
-		iteration,
-		progress,
-		calculateExecutionTime(timeBegin)
-	);
+	return new RootOfEquationAnswer(xm, iteration, progress, calculateExecutionTime(timeBegin));
 }
 
 export function falsePosition(expr, xl, xr, error = 0.000001) {
@@ -144,12 +134,7 @@ export function falsePosition(expr, xl, xr, error = 0.000001) {
 		++iteration;
 	} while (iteration < 100 && (cmp == 0 || x1_error >= error));
 
-	return new RootOfEquationAnswer(
-		x1,
-		iteration,
-		progress,
-		calculateExecutionTime(timeBegin)
-	);
+	return new RootOfEquationAnswer(x1, iteration, progress, calculateExecutionTime(timeBegin));
 }
 
 function createFunctionGraphData(f, start, end) {
