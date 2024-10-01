@@ -1,5 +1,5 @@
 <script>
-	import { generateMatrix } from '$lib/utils/misc.js';
+	import { generateMatrix, toSubset } from '$lib/utils/misc.js';
 
 	export let size = 3;
 	$: size = size > 9 ? 9 : size < 2 ? 2 : size;
@@ -43,7 +43,7 @@
 			{#each Array(size) as _, j}
 				<input
 					bind:value={A[i][j]}
-					placeholder="a{i + 1}{j + 1}"
+					placeholder="a{toSubset(i + 1)}{toSubset(j + 1)}"
 					name="a{i + 1}{j + 1}"
 					type="number"
 				/>
@@ -52,14 +52,14 @@
 	</div>
 	<div>
 		{#each Array(size) as _, i}
-			<input disabled placeholder="x{i + 1}" type="text" />
+			<input disabled placeholder="x{toSubset(i + 1)}" type="text" />
 		{/each}
 	</div>
 	<div class="equals">=</div>
 	<div>
 		<div class="b-input" style:grid-template-rows="repeat({size}, 3.5rem)">
 			{#each Array(size) as _, i}
-				<input bind:value={B[i][0]} placeholder="b{i + 1}" name="b{i + 1}" type="number" />
+				<input bind:value={B[i][0]} placeholder="b{toSubset(i + 1)}" name="b{i + 1}" type="number" />
 			{/each}
 		</div>
 	</div>

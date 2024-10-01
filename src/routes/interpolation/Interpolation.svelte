@@ -2,10 +2,10 @@
 	import Input from '$lib/components/Input.svelte';
 	import InterpolationAnswer from '$lib/components/Answer/InterpolationAnswer.svelte';
 
+	import { toSubset } from '$lib/utils/misc.js';
+
 	export let func;
 	export let filterData = true;
-
-	const subNumber = ['₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉'];
 
 	$: count = count < 2 ? 2 : count;
 
@@ -55,14 +55,14 @@
 				{/if}
 				<Input
 					label="x of Data No.{i + 1}"
-					placeholder="x{subNumber[i]}"
+					placeholder="x{toSubset(i)}"
 					name="x{i}"
 					type="number"
 					bind:value={x_data[i]}
 				/>
 				<Input
 					label="f(x) of Data No.{i + 1}"
-					placeholder="f(x{subNumber[i]})"
+					placeholder="f(x{toSubset(i)})"
 					name="f(x{i})"
 					type="number"
 					bind:value={y_data[i]}

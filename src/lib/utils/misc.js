@@ -54,3 +54,21 @@ export function matrixIsInvalid(matrix, determinedRows, determinedCols) {
 export function calculateExecutionTime(timeInit) {
 	return (performance.now() - timeInit).toFixed(2);
 }
+
+export function toSubset(str) {
+	const subNumbers = ['₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉'];
+	
+	str = str.toString();
+	let modified = "";
+
+	for (let i = 0; i < str.length; ++i) {
+		const charCode = str.charCodeAt(i);
+
+		if (charCode >= 48 && charCode <= 57)
+			modified += subNumbers[charCode - 48];
+		else
+			modified += str.charAt(i);
+	}
+
+	return modified;
+}
