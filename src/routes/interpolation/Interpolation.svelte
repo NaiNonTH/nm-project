@@ -3,6 +3,7 @@
 	import InterpolationAnswer from '$lib/components/Answer/InterpolationAnswer.svelte';
 
 	export let func;
+	export let filterData = true;
 
 	const subNumber = ['₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉'];
 
@@ -14,13 +15,13 @@
 	let y_data = [];
 	let filter = new Set();
 
-	$: x_filtered = x_data.filter((_, i) => i < count && filter.has(i));
-	$: y_filtered = y_data.filter((_, i) => i < count && filter.has(i));
+	$: x_filtered = filterData ? x_data.filter((_, i) => i < count && filter.has(i)) : x_data;
+	$: y_filtered = filterData ? y_data.filter((_, i) => i < count && filter.has(i)) : y_data;
 
 	$: disabled =
 		x_data.some((num, i) => i < count && typeof num !== 'number') ||
 		y_data.some((num, i) => i < count && typeof num !== 'number') ||
-		filter.size < 2;
+		filterData && filter.size < 2;
 
 	function toggleFilter(checked, i) {
 		if (!checked) filter.delete(i);
@@ -44,12 +45,14 @@
 	<div>
 		{#each Array(count) as _, i}
 			<div class="same-line">
-				<input
-					on:change={(event) => toggleFilter(event.target.checked, i)}
-					type="checkbox"
-					name="pick-x{i + 1}"
-					id="pick-x{i + 1}"
-				/>
+				{#if filterData}
+					<input
+						on:change={(event) => toggleFilter(event.target.checked, i)}
+						type="checkbox"
+						name="pick-x{i + 1}"
+						id="pick-x{i + 1}"
+					/>
+				{/if}
 				<Input
 					label="x of Data No.{i + 1}"
 					placeholder="x{subNumber[i]}"
