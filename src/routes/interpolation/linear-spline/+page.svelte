@@ -3,4 +3,4 @@
 	import { linearSpline } from '$lib/utils/interpolation.js';
 </script>
 
-<Interpolation func={linearSpline} />
+<Interpolation func={linearSpline} filterData={false} />
