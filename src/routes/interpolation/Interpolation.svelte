@@ -21,7 +21,7 @@
 	$: disabled =
 		x_data.some((num, i) => i < count && typeof num !== 'number') ||
 		y_data.some((num, i) => i < count && typeof num !== 'number') ||
-		filterData && filter.size < 2;
+		(filterData && filter.size < 2);
 
 	function toggleFilter(checked, i) {
 		if (!checked) filter.delete(i);

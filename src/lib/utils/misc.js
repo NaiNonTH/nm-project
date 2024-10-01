@@ -57,17 +57,15 @@ export function calculateExecutionTime(timeInit) {
 
 export function toSubset(str) {
 	const subNumbers = ['₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉'];
-	
+
 	str = str.toString();
-	let modified = "";
+	let modified = '';
 
 	for (let i = 0; i < str.length; ++i) {
 		const charCode = str.charCodeAt(i);
 
-		if (charCode >= 48 && charCode <= 57)
-			modified += subNumbers[charCode - 48];
-		else
-			modified += str.charAt(i);
+		if (charCode >= 48 && charCode <= 57) modified += subNumbers[charCode - 48];
+		else modified += str.charAt(i);
 	}
 
 	return modified;

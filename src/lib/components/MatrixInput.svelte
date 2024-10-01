@@ -59,7 +59,12 @@
 	<div>
 		<div class="b-input" style:grid-template-rows="repeat({size}, 3.5rem)">
 			{#each Array(size) as _, i}
-				<input bind:value={B[i][0]} placeholder="b{toSubset(i + 1)}" name="b{i + 1}" type="number" />
+				<input
+					bind:value={B[i][0]}
+					placeholder="b{toSubset(i + 1)}"
+					name="b{i + 1}"
+					type="number"
+				/>
 			{/each}
 		</div>
 	</div>
