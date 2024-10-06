@@ -5,10 +5,15 @@ import { lup, lusolve } from 'mathjs';
 function det(A) {
 	const size = A.length;
 
+	if (size === 0) return null;
+	if (size === 1) return A[0][0];
+
 	let sum = 0,
 		difference = 0;
 
-	for (let i = 0; i < size; ++i) {
+	const isTwoByTwo = size === 2;
+
+	for (let i = 0; i < size - isTwoByTwo; ++i) {
 		let multiplied = 1;
 
 		for (let j = 0; j < size; ++j) {
@@ -18,7 +23,7 @@ function det(A) {
 		sum += multiplied;
 	}
 
-	for (let i = 0; i < size; ++i) {
+	for (let i = 0; i < size - isTwoByTwo; ++i) {
 		let multiplied = 1;
 
 		for (let j = size - 1; j >= 0; --j) {
