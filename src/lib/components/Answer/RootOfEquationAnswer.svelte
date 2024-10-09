@@ -2,30 +2,12 @@
 	import Answer from './Answer.svelte';
 
 	export let result = null;
-	export let graphKeys = [['x', 'y']];
 
 	let plotlyOutput;
 
-	$: if (plotlyOutput && result) {
-		const useGraphFromProgress = result.graph === result.progress;
-		let iterator = useGraphFromProgress ? graphKeys : result.graph;
-
+	$: if (plotlyOutput && result.graph) {
 		Plotly.newPlot(plotlyOutput, {
-			data: iterator.map((line) => {
-				if (useGraphFromProgress)
-					return {
-						x: result.graph.map((data) => data[line[0]]),
-						y: result.graph.map((data) => data[line[1]]),
-						type: 'scatter',
-						mode: 'lines+markers'
-					};
-				else
-					return {
-						x: line.map((data) => data[0]),
-						y: line.map((data) => data[1]),
-						type: 'scatter'
-					};
-			}),
+			data: result.graph,
 			layout: {
 				width: '100%',
 				height: 400,

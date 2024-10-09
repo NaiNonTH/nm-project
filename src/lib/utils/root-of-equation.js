@@ -1,4 +1,4 @@
-import { RootOfEquationAnswer } from './classes.js';
+import { PlotlyLineGraph, RootOfEquationAnswer } from './classes.js';
 import { derivative, evaluate } from 'mathjs';
 import { calculateExecutionTime } from './misc.js';
 
@@ -13,6 +13,7 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 	let rangeToRoute;
 
 	let progress = [];
+	let graph = [new PlotlyLineGraph('Iteration', { mode: 'lines+markers' })];
 
 	for (x = start; x <= end; ++x) {
 		const y = f(x);
@@ -24,6 +25,8 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 			y,
 			'Error (%)': y_error
 		});
+		graph[0].x.push(x);
+		graph[0].y.push(y);
 
 		if (error_previous < y_error) {
 			rangeToRoute = x;
@@ -38,13 +41,16 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 		const y = f(x);
 		const y_error = Math.abs(y);
 
-		if (iteration % 10000 === 0)
+		if (iteration % 10000 === 0) {
 			progress.push({
 				Iteration: iteration,
 				x,
 				y,
 				'Error (%)': y_error
 			});
+			graph[0].x.push(x);
+			graph[0].y.push(y);
+		}
 
 		if (error_previous < y_error) {
 			progress.push({
@@ -53,8 +59,16 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 				y,
 				'Error (%)': y_error
 			});
+			graph[0].x.push(x);
+			graph[0].y.push(y);
 
-			return new RootOfEquationAnswer(x, iteration, progress, calculateExecutionTime(timeBegin));
+			return new RootOfEquationAnswer(
+				x,
+				iteration,
+				progress,
+				calculateExecutionTime(timeBegin),
+				graph
+			);
 		}
 
 		error_previous = y_error;
@@ -74,6 +88,7 @@ export function bisection(expr, xl, xr, error = 0.000001) {
 		iteration = 0;
 
 	let progress = [];
+	let graph = [new PlotlyLineGraph('Iteration', { mode: 'lines+markers' })];
 
 	do {
 		xm = (xl + xr) / 2;
@@ -91,11 +106,19 @@ export function bisection(expr, xl, xr, error = 0.000001) {
 			y: fxm,
 			'Error (%)': xm_error * 100
 		});
+		graph[0].x.push(xm);
+		graph[0].y.push(fxm);
 
 		++iteration;
 	} while (iteration < 100 && (cmp == 0 || xm_error >= error));
 
-	return new RootOfEquationAnswer(xm, iteration, progress, calculateExecutionTime(timeBegin));
+	return new RootOfEquationAnswer(
+		xm,
+		iteration,
+		progress,
+		calculateExecutionTime(timeBegin),
+		graph
+	);
 }
 
 export function falsePosition(expr, xl, xr, error = 0.000001) {
@@ -110,6 +133,7 @@ export function falsePosition(expr, xl, xr, error = 0.000001) {
 		iteration = 0;
 
 	let progress = [];
+	let graph = [new PlotlyLineGraph('Iteration', { mode: 'lines+markers' })];
 
 	do {
 		let fxl = f(xl);
@@ -130,21 +154,31 @@ export function falsePosition(expr, xl, xr, error = 0.000001) {
 			y: fx1,
 			'Error (%)': x1_error * 100
 		});
+		graph[0].x.push(x1);
+		graph[0].y.push(fx1);
 
 		++iteration;
 	} while (iteration < 100 && (cmp == 0 || x1_error >= error));
 
-	return new RootOfEquationAnswer(x1, iteration, progress, calculateExecutionTime(timeBegin));
+	return new RootOfEquationAnswer(
+		x1,
+		iteration,
+		progress,
+		calculateExecutionTime(timeBegin),
+		graph
+	);
 }
 
 function createFunctionGraphData(f, start, end) {
-	const graphData = [];
+	let x_data = [];
+	let y_data = [];
 
 	for (let x = start; x < end; x += 0.025) {
-		graphData.push([x, f(x)]);
+		x_data.push(x);
+		y_data.push(f(x));
 	}
 
-	return graphData;
+	return [x_data, y_data];
 }
 
 export function onePoint(expr, init, error = 0.000001) {
@@ -159,7 +193,7 @@ export function onePoint(expr, init, error = 0.000001) {
 		iteration = 0;
 
 	let progress = [];
-	let graph = [[]];
+	let graph = [new PlotlyLineGraph('Iteration')];
 
 	do {
 		x0 = x1 ? x1 : init;
@@ -174,16 +208,14 @@ export function onePoint(expr, init, error = 0.000001) {
 			x1,
 			'Error (%)': x_error * 100
 		});
-		graph[0].push([x0, x0], [x0, x1]);
+		graph[0].x.push(x0, x0);
+		graph[0].y.push(x0, x1);
 
 		++iteration;
 	} while (iteration < 100 && x_error > error);
 
-	graph[1] = createFunctionGraphData(f, init, x1_max);
-	graph[2] = [
-		[init, init],
-		[x1_max, x1_max]
-	];
+	graph[1] = new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(f, init, x1_max));
+	graph[2] = new PlotlyLineGraph('x', {}, [init, x1_max], [init, x1_max]);
 
 	return new RootOfEquationAnswer(
 		x1,
@@ -207,7 +239,7 @@ export function newtonRaphson(expr, init, error = 0.000001) {
 		iteration = 0;
 
 	let progress = [];
-	let graph = [[]];
+	let graph = [];
 
 	do {
 		x0 = x1 ? x1 : init;
@@ -222,15 +254,12 @@ export function newtonRaphson(expr, init, error = 0.000001) {
 			y: fn(x0),
 			'Error (%)': x_error * 100
 		});
-		graph.push([
-			[x0, fn(x0)],
-			[x1, 0]
-		]);
+		graph.push(new PlotlyLineGraph(`f(x) @ ${iteration}`, {}, [x0, x1], [fn(x0), 0]));
 
 		++iteration;
 	} while (iteration < 100 && x_error > error);
 
-	graph[0] = createFunctionGraphData(fn, init, x1_max);
+	graph.push(new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(fn, init, x1_max)));
 
 	return new RootOfEquationAnswer(
 		x1,
@@ -254,13 +283,13 @@ export function secantMethod(expr, init1, init2, error = 0.000001) {
 		iteration = 0;
 
 	let progress = [];
-	let graph = [[]];
+	let graph = [new PlotlyLineGraph('Iteration')];
 
 	do {
 		x0 = x1 ? x1 : init1;
 		x1 = x2 ? x2 : init2;
 		x2 = x1 - fn(x1) * ((x1 - x0) / (fn(x1) - fn(x0)));
-		x_error = Math.abs(x1 - x0);
+		x_error = Math.abs(x2 - x1);
 
 		if (x2 > x2_max) x2_max = x2;
 
@@ -270,15 +299,16 @@ export function secantMethod(expr, init1, init2, error = 0.000001) {
 			y: fn(x1),
 			'Error (%)': x_error * 100
 		});
-		graph.push([
-			[x1, fn(x1)],
-			[x2, 0]
-		]);
+		graph.push(new PlotlyLineGraph(`f(x) @ ${iteration}`, {}, [x1, x2], [fn(x1), 0]));
 
 		++iteration;
 	} while (iteration < 100 && x_error > error);
 
-	graph[0] = createFunctionGraphData(fn, Math.min(init1, init2), x2_max);
+	graph[0] = new PlotlyLineGraph(
+		'f(x)',
+		{},
+		...createFunctionGraphData(fn, Math.min(init1, init2), x2_max)
+	);
 
 	return new RootOfEquationAnswer(
 		x2,

@@ -38,3 +38,16 @@ export class InterpolationAnswer extends Answer {
 		this.executionTime = executionTime;
 	}
 }
+
+export class PlotlyLineGraph {
+	constructor(name, config = {}, x = [], y = []) {
+		this.name = name;
+		this.x = x;
+		this.y = y;
+		this.type = 'scatter';
+
+		for (const conf in config) {
+			this[conf] = config[conf];
+		}
+	}
+}
