@@ -4,4 +4,4 @@
 </script>
 
 <h1>Cramer's Rule</h1>
-<LinearAlgebra func={cramersRule} />
+<LinearAlgebra cramerMode={true} func={cramersRule} />

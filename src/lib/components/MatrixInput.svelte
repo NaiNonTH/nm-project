@@ -2,7 +2,11 @@
 	import { generateMatrix, toSubset } from '$lib/utils/misc.js';
 
 	export let size = 3;
-	$: size = size > 9 ? 9 : size < 2 ? 2 : size;
+	export let cramerMode = false;
+
+	let sizeLimit = cramerMode ? 3 : 9;
+
+	$: size = size > sizeLimit ? sizeLimit : size < 2 ? 2 : size;
 
 	const changeSizeThroughWheel = (event) => (size = size - Math.sign(event.deltaY));
 
@@ -22,7 +26,7 @@
 		id="matrixSize"
 		type="range"
 		min="2"
-		max="9"
+		max={sizeLimit}
 		step="1"
 		bind:value={size}
 	/>
@@ -32,7 +36,7 @@
 		id="matrixSize"
 		type="number"
 		min="2"
-		max="9"
+		max={sizeLimit}
 		step="1"
 		bind:value={size}
 	/>

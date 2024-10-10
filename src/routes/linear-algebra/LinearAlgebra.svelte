@@ -4,6 +4,7 @@
 
 	export let func;
 	export let joinMatrix = false;
+	export let cramerMode = false;
 
 	import { joinedMatrix, matrixIsInvalid } from '$lib/utils/misc.js';
 
@@ -20,7 +21,7 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
-	<MatrixInput bind:size bind:A bind:B />
+	<MatrixInput {cramerMode} bind:size bind:A bind:B />
 	<div>
 		<button disabled={AisInvalid || BisInvalid} type="submit">Calculate</button>
 	</div>
