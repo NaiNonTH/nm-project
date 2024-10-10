@@ -89,7 +89,7 @@ export function gauss(matrix) {
 		returnArr.push(difference / matrix[i][i]);
 	}
 
-	return new LinearAlgebraAnswer(returnArr, calculateExecutionTime(timeBegin));
+	return new LinearAlgebraAnswer(returnArr.reverse(), calculateExecutionTime(timeBegin));
 }
 
 export function gaussJordan(matrix) {
@@ -126,7 +126,7 @@ export function gaussJordan(matrix) {
 	const returnArr = [];
 
 	for (let i = 0; i < size; ++i) {
-		returnArr.unshift(matrix[i].at(-1) / matrix[i][i]);
+		returnArr.push(matrix[i].at(-1) / matrix[i][i]);
 	}
 
 	return new LinearAlgebraAnswer(returnArr, calculateExecutionTime(timeBegin));
