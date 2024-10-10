@@ -17,6 +17,11 @@
 			title: 'Interpolation',
 			href: '/interpolation',
 			emoji: '📈'
+		},
+		{
+			title: 'Extrapolation',
+			href: '/extrapolation',
+			emoji: '📉'
 		}
 	];
 </script>

@@ -39,6 +39,15 @@ export class InterpolationAnswer extends Answer {
 	}
 }
 
+export class ExtrapolationAnswer extends Answer {
+	constructor(value, executionTime) {
+		super();
+		this.topic = 'extrapolation';
+		this.value = value;
+		this.executionTime = executionTime;
+	}
+}
+
 export class PlotlyLineGraph {
 	constructor(name, config = {}, x = [], y = []) {
 		this.name = name;
