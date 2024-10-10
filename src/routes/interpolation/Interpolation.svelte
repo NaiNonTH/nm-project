@@ -42,34 +42,32 @@
 		<Input label="Data Count" name="count" type="number" placeholder="3" bind:value={count} />
 		<Input label="Missing x" name="x" type="number" placeholder="40331" bind:value={x} />
 	</div>
-	<div>
-		{#each Array(count) as _, i}
-			<div class="same-line">
-				{#if filterData}
-					<input
-						on:change={(event) => toggleFilter(event.target.checked, i)}
-						type="checkbox"
-						name="pick-x{i + 1}"
-						id="pick-x{i + 1}"
-					/>
-				{/if}
-				<Input
-					label="x of Data No.{i + 1}"
-					placeholder="x{toSubset(i)}"
-					name="x{i}"
-					type="number"
-					bind:value={x_data[i]}
+	{#each Array(count) as _, i}
+		<div class="same-line">
+			{#if filterData}
+				<input
+					on:change={(event) => toggleFilter(event.target.checked, i)}
+					type="checkbox"
+					name="pick-x{i + 1}"
+					id="pick-x{i + 1}"
 				/>
-				<Input
-					label="f(x) of Data No.{i + 1}"
-					placeholder="f(x{toSubset(i)})"
-					name="f(x{i})"
-					type="number"
-					bind:value={y_data[i]}
-				/>
-			</div>
-		{/each}
-	</div>
+			{/if}
+			<Input
+				label="x of Data No.{i + 1}"
+				placeholder="x{toSubset(i)}"
+				name="x{i}"
+				type="number"
+				bind:value={x_data[i]}
+			/>
+			<Input
+				label="f(x) of Data No.{i + 1}"
+				placeholder="f(x{toSubset(i)})"
+				name="f(x{i})"
+				type="number"
+				bind:value={y_data[i]}
+			/>
+		</div>
+	{/each}
 	<div class="button-zone">
 		<button {disabled} type="submit">Calculate</button>
 	</div>
