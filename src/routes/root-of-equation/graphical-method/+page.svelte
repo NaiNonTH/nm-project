@@ -12,9 +12,19 @@
 		error = 0.000001;
 
 	let expr_isInvalid;
-	$: start_isInvalid = start === null;
-	$: end_isInvalid = end === null;
-	$: error_isInvalid = error === null;
+	$: startMoreThanEnd = start >= end;
+	$: startIsEmpty = start === null;
+	$: endIsEmpty = end === null;
+	$: errorIsEmpty = error === null;
+	$: errorIsInvalid = error <= 0;
+
+	$: disabled =
+		expr_isInvalid ||
+		startMoreThanEnd ||
+		startIsEmpty ||
+		endIsEmpty ||
+		errorIsEmpty ||
+		errorIsInvalid;
 
 	let result;
 </script>
@@ -36,29 +46,35 @@
 			name="expr"
 			placeholder="(43 * x) - 180"
 			bind:value={expr}
-			bind:isInvalid={expr_isInvalid}
 		/>
-		<Input
-			label="Start"
-			type="number"
-			name="start"
-			bind:value={start}
-			bind:isInvalid={start_isInvalid}
-		/>
-		<Input label="End" type="number" name="end" bind:value={end} bind:isInvalid={end_isInvalid} />
-		<Input
-			label="Error Threshold"
-			type="number"
-			name="error"
-			bind:value={error}
-			bind:isInvalid={error_isInvalid}
-		/>
+		<Input label="Start" type="number" name="start" bind:value={start} />
+		<Input label="End" type="number" name="end" bind:value={end} />
+		<Input label="Error Threshold" type="number" name="error" bind:value={error} />
 	</div>
-	<div>
-		<button
-			disabled={expr_isInvalid || start_isInvalid || end_isInvalid || error_isInvalid}
-			type="submit">Calculate</button
-		>
+	<div class="button-zone">
+		<button {disabled} type="submit"> Calculate </button>
+		{#if disabled}
+			<ul class="warning" role="tooltip">
+				{#if expr_isInvalid}
+					<li>Invalid Expression.</li>
+				{/if}
+				{#if startMoreThanEnd}
+					<li>Start must be less than End.</li>
+				{/if}
+				{#if startIsEmpty}
+					<li>Start is empty or not a number.</li>
+				{/if}
+				{#if endIsEmpty}
+					<li>End is empty or not a number.</li>
+				{/if}
+				{#if errorIsEmpty}
+					<li>Error Threshold is empty or not a number.</li>
+				{/if}
+				{#if errorIsInvalid}
+					<li>Error Threshold must be more than 0.</li>
+				{/if}
+			</ul>
+		{/if}
 	</div>
 </form>
 

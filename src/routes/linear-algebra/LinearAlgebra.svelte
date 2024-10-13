@@ -14,6 +14,8 @@
 	$: AisInvalid = matrixIsInvalid(A, size, size);
 	$: BisInvalid = matrixIsInvalid(B, size, 1);
 
+	$: disabled = AisInvalid || BisInvalid;
+
 	function submit() {
 		if (joinMatrix) result = func(joinedMatrix(A, B));
 		else result = func(A, B);
@@ -22,8 +24,11 @@
 
 <form on:submit|preventDefault={submit}>
 	<MatrixInput {cramerMode} bind:size bind:A bind:B />
-	<div>
-		<button disabled={AisInvalid || BisInvalid} type="submit">Calculate</button>
+	<div class="button-zone">
+		<button {disabled} type="submit"> Calculate </button>
+		{#if disabled}
+			<div class="warning" role="tooltip">Please fill in all slots in Matrix</div>
+		{/if}
 	</div>
 </form>
 

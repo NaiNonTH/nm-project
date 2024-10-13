@@ -18,10 +18,13 @@
 	$: x_filtered = filterData ? x_data.filter((_, i) => i < count && filter.has(i)) : x_data;
 	$: y_filtered = filterData ? y_data.filter((_, i) => i < count && filter.has(i)) : y_data;
 
-	$: disabled =
+	$: invalidChecks = filterData && filter.size < 2;
+	$: xIsEmpty = typeof x !== 'number';
+	$: dataIsNotFilledIn =
 		x_data.some((num, i) => i < count && typeof num !== 'number') ||
-		y_data.some((num, i) => i < count && typeof num !== 'number') ||
-		(filterData && filter.size < 2);
+		y_data.some((num, i) => i < count && typeof num !== 'number');
+
+	$: disabled = dataIsNotFilledIn || invalidChecks || xIsEmpty;
 
 	function toggleFilter(checked, i) {
 		if (!checked) filter.delete(i);
@@ -70,6 +73,19 @@
 	{/each}
 	<div class="button-zone">
 		<button {disabled} type="submit">Calculate</button>
+		{#if disabled}
+			<ul class="warning" role="tooltip">
+				{#if dataIsNotFilledIn}
+					<li>Please fill in all data input.</li>
+				{/if}
+				{#if invalidChecks}
+					<li>Please tick at least 2 points</li>
+				{/if}
+				{#if xIsEmpty}
+					<li>x is empty or not a number</li>
+				{/if}
+			</ul>
+		{/if}
 	</div>
 </form>
 

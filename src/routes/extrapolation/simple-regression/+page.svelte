@@ -16,9 +16,8 @@
 
 	let result = null;
 
-	$: emptyDataInput = 
-		x_data.some((x) => typeof x !== 'number') ||
-		y_data.some((y) => typeof y !== 'number');
+	$: emptyDataInput =
+		x_data.some((x) => typeof x !== 'number') || y_data.some((y) => typeof y !== 'number');
 
 	$: noX = typeof x !== 'number';
 
@@ -65,18 +64,18 @@
 	{/each}
 	<div class="button-zone">
 		<button {disabled} type="submit">
-			{#if disabled}
-				<div class="warning" role="tooltip">
-					{#if emptyDataInput}
-						<span>Not all points input are filled{#if noX}&nbsp;and {:else}.{/if}</span>
-					{/if}
-					{#if noX}
-						<span>x is not defined.</span>
-					{/if}
-				</div>
-			{/if}
 			Calculate
 		</button>
+		{#if disabled}
+			<ul class="warning" role="tooltip">
+				{#if emptyDataInput}
+					<li>Not all points input are filled</li>
+				{/if}
+				{#if noX}
+					<li>x is empty or not a number.</li>
+				{/if}
+			</ul>
+		{/if}
 	</div>
 </form>
 

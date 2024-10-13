@@ -11,8 +11,11 @@
 		error = 0.000001;
 
 	let expr_isInvalid;
-	$: init_isInvalid = init === null;
-	$: error_isInvalid = error === null;
+	$: initIsEmpty = init === null;
+	$: errorIsEmpty = error === null;
+	$: errorIsInvalid = error <= 0;
+
+	$: disabled = expr_isInvalid || initIsEmpty || errorIsEmpty || errorIsInvalid;
 
 	let result;
 </script>
@@ -28,27 +31,28 @@
 			name="expr"
 			placeholder="(x * x) / 7"
 			bind:value={expr}
-			bind:isInvalid={expr_isInvalid}
 		/>
-		<Input
-			label="Initial Value"
-			type="number"
-			name="init"
-			bind:value={init}
-			bind:isInvalid={init_isInvalid}
-		/>
-		<Input
-			label="Error Threshold"
-			type="number"
-			name="error"
-			bind:value={error}
-			bind:isInvalid={error_isInvalid}
-		/>
+		<Input label="Initial Value" type="number" name="init" bind:value={init} />
+		<Input label="Error Threshold" type="number" name="error" bind:value={error} />
 	</div>
-	<div>
-		<button disabled={expr_isInvalid || init_isInvalid || error_isInvalid} type="submit"
-			>Calculate</button
-		>
+	<div class="button-zone">
+		<button {disabled} type="submit"> Calculate </button>
+		{#if disabled}
+			<ul class="warning" role="tooltip">
+				{#if expr_isInvalid}
+					<li>Invalid Expression.</li>
+				{/if}
+				{#if initIsEmpty}
+					<li>Initial Value is empty or not a number.</li>
+				{/if}
+				{#if errorIsEmpty}
+					<li>Error Threshold is empty or not a number.</li>
+				{/if}
+				{#if errorIsInvalid}
+					<li>Error Threshold must be more than 0.</li>
+				{/if}
+			</ul>
+		{/if}
 	</div>
 </form>
 
