@@ -257,6 +257,32 @@ table th {
 	background: #dcdcff;
 }
 
+.button-zone {
+	position: relative;
+	margin: 1rem auto;
+	padding: 1rem;
+
+	max-width: -moz-fit-content;
+	max-width: fit-content;
+	
+	text-align: center;
+}
+button .warning {
+	position: absolute;
+	z-index: 99;
+	top: 0em;
+	left: 50%;
+	transform: translate(-50%, -100%);
+	
+	padding: 0.35em;
+	width: 24ch;
+	color: white;
+	background: #fe0000;
+}
+button:not(:focus, :hover):disabled .warning {
+	display: none;
+}
+
 @media (max-width: 48rem) {
 	#site {
 		display: flex;

@@ -1,11 +1,12 @@
 <script>
+	import InterpolationAnswer from '$lib/components/Answer/InterpolationAnswer.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import { toSubset } from '$lib/utils/misc.js';
 	import { polynomialRegression } from '$lib/utils/extrapolation.js';
 
 	let points = 2;
 	let m = 1;
-	let x = 69;
+	let x;
 
 	let x_data = [];
 	let y_data = [];
@@ -15,23 +16,23 @@
 
 	let result = null;
 
-	$: disabled =
-		typeof x !== 'number' ||
-		typeof m !== 'number' ||
+	$: emptyDataInput = 
 		x_data.some((x) => typeof x !== 'number') ||
 		y_data.some((y) => typeof y !== 'number');
 
+	$: noX = typeof x !== 'number';
+
+	$: disabled = noX || emptyDataInput;
+
 	function submit() {
 		result = polynomialRegression(m, x, x_data, y_data);
-		console.log(result);
 	}
 </script>
 
 <h1>Simple Regression</h1>
-<p style="text-align:center;color:red;"><b>WORK-IN-PROGRESS! ANSWERS WON'T BE DISPLAYED YET</b></p>
 <form on:submit|preventDefault={submit}>
 	<div class="same-line">
-		<Input label="Missing x" type="number" name="1" placeholder="x" bind:value={x} />
+		<Input label="Missing x" type="number" name="1" placeholder="65" bind:value={x} />
 		<Input label="Value of m" type="number" name="1" placeholder="m" bind:value={m} />
 	</div>
 	<div class="same-line">
@@ -63,6 +64,20 @@
 		</div>
 	{/each}
 	<div class="button-zone">
-		<button {disabled} type="submit">Calculate</button>
+		<button {disabled} type="submit">
+			{#if disabled}
+				<div class="warning" role="tooltip">
+					{#if emptyDataInput}
+						<span>Not all points input are filled{#if noX}&nbsp;and {:else}.{/if}</span>
+					{/if}
+					{#if noX}
+						<span>x is not defined.</span>
+					{/if}
+				</div>
+			{/if}
+			Calculate
+		</button>
 	</div>
 </form>
+
+<InterpolationAnswer {result} />
