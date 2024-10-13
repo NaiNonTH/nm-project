@@ -2,21 +2,10 @@ import { ExtrapolationAnswer } from './classes';
 import { gaussJordan } from './linear-algebra';
 import { joinedMatrix } from './misc';
 
-/**
- * @param {Array<Number>} data
- * @returns {Number}
- */
 function sum(data) {
 	return data.reduce((a, b) => a + b, 0);
 }
 
-/**
- * @param {Array<Number>} xi
- * @param {Array<Number>} yi
- * @param {Number} x
- * @param {Number} m
- * @returns {Number}
- */
 export function polynomialRegression(m, x, xi, yi) {
 	if (xi.length != yi.length) throw new TypeError('x and y dataset are not relative.');
 
