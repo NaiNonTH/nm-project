@@ -20,10 +20,10 @@
 		for (let i = 0; i < k; ++i) xi[i] = xi[i] ? xi[i] : [];
 	}
 
-	$: data_isInvalid = 
-		xi.some(set => set.some(n => typeof n !== 'number')) ||
-		yi.some(n => typeof n !== 'number');
-	$: xIsInvalid = x.some(n => typeof n !== 'number');
+	$: data_isInvalid =
+		xi.some((set) => set.some((n) => typeof n !== 'number')) ||
+		yi.some((n) => typeof n !== 'number');
+	$: xIsInvalid = x.some((n) => typeof n !== 'number');
 
 	$: disabled = data_isInvalid || xIsInvalid;
 

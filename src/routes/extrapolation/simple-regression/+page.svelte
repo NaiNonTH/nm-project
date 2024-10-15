@@ -63,9 +63,7 @@
 		</div>
 	{/each}
 	<div class="button-zone">
-		<button {disabled} type="submit">
-			Calculate
-		</button>
+		<button {disabled} type="submit"> Calculate </button>
 		{#if disabled}
 			<ul class="warning" role="tooltip">
 				{#if emptyDataInput}
