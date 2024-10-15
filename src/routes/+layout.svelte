@@ -22,6 +22,11 @@
 			title: 'Extrapolation',
 			href: '/extrapolation',
 			emoji: '📉'
+		},
+		{
+			title: 'Integration',
+			href: '/integration',
+			emoji: '➕'
 		}
 	];
 </script>

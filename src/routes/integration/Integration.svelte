@@ -1,0 +1,61 @@
+<script>
+	import Input from '$lib/components/Input.svelte';
+	import MathDisplay from '$lib/components/Math.svelte';
+	import IntegrationAnswer from '$lib/components/Answer/IntegrationAnswer.svelte';
+
+	export let func;
+	export let formula;
+	export let defaultRange = [2, 8];
+	export let minComposite = 1;
+
+	let expr = formula;
+	let a;
+	let b;
+	let n = minComposite;
+
+	$: n = Math.max(minComposite, Math.trunc(n));
+
+	let expr_isInvalid;
+	$: aIsEmpty = typeof a !== 'number';
+	$: bIsEmpty = typeof b !== 'number';
+	$: aIsMoreThanB = a >= b;
+
+	$: disabled = expr_isInvalid || aIsEmpty || bIsEmpty || aIsMoreThanB;
+
+	let result = null;
+
+	function submit() {
+		result = func(expr, a, b, n);
+	}
+</script>
+
+<MathDisplay {expr} bind:isInvalid={expr_isInvalid} />
+<form on:submit|preventDefault={submit}>
+	<div class="same-line">
+		<Input label="Math Formula" type="text" name="expr" placeholder={formula} bind:value={expr} />
+		<Input label="a (Start)" type="number" name="a" placeholder={defaultRange[0]} bind:value={a} />
+		<Input label="b (End)" type="number" name="b" placeholder={defaultRange[1]} bind:value={b} />
+		<Input label="Composition" type="number" name="n" placeholder="1" bind:value={n} />
+	</div>
+	<div class="button-zone">
+		<button {disabled} type="submit">Calculate</button>
+		{#if disabled}
+			<ul class="warning" role="tooltip">
+				{#if expr_isInvalid}
+					<li>Invalid Expression</li>
+				{/if}
+				{#if aIsEmpty}
+					<li>a is empty or not a number</li>
+				{/if}
+				{#if bIsEmpty}
+					<li>b is empty or not a number</li>
+				{/if}
+				{#if aIsMoreThanB}
+					<li>a must less than b</li>
+				{/if}
+			</ul>
+		{/if}
+	</div>
+</form>
+
+<IntegrationAnswer {result} />
