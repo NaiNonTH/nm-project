@@ -172,8 +172,9 @@ export function falsePosition(expr, xl, xr, error = 0.000001) {
 function createFunctionGraphData(f, start, end) {
 	let x_data = [];
 	let y_data = [];
+	let step = (end - start) * 0.025;
 
-	for (let x = start; x < end; x += 0.025) {
+	for (let x = start; x < end; x += step) {
 		x_data.push(x);
 		y_data.push(f(x));
 	}
