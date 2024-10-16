@@ -31,7 +31,7 @@
 			label="Math Formula"
 			type="text"
 			name="expr"
-			placeholder="(x * x) / 7"
+			placeholder="x * x - 7"
 			bind:value={expr}
 			bind:isInvalid={expr_isInvalid}
 		/>
@@ -59,23 +59,25 @@
 	</div>
 	<div class="button-zone">
 		<button {disabled} type="submit"> Calculate </button>
-		<ul class="warning" role="tooltip">
-			{#if expr_isInvalid}
-				<li>Invalid Expression.</li>
-			{/if}
-			{#if init1IsEmpty}
-				<li>First Initial Value is empty or not a number.</li>
-			{/if}
-			{#if init2IsEmpty}
-				<li>Second Initial Value is empty or not a number.</li>
-			{/if}
-			{#if errorIsEmpty}
-				<li>Error Threshold is empty or not a number.</li>
-			{/if}
-			{#if errorIsInvalid}
-				<li>Error Threshold must be more than 0.</li>
-			{/if}
-		</ul>
+		{#if disabled}
+			<ul class="warning" role="tooltip">
+				{#if expr_isInvalid}
+					<li>Invalid Expression.</li>
+				{/if}
+				{#if init1IsEmpty}
+					<li>First Initial Value is empty or not a number.</li>
+				{/if}
+				{#if init2IsEmpty}
+					<li>Second Initial Value is empty or not a number.</li>
+				{/if}
+				{#if errorIsEmpty}
+					<li>Error Threshold is empty or not a number.</li>
+				{/if}
+				{#if errorIsInvalid}
+					<li>Error Threshold must be more than 0.</li>
+				{/if}
+			</ul>
+		{/if}
 	</div>
 </form>
 

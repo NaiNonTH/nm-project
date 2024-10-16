@@ -29,7 +29,7 @@
 			label="Math Formula"
 			type="text"
 			name="expr"
-			placeholder="(x * x) / 7"
+			placeholder="x * x - 7"
 			bind:value={expr}
 		/>
 		<Input label="Initial Value" type="number" name="init" bind:value={init} />
