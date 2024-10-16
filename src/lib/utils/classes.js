@@ -49,12 +49,12 @@ export class ExtrapolationAnswer extends Answer {
 }
 
 export class IntegrationAnswer extends Answer {
-	constructor(value, error, executionTime) {
+	constructor(value, executionTime, graph = null) {
 		super();
 		this.topic = 'integration';
 		this.value = value;
-		this.error = error;
 		this.executionTime = executionTime;
+		this.graph = graph;
 	}
 }
 

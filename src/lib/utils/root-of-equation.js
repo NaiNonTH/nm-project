@@ -1,6 +1,6 @@
 import { PlotlyLineGraph, RootOfEquationAnswer } from './classes.js';
 import { derivative, evaluate } from 'mathjs';
-import { calculateExecutionTime } from './misc.js';
+import { calculateExecutionTime, createFunctionGraphData } from './misc.js';
 
 export function graphicalMethod(expr, start, end, error = 0.000001) {
 	const timeBegin = performance.now();
@@ -167,19 +167,6 @@ export function falsePosition(expr, xl, xr, error = 0.000001) {
 		calculateExecutionTime(timeBegin),
 		graph
 	);
-}
-
-function createFunctionGraphData(f, start, end) {
-	let x_data = [];
-	let y_data = [];
-	let step = (end - start) * 0.025;
-
-	for (let x = start; x < end; x += step) {
-		x_data.push(x);
-		y_data.push(f(x));
-	}
-
-	return [x_data, y_data];
 }
 
 export function onePoint(expr, init, error = 0.000001) {
