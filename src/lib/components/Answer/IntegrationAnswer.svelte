@@ -38,8 +38,8 @@
 			{/if}
 		</svelte:fragment>
 		<svelte:fragment slot="executionTime">
-            {result.executionTime}
-        </svelte:fragment>
+			{result.executionTime}
+		</svelte:fragment>
 		<svelte:fragment slot="other">
 			{#if result.graph}
 				<div bind:this={plotlyOutput}></div>

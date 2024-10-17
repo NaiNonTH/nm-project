@@ -7,12 +7,12 @@ function sum(data) {
 }
 
 /**
- * 
- * @param {*} m 
- * @param {*} x 
- * @param {Array} xi 
- * @param {*} yi 
- * @returns 
+ *
+ * @param {*} m
+ * @param {*} x
+ * @param {Array} xi
+ * @param {*} yi
+ * @returns
  */
 export function polynomialRegression(m, x, xi, yi) {
 	if (xi.length != yi.length) throw new TypeError('x and y dataset are not relative.');
@@ -38,8 +38,8 @@ export function polynomialRegression(m, x, xi, yi) {
 	}
 
 	const { values: a_list } = gaussJordan(joinedMatrix(A, B));
-	
-	const f = x => sum(a_list.map((a, i) => a * Math.pow(x, i)));
+
+	const f = (x) => sum(a_list.map((a, i) => a * Math.pow(x, i)));
 	const xi_min = xi.reduce((acc, val) => Math.min(val, acc));
 	const xi_max = xi.reduce((acc, val) => Math.max(val, acc));
 
@@ -51,11 +51,7 @@ export function polynomialRegression(m, x, xi, yi) {
 		new PlotlyLineGraph('Answer', { stroke: 'red' }, [x], [answer])
 	];
 
-	return new ExtrapolationAnswer(
-		answer,
-		(performance.now() - timeBegin).toFixed(2),
-		graph
-	);
+	return new ExtrapolationAnswer(answer, (performance.now() - timeBegin).toFixed(2), graph);
 }
 export function multiLinearRegression(x, xi, yi) {
 	if (xi[0].length != yi.length) throw new TypeError('x and y dataset are not relative.');

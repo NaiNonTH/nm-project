@@ -64,7 +64,7 @@ export class DifferenceAnswer extends Answer {
 		super();
 		this.topic = 'difference';
 		this.value = value;
-		this.error = error
+		this.error = error;
 		this.executionTime = executionTime;
 	}
 }

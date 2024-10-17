@@ -36,7 +36,14 @@
 		<Input label="Math Formula" type="text" name="expr" placeholder={formula} bind:value={expr} />
 		<Input label="a (Start)" type="number" name="a" placeholder={defaultRange[0]} bind:value={a} />
 		<Input label="b (End)" type="number" name="b" placeholder={defaultRange[1]} bind:value={b} />
-		<Input label="Composition" type="number" name="n" placeholder="1" bind:value={n} hint={compositeHint} />
+		<Input
+			label="Composition"
+			type="number"
+			name="n"
+			placeholder="1"
+			bind:value={n}
+			hint={compositeHint}
+		/>
 	</div>
 	<div class="button-zone">
 		<button {disabled} type="submit">Calculate</button>
