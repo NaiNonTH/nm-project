@@ -27,6 +27,11 @@
 			title: 'Integration',
 			href: '/integration',
 			emoji: '➕'
+		},
+		{
+			title: 'Difference',
+			href: '/numerical-difference',
+			emoji: '➖'
 		}
 	];
 </script>

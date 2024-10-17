@@ -58,6 +58,16 @@ export class IntegrationAnswer extends Answer {
 	}
 }
 
+export class DifferenceAnswer extends Answer {
+	constructor(value, error, executionTime) {
+		super();
+		this.topic = 'difference';
+		this.value = value;
+		this.error = error
+		this.executionTime = executionTime;
+	}
+}
+
 export class PlotlyLineGraph {
 	constructor(name, config = {}, x = [], y = []) {
 		this.name = name;

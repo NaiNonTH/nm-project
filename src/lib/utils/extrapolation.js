@@ -1,11 +1,19 @@
-import { ExtrapolationAnswer } from './classes';
+import { ExtrapolationAnswer, PlotlyLineGraph } from './classes';
 import { gaussJordan } from './linear-algebra';
-import { joinedMatrix } from './misc';
+import { createFunctionGraphData, joinedMatrix } from './misc';
 
 function sum(data) {
 	return data.reduce((a, b) => a + b, 0);
 }
 
+/**
+ * 
+ * @param {*} m 
+ * @param {*} x 
+ * @param {Array} xi 
+ * @param {*} yi 
+ * @returns 
+ */
 export function polynomialRegression(m, x, xi, yi) {
 	if (xi.length != yi.length) throw new TypeError('x and y dataset are not relative.');
 
@@ -30,10 +38,23 @@ export function polynomialRegression(m, x, xi, yi) {
 	}
 
 	const { values: a_list } = gaussJordan(joinedMatrix(A, B));
+	
+	const f = x => sum(a_list.map((a, i) => a * Math.pow(x, i)));
+	const xi_min = xi.reduce((acc, val) => Math.min(val, acc));
+	const xi_max = xi.reduce((acc, val) => Math.max(val, acc));
+
+	const answer = f(x);
+
+	const graph = [
+		new PlotlyLineGraph('f^(x)', {}, ...createFunctionGraphData(f, xi_min, xi_max)),
+		new PlotlyLineGraph('Data', { mode: 'markers' }, xi, yi),
+		new PlotlyLineGraph('Answer', { stroke: 'red' }, [x], [answer])
+	];
 
 	return new ExtrapolationAnswer(
-		sum(a_list.map((a, i) => a * Math.pow(x, i))),
-		(performance.now() - timeBegin).toFixed(2)
+		answer,
+		(performance.now() - timeBegin).toFixed(2),
+		graph
 	);
 }
 export function multiLinearRegression(x, xi, yi) {

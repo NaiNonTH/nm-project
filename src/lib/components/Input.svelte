@@ -1,14 +1,15 @@
 <script>
 	export let label = null;
 	export let name = 'untitled';
+
 	export let type = 'text';
 	export let placeholder = '';
-
-	export let value = '';
-
+	
 	export let step = 'any';
+	export let choices = ['None'];
+	export let value = type === 'selections' ? 0 : '';
 
-	export let hint;
+	export let hint = '';
 </script>
 
 <div>
@@ -37,6 +38,17 @@
 			on:focus={(event) => event.currentTarget.select()}
 			{step}
 		/>
+	{:else if type === 'selections'}
+		<select
+			required
+			bind:value
+			{name}
+			id={name}
+		>
+			{#each choices as title, value}
+				<option {value}>{title}</option>
+			{/each}
+		</select>
 	{/if}
 	{#if hint}
 		<abbr title={hint}>
