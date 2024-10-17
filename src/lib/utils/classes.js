@@ -40,10 +40,11 @@ export class InterpolationAnswer extends Answer {
 }
 
 export class ExtrapolationAnswer extends Answer {
-	constructor(value, executionTime) {
+	constructor(value, executionTime, graph = null) {
 		super();
 		this.topic = 'extrapolation';
 		this.value = value;
+		this.graph = graph;
 		this.executionTime = executionTime;
 	}
 }
