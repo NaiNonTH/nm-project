@@ -108,11 +108,9 @@ export default function (direction, precision, order, expr, x, h) {
 
 	let realDiffExpr = expr;
 	for (let i = 0; i <= order; ++i) {
-		console.log(i + 1);
-		realDiffExpr = derivative(expr, 'x').toString();
+		realDiffExpr = derivative(realDiffExpr, 'x').toString();
 	}
 	const realAnswer = evaluate(realDiffExpr, { x });
-	console.log(realAnswer);
 
 	const error = ((realAnswer - answer) / realAnswer) * 100;
 

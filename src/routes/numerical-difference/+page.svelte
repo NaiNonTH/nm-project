@@ -2,24 +2,33 @@
 	import Input from '$lib/components/Input.svelte';
 	import difference from '$lib/utils/difference.js';
 	import DifferenceAnswer from '$lib/components/Answer/DifferenceAnswer.svelte';
+	import Math from '$lib/components/Math.svelte';
 
 	let direction;
 	let precision;
 	let order;
 
-	let expr;
+	let expr = '';
 	let x;
 	let h;
 
+	let expr_isInvalid;
+
 	let result = null;
+
+	$: display = `f^{(${order + 1})}(x) = %x`;
 
 	function submit() {
 		result = difference(direction, precision, order, expr, x, h);
-		console.log(result);
 	}
 </script>
 
 <h1>Numerical Difference</h1>
+<Math
+	{expr}
+	bind:display
+	bind:isInvalid={expr_isInvalid}
+/>
 <form on:submit|preventDefault={submit}>
 	<div class="same-line">
 		<Input
