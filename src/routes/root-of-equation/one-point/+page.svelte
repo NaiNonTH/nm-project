@@ -22,7 +22,7 @@
 
 <h1>One-point Iteration</h1>
 
-<Math iterative {expr} bind:isInvalid={expr_isInvalid} />
+<Math display={'x_{i+1} = %x'} {expr} bind:isInvalid={expr_isInvalid} />
 <form on:submit|preventDefault={() => (result = rootOfEquation(onePoint, expr, init, error))}>
 	<div class="same-line">
 		<Input

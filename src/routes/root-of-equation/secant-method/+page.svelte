@@ -24,7 +24,7 @@
 
 <h1>Secant Method</h1>
 
-<Math iterative {expr} bind:isInvalid={expr_isInvalid} />
+<Math display={'x_{i+1} = %x'} {expr} bind:isInvalid={expr_isInvalid} />
 <form on:submit|preventDefault={() => (result = rootOfEquation(secantMethod, expr, init1, error))}>
 	<div class="same-line">
 		<Input

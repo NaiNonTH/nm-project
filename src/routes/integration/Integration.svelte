@@ -15,6 +15,7 @@
 	let n = minComposite;
 
 	$: n = Math.max(minComposite, Math.trunc(n));
+	$: display = `\\int_{${a || '?'}}^{${b || '?'}} = %x"`;
 
 	let expr_isInvalid;
 	$: aIsEmpty = typeof a !== 'number';
@@ -30,7 +31,11 @@
 	}
 </script>
 
-<MathDisplay {expr} bind:isInvalid={expr_isInvalid} />
+<MathDisplay
+	{expr}
+	bind:display
+	bind:isInvalid={expr_isInvalid}
+/>
 <form on:submit|preventDefault={submit}>
 	<div class="same-line">
 		<Input label="Math Formula" type="text" name="expr" placeholder={formula} bind:value={expr} />

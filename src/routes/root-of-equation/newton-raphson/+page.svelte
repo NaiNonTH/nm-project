@@ -22,7 +22,7 @@
 
 <h1>Newton Raphson</h1>
 
-<Math iterative {expr} bind:isInvalid={expr_isInvalid} />
+<Math display={'x_{i+1} = %x'} {expr} bind:isInvalid={expr_isInvalid} />
 <form on:submit|preventDefault={() => (result = rootOfEquation(newtonRaphson, expr, init, error))}>
 	<div class="same-line">
 		<Input label="Math Formula" type="text" name="expr" placeholder="x * x - 7" bind:value={expr} />

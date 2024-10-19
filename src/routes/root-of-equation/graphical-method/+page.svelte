@@ -34,7 +34,7 @@
 	<strong>Note:</strong> You may experience a lag for a short amount of time.
 </aside>
 
-<Math {expr} bind:isInvalid={expr_isInvalid} />
+<Math display="f(x) = %x" {expr} bind:isInvalid={expr_isInvalid} />
 <form
 	on:submit|preventDefault={() =>
 		(result = rootOfEquation(graphicalMethod, expr, start, end, error))}

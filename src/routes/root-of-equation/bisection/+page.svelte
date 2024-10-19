@@ -31,7 +31,7 @@
 
 <h1>Bisection</h1>
 
-<Math {expr} bind:isInvalid={expr_isInvalid} />
+<Math display="f(x) = %x" {expr} bind:isInvalid={expr_isInvalid} />
 <form
 	on:submit|preventDefault={() => (result = rootOfEquation(bisection, expr, start, end, error))}
 >

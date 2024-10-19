@@ -51,10 +51,19 @@ export function matrixIsInvalid(matrix, determinedRows, determinedCols) {
 	return false;
 }
 
-export function createFunctionGraphData(f, start, end) {
+export function createFunctionGraphData(f, x0, x1) {
 	let x_data = [];
 	let y_data = [];
-	let step = (end - start) * 0.025;
+	let step = Math.abs(x1 - x0) * 0.025;
+
+	let start, end;
+	if (x0 < x1) {
+		start = x0;
+		end = x1;
+	} else {
+		start = x1;
+		end = x0;
+	}
 
 	for (let x = start; x <= end + step; x += step) {
 		x_data.push(x);

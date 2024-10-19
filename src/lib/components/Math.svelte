@@ -9,28 +9,23 @@
 	};
 
 	export let expr;
-	export let iterative = false;
+	export let display = '%s';
 	export let isInvalid;
 
 	$: htmlExpr = function () {
-		const equals = iterative ? 'x_{i+1}' : 'f(x)';
-
 		if (expr.trim() === '') {
 			isInvalid = true;
-			return katex.renderToString(`${equals} = ?`, katexConfig);
+			return katex.renderToString(display.replace('%x', '?'), katexConfig);
 		}
 
 		try {
 			let texExpr = parse(expr).toTex();
-			texExpr = iterative ? texExpr.replace(/x/g, 'x_{i}') : texExpr;
 
 			isInvalid = false;
-			return katex.renderToString(`${equals} = ${texExpr}`, katexConfig);
+			return katex.renderToString(display.replace('%x', texExpr), katexConfig);
 		} catch {
-			const replacedExpr = iterative ? expr.replace(/x/g, 'x_{i}') : expr;
-
 			isInvalid = true;
-			return katex.renderToString(`${equals} = ${replacedExpr}`, katexConfig);
+			return katex.renderToString(display.replace('%x', expr), katexConfig);
 		}
 	};
 </script>
