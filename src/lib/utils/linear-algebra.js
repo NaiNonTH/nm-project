@@ -1,6 +1,17 @@
 import { LinearAlgebraAnswer } from './classes';
 import { calculateExecutionTime, joinedMatrix } from './misc';
-import { lup, lusolve } from 'mathjs';
+import {
+	add,
+	lup,
+	lusolve,
+	matrix,
+	multiply,
+	sqrt,
+	subtract,
+	transpose,
+	unaryMinus,
+	zeros
+} from 'mathjs';
 
 function det(A) {
 	const size = A.length;
@@ -274,4 +285,41 @@ export function gaussSeidel(A, B, x0, error = 0.000001) {
 	}
 
 	return new LinearAlgebraAnswer(x1, calculateExecutionTime(timeBegin));
+}
+
+export function conjugateGradient(A, B, x, error = 0.000001) {
+	function scalar(matrix) {
+		return matrix.toArray()[0][0];
+	}
+
+	const timeBegin = performance.now();
+
+	A = matrix(A);
+	B = matrix(B);
+
+	x = matrix(x.map((init) => [init]));
+
+	let R = subtract(multiply(A, x), B);
+	let D = unaryMinus(R);
+
+	let calcError,
+		iteration = 0;
+
+	do {
+		++iteration;
+
+		let lambda = unaryMinus(
+			scalar(multiply(transpose(D), R)) / scalar(multiply(transpose(D), A, D))
+		);
+		x = add(x, multiply(lambda, D));
+		R = subtract(multiply(A, x), B);
+
+		calcError = sqrt(scalar(multiply(transpose(R), R)));
+		if (calcError < error) break;
+
+		let alpha = scalar(multiply(transpose(R), A, D)) / scalar(multiply(transpose(D), A, D));
+		D = add(unaryMinus(R), multiply(alpha, D));
+	} while (iteration <= 999);
+
+	return new LinearAlgebraAnswer(x.toArray().flat(), calculateExecutionTime(timeBegin));
 }

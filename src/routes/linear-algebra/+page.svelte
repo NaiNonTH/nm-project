@@ -21,4 +21,7 @@
 	<li>
 		<a href="/linear-algebra/gauss-seidel">Gauss-Seidel</a>
 	</li>
+	<li>
+		<a href="/linear-algebra/conjugate-gradient">Conjugate Gradient</a>
+	</li>
 </ul>
