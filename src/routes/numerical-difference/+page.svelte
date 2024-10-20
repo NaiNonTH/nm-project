@@ -24,11 +24,7 @@
 </script>
 
 <h1>Numerical Difference</h1>
-<Math
-	{expr}
-	bind:display
-	bind:isInvalid={expr_isInvalid}
-/>
+<Math {expr} bind:display bind:isInvalid={expr_isInvalid} />
 <form on:submit|preventDefault={submit}>
 	<div class="same-line">
 		<Input

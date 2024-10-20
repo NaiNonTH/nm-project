@@ -31,11 +31,7 @@
 	}
 </script>
 
-<MathDisplay
-	{expr}
-	bind:display
-	bind:isInvalid={expr_isInvalid}
-/>
+<MathDisplay {expr} bind:display bind:isInvalid={expr_isInvalid} />
 <form on:submit|preventDefault={submit}>
 	<div class="same-line">
 		<Input label="Math Formula" type="text" name="expr" placeholder={formula} bind:value={expr} />
