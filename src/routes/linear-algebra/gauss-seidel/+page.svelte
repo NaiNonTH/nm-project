@@ -4,4 +4,4 @@
 </script>
 
 <h1>Gauss-Seidel</h1>
-<LinearAlgebra func={gaussSeidel} />
+<LinearAlgebra iterative func={gaussSeidel} />

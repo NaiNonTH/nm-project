@@ -4,4 +4,4 @@
 </script>
 
 <h1>Jacobi</h1>
-<LinearAlgebra func={jacobi} />
+<LinearAlgebra iterative func={jacobi} />

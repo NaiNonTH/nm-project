@@ -206,10 +206,9 @@ export function lu(A, B) {
 	return new LinearAlgebraAnswer(answer, calculateExecutionTime(timeBegin));
 }
 
-export function jacobi(A, B, error = 0.000001) {
+export function jacobi(A, B, x0, error = 0.000001) {
 	const timeBegin = performance.now();
 
-	let x0 = new Array(A.length).fill(0);
 	let x1 = new Array(A.length).fill(0);
 
 	let iteration = 0;
@@ -242,10 +241,9 @@ export function jacobi(A, B, error = 0.000001) {
 	return new LinearAlgebraAnswer(x1, calculateExecutionTime(timeBegin));
 }
 
-export function gaussSeidel(A, B, error = 0.000001) {
+export function gaussSeidel(A, B, x0, error = 0.000001) {
 	const timeBegin = performance.now();
-
-	let x0 = new Array(A.length).fill(0);
+	
 	let x1 = new Array(A.length).fill(0);
 
 	let iteration = 0;
