@@ -19,7 +19,7 @@
 		text-align: center;
 	}
 	.hero div * {
-		margin: 0.5rem 0;
+		margin: 1rem 0;
 	}
 	.hero h1 {
 		font-size: 2rem;

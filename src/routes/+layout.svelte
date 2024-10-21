@@ -44,7 +44,8 @@
 		<li>
 			<a data-icon="🏠" class="home" aria-current={$page.url.pathname === '/'} href="/">Home</a>
 		</li>
-		<hr />
+	</ul>
+	<ul>
 		{#each links as { title, href, emoji }}
 			<li>
 				<a
