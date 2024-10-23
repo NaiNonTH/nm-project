@@ -1,5 +1,5 @@
 <script>
-	import { parse } from 'mathjs';
+	import { parse, evaluate } from 'mathjs';
 	import katex from 'katex';
 
 	const katexConfig = {
@@ -19,6 +19,10 @@
 		}
 
 		try {
+			evaluate(expr, { x: 1 });
+
+			if (expr.indexOf('x') === -1) throw new Error();
+
 			let texExpr = parse(expr).toTex();
 
 			isInvalid = false;
