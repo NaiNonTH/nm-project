@@ -56,14 +56,8 @@ export function createFunctionGraphData(f, x0, x1) {
 	let y_data = [];
 	let step = Math.abs(x1 - x0) * 0.025;
 
-	let start, end;
-	if (x0 < x1) {
-		start = x0;
-		end = x1;
-	} else {
-		start = x1;
-		end = x0;
-	}
+	let start = Math.min(x0, x1) - 2;
+	let end = Math.max(x0, x1) + 2;
 
 	for (let x = start; x <= end + step; x += step) {
 		x_data.push(x);

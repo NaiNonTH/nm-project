@@ -13,20 +13,27 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 	let rangeToRoute;
 
 	let progress = [];
-	let graph = [new PlotlyLineGraph('Iteration', { mode: 'lines+markers' })];
+	let graph = [
+		new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(f, start, end)),
+		new PlotlyLineGraph('Iteration', { mode: 'markers' })
+	];
+
+	function pushToGraph(x, y, error) {
+		progress.push({
+			Iteration: iteration,
+			x,
+			y,
+			'Error (%)': error
+		});
+		graph[1].x.push(x);
+		graph[1].y.push(y);
+	}
 
 	for (x = start; x <= end; ++x) {
 		const y = f(x);
 		const y_error = Math.abs(y);
 
-		progress.push({
-			Iteration: iteration,
-			x,
-			y,
-			'Error (%)': y_error
-		});
-		graph[0].x.push(x);
-		graph[0].y.push(y);
+		pushToGraph(x, y, y_error);
 
 		if (error_previous < y_error) {
 			rangeToRoute = x;
@@ -41,26 +48,10 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 		const y = f(x);
 		const y_error = Math.abs(y);
 
-		if (iteration % 10000 === 0) {
-			progress.push({
-				Iteration: iteration,
-				x,
-				y,
-				'Error (%)': y_error
-			});
-			graph[0].x.push(x);
-			graph[0].y.push(y);
-		}
+		if (iteration % 10000 === 0) pushToGraph(x, y, y_error);
 
 		if (error_previous < y_error) {
-			progress.push({
-				Iteration: iteration,
-				x,
-				y,
-				'Error (%)': y_error
-			});
-			graph[0].x.push(x);
-			graph[0].y.push(y);
+			pushToGraph(x, y, y_error);
 
 			return new RootOfEquationAnswer(
 				x,
@@ -88,7 +79,10 @@ export function bisection(expr, xl, xr, error = 0.000001) {
 		iteration = 0;
 
 	let progress = [];
-	let graph = [new PlotlyLineGraph('Iteration', { mode: 'lines+markers' })];
+	let graph = [
+		new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(f, xl, xr)),
+		new PlotlyLineGraph('Iteration', { mode: 'markers' })
+	];
 
 	do {
 		xm = (xl + xr) / 2;
@@ -106,8 +100,8 @@ export function bisection(expr, xl, xr, error = 0.000001) {
 			y: fxm,
 			'Error (%)': xm_error * 100
 		});
-		graph[0].x.push(xm);
-		graph[0].y.push(fxm);
+		graph[1].x.push(xm);
+		graph[1].y.push(fxm);
 
 		++iteration;
 	} while (iteration < 100 && (cmp == 0 || xm_error >= error));
@@ -133,7 +127,10 @@ export function falsePosition(expr, xl, xr, error = 0.000001) {
 		iteration = 0;
 
 	let progress = [];
-	let graph = [new PlotlyLineGraph('Iteration', { mode: 'lines+markers' })];
+	let graph = [
+		new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(f, xl, xr)),
+		new PlotlyLineGraph('Iteration', { mode: 'markers' })
+	];
 
 	do {
 		let fxl = f(xl);
@@ -154,8 +151,8 @@ export function falsePosition(expr, xl, xr, error = 0.000001) {
 			y: fx1,
 			'Error (%)': x1_error * 100
 		});
-		graph[0].x.push(x1);
-		graph[0].y.push(fx1);
+		graph[1].x.push(x1);
+		graph[1].y.push(fx1);
 
 		++iteration;
 	} while (iteration < 100 && (cmp == 0 || x1_error >= error));
@@ -176,6 +173,7 @@ export function onePoint(expr, init, error = 0.000001) {
 
 	let x0,
 		x1,
+		x1_min = Infinity,
 		x1_max = -Infinity,
 		x_error,
 		iteration = 0;
@@ -188,7 +186,8 @@ export function onePoint(expr, init, error = 0.000001) {
 		x1 = f(x0);
 		x_error = Math.abs(x1 - x0);
 
-		if (x1 > x1_max) x1_max = x1;
+		x1_min = Math.min(x1, x1_min);
+		x1_max = Math.max(x1, x1_max);
 
 		progress.push({
 			Iteration: iteration,
@@ -202,8 +201,11 @@ export function onePoint(expr, init, error = 0.000001) {
 		++iteration;
 	} while (iteration < 100 && x_error > error);
 
-	graph[1] = new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(f, init, x1_max));
-	graph[2] = new PlotlyLineGraph('x', {}, [init, x1_max], [init, x1_max]);
+	const x_min = Math.min(x1_min, init);
+	const x_max = Math.max(x1_max, init);
+
+	graph[1] = new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(f, x_min, x_max));
+	graph[2] = new PlotlyLineGraph('x', {}, [x_min, x_max], [x_min, x_max]);
 
 	return new RootOfEquationAnswer(
 		x1,
