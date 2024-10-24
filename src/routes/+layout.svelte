@@ -2,6 +2,8 @@
 	import { page } from '$app/stores';
 	import '../app.css';
 
+	export let data;
+
 	const links = [
 		{
 			title: 'Root of Equation',
@@ -39,34 +41,44 @@
 <header>
 	<h1><span aria-hidden="true">🧮</span> Numerical Method Project</h1>
 </header>
-<nav class="site-nav">
-	<ul>
-		<li>
-			<a data-icon="🏠" class="home" aria-current={$page.url.pathname === '/'} href="/">Home</a>
-		</li>
-	</ul>
-	<ul>
-		{#each links as { title, href, emoji }}
+<div class="sidebar">
+	<nav class="site-nav">
+		<ul>
+			<li>
+				<a data-icon="🏠" class="home" aria-current={$page.url.pathname === '/'} href="/">Home</a>
+			</li>
+		</ul>
+		<ul>
+			{#each links as { title, href, emoji }}
+				<li>
+					<a
+						data-icon={emoji}
+						aria-current={$page.url.pathname.includes(href) && $page.status == 200}
+						{href}
+					>
+						{title}
+					</a>
+				</li>
+			{/each}
+		</ul>
+		<ul>
 			<li>
 				<a
-					data-icon={emoji}
-					aria-current={$page.url.pathname.includes(href) && $page.status == 200}
-					{href}
+					aria-current={$page.url.pathname.includes('/credits') && $page.status == 200}
+					href="/credits">Credits</a
 				>
-					{title}
-				</a>
 			</li>
-		{/each}
-	</ul>
-	<ul>
-		<li>
-			<a
-				aria-current={$page.url.pathname.includes('/credits') && $page.status == 200}
-				href="/credits">Credits</a
-			>
-		</li>
-	</ul>
-</nav>
+		</ul>
+	</nav>
+	<div class="last-commit">
+		<h3>Last Commit:</h3>
+		{#if data.lastCommit}
+			{@const lastCommit = data.lastCommit}
+			{@const commit = lastCommit.commit}
+			<p><a target="_blank" href={lastCommit.html_url}>{commit.message}</a> by {commit.author.name} ({new Date(commit.author.date).toLocaleString()})</p>
+		{/if}
+	</div>
+</div>
 <main>
 	<slot />
 </main>

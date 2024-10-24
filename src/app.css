@@ -92,7 +92,7 @@ footer {
 }
 
 main,
-.site-nav {
+.sidebar > * {
 	border-radius: 1rem;
 	border: 0.1rem solid #dcdcff;
 	overflow: hidden;
@@ -111,10 +111,11 @@ main > section {
 	margin: 1rem 0;
 }
 
-.site-nav {
+.sidebar > * {
 	background: #f2f2ff;
-	align-self: start;
+	margin: 1rem 0;
 }
+
 .site-nav hr {
 	border: none;
 	height: 1px;
@@ -162,6 +163,10 @@ main > section {
 .site-nav a:not([aria-current='true']):hover,
 .site-nav a:not([aria-current='true']):focus-visible {
 	background: #fff;
+}
+
+.last-commit {
+	padding: 1rem;
 }
 
 .grid-list {
