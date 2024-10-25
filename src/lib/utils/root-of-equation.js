@@ -204,12 +204,7 @@ export function onePoint(expr, init, error = 0.000001) {
 	} while (iteration < 100 && x_error > error);
 
 	if (!isFinite(x1_min) || !isFinite(x1_max))
-		return new RootOfEquationAnswer(
-			x1,
-			iteration,
-			progress,
-			calculateExecutionTime(timeBegin)
-		);
+		return new RootOfEquationAnswer(x1, iteration, progress, calculateExecutionTime(timeBegin));
 
 	const x_min = Math.min(x1_min, init);
 	const x_max = Math.max(x1_max, init);
@@ -258,14 +253,9 @@ export function newtonRaphson(expr, init, error = 0.000001) {
 
 		++iteration;
 	} while (iteration < 100 && x_error > error);
-	
+
 	if (!isFinite(x1_max))
-		return new RootOfEquationAnswer(
-			x1,
-			iteration,
-			progress,
-			calculateExecutionTime(timeBegin)
-		);
+		return new RootOfEquationAnswer(x1, iteration, progress, calculateExecutionTime(timeBegin));
 
 	graph.push(new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(fn, init, x1_max)));
 
@@ -311,14 +301,9 @@ export function secantMethod(expr, init1, init2, error = 0.000001) {
 
 		++iteration;
 	} while (iteration < 100 && x_error > error);
-	
+
 	if (!isFinite(x2_max))
-		return new RootOfEquationAnswer(
-			x1,
-			iteration,
-			progress,
-			calculateExecutionTime(timeBegin)
-		);
+		return new RootOfEquationAnswer(x1, iteration, progress, calculateExecutionTime(timeBegin));
 
 	graph[0] = new PlotlyLineGraph(
 		'f(x)',

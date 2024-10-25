@@ -45,10 +45,7 @@
 		<ul>
 			{#each links as { title, href }}
 				<li>
-					<a
-						aria-current={$page.url.pathname.includes(href) && $page.status == 200}
-						{href}
-					>
+					<a aria-current={$page.url.pathname.includes(href) && $page.status == 200} {href}>
 						{title}
 					</a>
 				</li>
@@ -68,7 +65,11 @@
 		{#if data.lastCommit}
 			{@const lastCommit = data.lastCommit}
 			{@const commit = lastCommit.commit}
-			<p><a target="_blank" href={lastCommit.html_url}>{commit.message}</a> by {commit.author.name} ({new Date(commit.author.date).toLocaleString()})</p>
+			<p>
+				<a target="_blank" href={lastCommit.html_url}>{commit.message}</a> by {commit.author.name} ({new Date(
+					commit.author.date
+				).toLocaleString()})
+			</p>
 		{/if}
 	</div>
 </div>

@@ -247,7 +247,7 @@ export function jacobi(A, B, x0, error = 0.000001) {
 				ok = false;
 			}
 		}
-		
+
 		progress.push({
 			iteration,
 			x0,
@@ -268,7 +268,7 @@ export function gaussSeidel(A, B, x0, error = 0.000001) {
 	const timeBegin = performance.now();
 
 	let x1 = new Array(A.length).fill(0);
-	
+
 	let progress = [];
 	let iteration = 0;
 
@@ -294,7 +294,7 @@ export function gaussSeidel(A, B, x0, error = 0.000001) {
 				ok = false;
 			}
 		}
-		
+
 		progress.push({
 			iteration,
 			x0,
@@ -349,7 +349,7 @@ export function conjugateGradient(A, B, x, error = 0.000001) {
 
 		let alpha = scalar(multiply(transpose(R), A, D)) / scalar(multiply(transpose(D), A, D));
 		D = add(unaryMinus(R), multiply(alpha, D));
-		
+
 		++iteration;
 	} while (iteration <= 999);
 

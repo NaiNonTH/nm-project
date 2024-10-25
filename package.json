@@ -1,32 +1,32 @@
 {
-  "name": "nm-project",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
-    "preview": "vite preview",
-    "lint": "prettier --check . && eslint .",
-    "format": "prettier --write ."
-  },
-  "devDependencies": {
-    "@sveltejs/adapter-auto": "^3.3.0",
-    "@sveltejs/kit": "^2.7.2",
-    "@sveltejs/vite-plugin-svelte": "^3.1.2",
-    "@types/eslint": "^9.6.1",
-    "eslint": "^9.13.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-svelte": "^2.46.0",
-    "globals": "^15.11.0",
-    "prettier": "^3.3.3",
-    "prettier-plugin-svelte": "^3.2.7",
-    "svelte": "^4.2.19",
-    "vite": "^5.4.10"
-  },
-  "type": "module",
-  "dependencies": {
-    "@octokit/core": "^6.1.2",
-    "katex": "^0.16.11",
-    "mathjs": "^13.2.0"
-  }
+	"name": "nm-project",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"lint": "prettier --check . && eslint .",
+		"format": "prettier --write ."
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "^3.3.0",
+		"@sveltejs/kit": "^2.7.2",
+		"@sveltejs/vite-plugin-svelte": "^3.1.2",
+		"@types/eslint": "^9.6.1",
+		"eslint": "^9.13.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-svelte": "^2.46.0",
+		"globals": "^15.11.0",
+		"prettier": "^3.3.3",
+		"prettier-plugin-svelte": "^3.2.7",
+		"svelte": "^4.2.19",
+		"vite": "^5.4.10"
+	},
+	"type": "module",
+	"dependencies": {
+		"@octokit/core": "^6.1.2",
+		"katex": "^0.16.11",
+		"mathjs": "^13.2.0"
+	}
 }

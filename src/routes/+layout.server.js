@@ -10,11 +10,11 @@ export async function load() {
 		owner: 'NaiNonTH',
 		repo: 'nm-project',
 		headers: {
-    		'X-GitHub-Api-Version': '2022-11-28'
+			'X-GitHub-Api-Version': '2022-11-28'
 		}
 	});
 
-    return {
-        lastCommit: data[0]
-    }
+	return {
+		lastCommit: data[0]
+	};
 }

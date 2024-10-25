@@ -14,7 +14,7 @@
 				x<sub>{i + 1}</sub> = {value.toFixed(precision)}<br />
 			{/each}
 		</svelte:fragment>
-		<svelte:fragment slot='other' let:precision>
+		<svelte:fragment slot="other" let:precision>
 			{#if iterative && result.progress}
 				<div class="table">
 					<table>
@@ -32,35 +32,35 @@
 							{#each result.progress as row}
 								{@const truncated = Math.trunc(precision)}
 								<tr>
-									<td>{+(row.iteration).toFixed(truncated)}</td>
+									<td>{+row.iteration.toFixed(truncated)}</td>
 									{#if conjugate}
 										<td>
 											<ul>
 												{#each row.x as x, i}
-													<li>x{toSubset(i+1)} = {+x.toFixed(truncated)}</li>
+													<li>x{toSubset(i + 1)} = {+x.toFixed(truncated)}</li>
 												{/each}
 											</ul>
 										</td>
-										<td>{+(row.error).toFixed(truncated)}</td>
+										<td>{+row.error.toFixed(truncated)}</td>
 									{:else}
 										<td>
 											<ul>
 												{#each row.x0 as x0, i}
-													<li>x{toSubset(i+1)} = {+x0.toFixed(truncated)}</li>
+													<li>x{toSubset(i + 1)} = {+x0.toFixed(truncated)}</li>
 												{/each}
 											</ul>
 										</td>
 										<td>
 											<ul>
 												{#each row.x1 as x0, i}
-													<li>x{toSubset(i+1)} = {+x0.toFixed(truncated)}</li>
+													<li>x{toSubset(i + 1)} = {+x0.toFixed(truncated)}</li>
 												{/each}
 											</ul>
 										</td>
 										<td>
 											<ul>
 												{#each row.errors as error, i}
-													<li>e{toSubset(i+1)} = {+error.toFixed(truncated)}</li>
+													<li>e{toSubset(i + 1)} = {+error.toFixed(truncated)}</li>
 												{/each}
 											</ul>
 										</td>
