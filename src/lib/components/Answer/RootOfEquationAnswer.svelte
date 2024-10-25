@@ -36,7 +36,9 @@
 			{/if}
 		</svelte:fragment>
 		<svelte:fragment slot="other" let:precision>
-			<div bind:this={plotlyOutput}></div>
+			{#if result.graph}
+				<div bind:this={plotlyOutput}></div>
+			{/if}
 			<div class="table">
 				<table>
 					<thead>

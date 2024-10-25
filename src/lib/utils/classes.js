@@ -10,7 +10,7 @@ class Answer {
 }
 
 export class RootOfEquationAnswer extends Answer {
-	constructor(value, iteration, progress, executionTime, graph = progress) {
+	constructor(value, iteration, progress, executionTime, graph = null) {
 		super();
 		this.topic = 'root-of-equation';
 		this.value = value;
