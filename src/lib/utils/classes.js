@@ -22,10 +22,11 @@ export class RootOfEquationAnswer extends Answer {
 }
 
 export class LinearAlgebraAnswer extends Answer {
-	constructor(values, executionTime) {
+	constructor(values, executionTime, progress = null) {
 		super();
 		this.topic = 'linear-algebra';
 		this.values = values;
+		this.progress = progress;
 		this.executionTime = executionTime;
 	}
 }

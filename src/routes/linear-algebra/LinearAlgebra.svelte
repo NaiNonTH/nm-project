@@ -9,6 +9,7 @@
 	export let joinMatrix = false;
 	export let cramerMode = false;
 	export let iterative = false;
+	export let conjugate = false;
 
 	import { joinedMatrix, matrixIsInvalid } from '$lib/utils/misc.js';
 
@@ -70,4 +71,4 @@
 	</div>
 </form>
 
-<LinearAlgebraAnswer {result} />
+<LinearAlgebraAnswer {conjugate} {iterative} {result} />

@@ -4,4 +4,4 @@
 </script>
 
 <h1>Conjugate Gradient</h1>
-<LinearAlgebra iterative func={conjugateGradient} />
+<LinearAlgebra conjugate iterative func={conjugateGradient} />

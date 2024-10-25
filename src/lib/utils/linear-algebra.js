@@ -223,8 +223,9 @@ export function jacobi(A, B, x0, error = 0.000001) {
 	let x1 = new Array(A.length).fill(0);
 
 	let iteration = 0;
+	let progress = [];
 
-	while (iteration <= 999) {
+	while (iteration <= 99) {
 		for (let i = 0; i < A.length; ++i) {
 			let ans = B[i][0];
 
@@ -235,13 +236,24 @@ export function jacobi(A, B, x0, error = 0.000001) {
 			x1[i] = ans / A[i][i];
 		}
 
+		let errorList = [];
+
 		let ok = true;
 		for (let i = 0; i < x1.length; ++i) {
-			if (Math.abs(x1[i] - x0[i]) >= error) {
+			const x_error = Math.abs(x1[i] - x0[i]);
+			errorList.push(x_error);
+
+			if (x_error >= error) {
 				ok = false;
-				break;
 			}
 		}
+		
+		progress.push({
+			iteration,
+			x0,
+			x1,
+			errors: errorList
+		});
 
 		if (ok) break;
 
@@ -249,17 +261,18 @@ export function jacobi(A, B, x0, error = 0.000001) {
 		++iteration;
 	}
 
-	return new LinearAlgebraAnswer(x1, calculateExecutionTime(timeBegin));
+	return new LinearAlgebraAnswer(x1, calculateExecutionTime(timeBegin), progress);
 }
 
 export function gaussSeidel(A, B, x0, error = 0.000001) {
 	const timeBegin = performance.now();
 
 	let x1 = new Array(A.length).fill(0);
-
+	
+	let progress = [];
 	let iteration = 0;
 
-	while (iteration <= 999) {
+	while (iteration <= 99) {
 		for (let i = 0; i < A.length; ++i) {
 			let ans = B[i][0];
 
@@ -270,13 +283,24 @@ export function gaussSeidel(A, B, x0, error = 0.000001) {
 			x1[i] = ans / A[i][i];
 		}
 
+		let errorList = [];
+
 		let ok = true;
 		for (let i = 0; i < x1.length; ++i) {
-			if (Math.abs(x1[i] - x0[i]) >= error) {
+			const x_error = Math.abs(x1[i] - x0[i]);
+			errorList.push(x_error);
+
+			if (x_error >= error) {
 				ok = false;
-				break;
 			}
 		}
+		
+		progress.push({
+			iteration,
+			x0,
+			x1,
+			errors: errorList
+		});
 
 		if (ok) break;
 
@@ -284,7 +308,7 @@ export function gaussSeidel(A, B, x0, error = 0.000001) {
 		++iteration;
 	}
 
-	return new LinearAlgebraAnswer(x1, calculateExecutionTime(timeBegin));
+	return new LinearAlgebraAnswer(x1, calculateExecutionTime(timeBegin), progress);
 }
 
 export function conjugateGradient(A, B, x, error = 0.000001) {
@@ -303,11 +327,10 @@ export function conjugateGradient(A, B, x, error = 0.000001) {
 	let D = unaryMinus(R);
 
 	let calcError,
+		progress = [],
 		iteration = 0;
 
 	do {
-		++iteration;
-
 		let lambda = unaryMinus(
 			scalar(multiply(transpose(D), R)) / scalar(multiply(transpose(D), A, D))
 		);
@@ -315,11 +338,20 @@ export function conjugateGradient(A, B, x, error = 0.000001) {
 		R = subtract(multiply(A, x), B);
 
 		calcError = sqrt(scalar(multiply(transpose(R), R)));
+
+		progress.push({
+			iteration,
+			x: x.toArray().flat(),
+			error: calcError
+		});
+
 		if (calcError < error) break;
 
 		let alpha = scalar(multiply(transpose(R), A, D)) / scalar(multiply(transpose(D), A, D));
 		D = add(unaryMinus(R), multiply(alpha, D));
+		
+		++iteration;
 	} while (iteration <= 999);
 
-	return new LinearAlgebraAnswer(x.toArray().flat(), calculateExecutionTime(timeBegin));
+	return new LinearAlgebraAnswer(x.toArray().flat(), calculateExecutionTime(timeBegin), progress);
 }
