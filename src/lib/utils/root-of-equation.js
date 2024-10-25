@@ -203,7 +203,7 @@ export function onePoint(expr, init, error = 0.000001) {
 		console.log(iteration < 100, x_error > error);
 	} while (iteration < 100 && x_error > error);
 
-	if (!isFinite(x1_min) || !isFinite(x1_max))
+	if (!isFinite(x1_min) || !isFinite(x1_max) || isNaN(x1_min) || isNaN(x1_max))
 		return new RootOfEquationAnswer(x1, iteration, progress, calculateExecutionTime(timeBegin));
 
 	const x_min = Math.min(x1_min, init);
@@ -254,7 +254,7 @@ export function newtonRaphson(expr, init, error = 0.000001) {
 		++iteration;
 	} while (iteration < 100 && x_error > error);
 
-	if (!isFinite(x1_max))
+	if (!isFinite(x1_max) || isNaN(x1_max))
 		return new RootOfEquationAnswer(x1, iteration, progress, calculateExecutionTime(timeBegin));
 
 	graph.push(new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(fn, init, x1_max)));
@@ -281,7 +281,7 @@ export function secantMethod(expr, init1, init2, error = 0.000001) {
 		iteration = 0;
 
 	let progress = [];
-	let graph = [new PlotlyLineGraph('Iteration')];
+	let graph = [];
 
 	do {
 		x0 = x1 ? x1 : init1;
@@ -302,14 +302,10 @@ export function secantMethod(expr, init1, init2, error = 0.000001) {
 		++iteration;
 	} while (iteration < 100 && x_error > error);
 
-	if (!isFinite(x2_max))
-		return new RootOfEquationAnswer(x1, iteration, progress, calculateExecutionTime(timeBegin));
+	if (!isFinite(x2_max) || isNaN(x2_max))
+		return new RootOfEquationAnswer(x2, iteration, progress, calculateExecutionTime(timeBegin));
 
-	graph[0] = new PlotlyLineGraph(
-		'f(x)',
-		{},
-		...createFunctionGraphData(fn, Math.min(init1, init2), x2_max)
-	);
+	graph.push(new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(fn, Math.min(init1, init2), x2_max)));
 
 	return new RootOfEquationAnswer(
 		x2,
