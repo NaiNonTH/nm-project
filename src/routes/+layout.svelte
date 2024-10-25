@@ -7,33 +7,27 @@
 	const links = [
 		{
 			title: 'Root of Equation',
-			href: '/root-of-equation',
-			emoji: '🫚'
+			href: '/root-of-equation'
 		},
 		{
 			title: 'Linear Algebra',
-			href: '/linear-algebra',
-			emoji: '📅'
+			href: '/linear-algebra'
 		},
 		{
 			title: 'Interpolation',
-			href: '/interpolation',
-			emoji: '📈'
+			href: '/interpolation'
 		},
 		{
 			title: 'Extrapolation',
-			href: '/extrapolation',
-			emoji: '📉'
+			href: '/extrapolation'
 		},
 		{
 			title: 'Integration',
-			href: '/integration',
-			emoji: '➕'
+			href: '/integration'
 		},
 		{
 			title: 'Difference',
-			href: '/numerical-difference',
-			emoji: '➖'
+			href: '/numerical-difference'
 		}
 	];
 </script>
@@ -49,10 +43,9 @@
 			</li>
 		</ul>
 		<ul>
-			{#each links as { title, href, emoji }}
+			{#each links as { title, href }}
 				<li>
 					<a
-						data-icon={emoji}
 						aria-current={$page.url.pathname.includes(href) && $page.status == 200}
 						{href}
 					>

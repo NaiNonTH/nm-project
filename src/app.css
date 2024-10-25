@@ -2,6 +2,7 @@
 *::before,
 *::after {
 	box-sizing: border-box;
+	line-height: 1.5em;
 }
 #site :first-child {
 	margin-top: 0 !important;
@@ -39,12 +40,22 @@ button {
 	border-radius: 0.5em;
 }
 button:not(:disabled):hover,
-button:not(:disabled):focus-visible {
+button:focus {
 	background: #4949af;
 }
 button:focus {
-	outline: 0.2em solid #0003;
+	animation: ripple 0.2s forwards;
 }
+
+@keyframes ripple {
+	from {
+		box-shadow: 0 0 #4949af99;
+	}
+	to {
+		box-shadow: 0 0 0 1rem transparent;
+	}
+}
+
 button:disabled {
 	background: #c4c4c4;
 }
@@ -115,12 +126,12 @@ main > section {
 	background: #f2f2ff;
 	margin: 1rem 0;
 }
-
+ 
 .site-nav hr {
 	border: none;
 	height: 1px;
 	background: #dcdcff;
-	margin: 0;
+	margin:0;
 }
 .site-nav ul {
 	margin: 0;
@@ -136,7 +147,7 @@ main > section {
 .site-nav a {
 	position: relative;
 	display: block;
-	padding: 0.5rem 0.75rem;
+	padding: 0.35rem;
 	text-decoration: none;
 
 	color: inherit;
@@ -194,6 +205,8 @@ main > section {
 	color: inherit;
 	text-align: center;
 	text-decoration: none;
+
+	transition: background-color 0.1s;
 }
 .grid-list a:hover,
 .grid-list a:focus-visible {
