@@ -52,12 +52,15 @@ export function matrixIsInvalid(matrix, determinedRows, determinedCols) {
 }
 
 export function createFunctionGraphData(f, x0, x1) {
+	x0 = Math.floor(Math.min(x0, x1));
+	x1 = Math.ceil(Math.max(x0, x1));
+
 	let x_data = [];
 	let y_data = [];
 	let step = Math.abs(x1 - x0) * 0.025;
 
-	let start = Math.min(x0, x1) - 2;
-	let end = Math.max(x0, x1) + 2;
+	let start = x0 - 2;
+	let end = x1 + 2;
 
 	for (let x = start; x <= end + step; x += step) {
 		x_data.push(x);
