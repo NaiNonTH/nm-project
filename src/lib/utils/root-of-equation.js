@@ -305,7 +305,9 @@ export function secantMethod(expr, init1, init2, error = 0.000001) {
 	if (!isFinite(x2_max) || isNaN(x2_max))
 		return new RootOfEquationAnswer(x2, iteration, progress, calculateExecutionTime(timeBegin));
 
-	graph.push(new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(fn, Math.min(init1, init2), x2_max)));
+	graph.push(
+		new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(fn, Math.min(init1, init2), x2_max))
+	);
 
 	return new RootOfEquationAnswer(
 		x2,

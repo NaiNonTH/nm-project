@@ -1,17 +1,6 @@
 import { LinearAlgebraAnswer } from './classes';
 import { calculateExecutionTime, joinedMatrix } from './misc';
-import {
-	add,
-	lup,
-	lusolve,
-	matrix,
-	multiply,
-	sqrt,
-	subtract,
-	transpose,
-	unaryMinus,
-	zeros
-} from 'mathjs';
+import { add, lup, lusolve, matrix, multiply, sqrt, subtract, transpose, unaryMinus } from 'mathjs';
 
 function det(A) {
 	const size = A.length;

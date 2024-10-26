@@ -25,33 +25,15 @@
 <h1>Secant Method</h1>
 
 <Math display={'x_{i+1} = %x'} {expr} bind:isInvalid={expr_isInvalid} />
-<form on:submit|preventDefault={() => (result = rootOfEquation(secantMethod, expr, init1, init2, error))}>
+<form
+	on:submit|preventDefault={() =>
+		(result = rootOfEquation(secantMethod, expr, init1, init2, error))}
+>
 	<div class="same-line">
-		<Input
-			label="Math Formula"
-			type="text"
-			name="expr"
-			placeholder="x * x - 7"
-			bind:value={expr}
-		/>
-		<Input
-			label="First Initial Value"
-			type="number"
-			name="init1"
-			bind:value={init1}
-		/>
-		<Input
-			label="Second Initial Value"
-			type="number"
-			name="init1"
-			bind:value={init2}
-		/>
-		<Input
-			label="Error Threshold"
-			type="number"
-			name="error"
-			bind:value={error}
-		/>
+		<Input label="Math Formula" type="text" name="expr" placeholder="x * x - 7" bind:value={expr} />
+		<Input label="First Initial Value" type="number" name="init1" bind:value={init1} />
+		<Input label="Second Initial Value" type="number" name="init1" bind:value={init2} />
+		<Input label="Error Threshold" type="number" name="error" bind:value={error} />
 	</div>
 	<div class="button-zone">
 		<button {disabled} type="submit"> Calculate </button>
