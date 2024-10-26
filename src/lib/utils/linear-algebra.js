@@ -267,7 +267,7 @@ export function jacobi(A, B, x0, error = 0.000001) {
 export function gaussSeidel(A, B, x0, error = 0.000001) {
 	const timeBegin = performance.now();
 
-	let x1 = new Array(A.length).fill(0);
+	let x1 = [...x0];
 
 	let progress = [];
 	let iteration = 0;
