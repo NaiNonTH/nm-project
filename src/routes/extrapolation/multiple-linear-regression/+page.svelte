@@ -1,5 +1,5 @@
 <script>
-	import InterpolationAnswer from '$lib/components/Answer/InterpolationAnswer.svelte';
+	import ExtrapolationAnswer from '$lib/components/Answer/ExtrapolationAnswer.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import { toSubset } from '$lib/utils/misc.js';
 	import { multiLinearRegression } from '$lib/utils/extrapolation.js';
@@ -95,4 +95,4 @@
 		{/if}
 	</div>
 </form>
-<InterpolationAnswer {result} />
+<ExtrapolationAnswer {result} />

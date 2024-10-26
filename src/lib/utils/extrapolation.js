@@ -1,6 +1,6 @@
 import { ExtrapolationAnswer, PlotlyLineGraph } from './classes';
 import { gaussJordan } from './linear-algebra';
-import { createFunctionGraphData, joinedMatrix } from './misc';
+import { calculateExecutionTime, createFunctionGraphData, joinedMatrix, toSubset } from './misc';
 
 function sum(data) {
 	return data.reduce((a, b) => a + b, 0);
@@ -51,7 +51,7 @@ export function polynomialRegression(m, x, xi, yi) {
 		new PlotlyLineGraph('Answer', { stroke: 'red' }, [x], [answer])
 	];
 
-	return new ExtrapolationAnswer(answer, (performance.now() - timeBegin).toFixed(2), graph);
+	return new ExtrapolationAnswer(answer, calculateExecutionTime(timeBegin), graph);
 }
 export function multiLinearRegression(x, xi, yi) {
 	if (xi[0].length != yi.length) throw new TypeError('x and y dataset are not relative.');
@@ -90,8 +90,33 @@ export function multiLinearRegression(x, xi, yi) {
 
 	const { values: a_list } = gaussJordan(joinedMatrix(A, B));
 
-	return new ExtrapolationAnswer(
-		sum(a_list.map((a, i) => a * (x[i - 1] || 1))),
-		(performance.now() - timeBegin).toFixed(2)
+	const xi_dataGraph = xi.map(
+		(x, i) => new PlotlyLineGraph(`x${toSubset(i)}`, { mode: 'markers' }, x, yi[i])
 	);
+
+	const f = (x) => sum(a_list.map((a, i) => a * (x[i - 1] || 1)));
+
+	let xi_min = Infinity;
+	for (const x_data of xi) {
+		for (const x of x_data) {
+			if (x < xi_min) xi_min = x;
+		}
+	}
+
+	let xi_max = -Infinity;
+	for (const x_data of xi) {
+		for (const x of x_data) {
+			if (x > xi_max) xi_max = x;
+		}
+	}
+
+	const answer = f(x);
+
+	const graph = [
+		new PlotlyLineGraph('f^(x)', {}, ...createFunctionGraphData(f, xi_min, xi_max)),
+		...xi_dataGraph,
+		new PlotlyLineGraph('Answer', { stroke: 'red' }, [x], [answer])
+	];
+
+	return new ExtrapolationAnswer(answer, calculateExecutionTime(timeBegin), graph);
 }

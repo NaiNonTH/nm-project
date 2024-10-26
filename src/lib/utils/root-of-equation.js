@@ -199,8 +199,6 @@ export function onePoint(expr, init, error = 0.000001) {
 		graph[0].y.push(x0, x1);
 
 		++iteration;
-
-		console.log(iteration < 100, x_error > error);
 	} while (iteration < 100 && x_error > error);
 
 	if (!isFinite(x1_min) || !isFinite(x1_max) || isNaN(x1_min) || isNaN(x1_max))
