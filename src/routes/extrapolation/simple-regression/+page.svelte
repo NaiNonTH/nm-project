@@ -17,7 +17,8 @@
 	let result = null;
 
 	$: emptyDataInput =
-		x_data.some((x) => typeof x !== 'number') || y_data.some((y) => typeof y !== 'number');
+		x_data.some((x, index) => index < points && typeof x !== 'number') ||
+		y_data.some((y, index) => index < points && typeof y !== 'number');
 
 	$: noX = typeof x !== 'number';
 

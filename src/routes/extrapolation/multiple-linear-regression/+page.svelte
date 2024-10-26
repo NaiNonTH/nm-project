@@ -21,9 +21,10 @@
 	}
 
 	$: data_isInvalid =
-		xi.some((set) => set.some((n) => typeof n !== 'number')) ||
-		yi.some((n) => typeof n !== 'number');
-	$: xIsInvalid = x.some((n) => typeof n !== 'number');
+		xi.some((set, index) => index < points && set.some((n) => typeof n !== 'number')) ||
+		yi.some((n, index) => index < points && typeof n !== 'number');
+
+	$: xIsInvalid = x.some((n, index) => index < k && typeof n !== 'number');
 
 	$: disabled = data_isInvalid || xIsInvalid;
 
