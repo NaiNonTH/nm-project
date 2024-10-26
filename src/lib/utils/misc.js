@@ -58,12 +58,6 @@ export function createFunctionGraphData(f, x0, x1) {
 	x0 = Math.floor(Math.min(x0, x1));
 	x1 = Math.ceil(Math.max(x0, x1));
 
-	if (x0 === x1)
-		return [[x0], [x1]];
-
-	x0 = Math.floor(Math.min(x0, x1));
-	x1 = Math.ceil(Math.max(x0, x1));
-
 	let x_data = [];
 	let y_data = [];
 	let step = Math.abs(x1 - x0) * 0.025;
