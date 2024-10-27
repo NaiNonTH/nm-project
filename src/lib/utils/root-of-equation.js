@@ -1,4 +1,4 @@
-import { PlotlyLineGraph, RootOfEquationAnswer } from './classes.js';
+import { CalcError, PlotlyLineGraph, RootOfEquationAnswer } from './classes.js';
 import { derivative, evaluate } from 'mathjs';
 import { calculateExecutionTime, createFunctionGraphData } from './misc.js';
 
@@ -8,9 +8,9 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 	let f = (x) => evaluate(expr, { x });
 
 	let x;
-	let error_previous = Infinity;
-	let iteration = 0;
-	let rangeToRoute;
+	let step = 1;
+	let previousError = Infinity;
+	let iteration = 1;
 
 	let progress = [];
 	let graph = [
@@ -18,7 +18,7 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 		new PlotlyLineGraph('Iteration', { mode: 'markers' })
 	];
 
-	function pushToGraph(x, y, error) {
+	function pushToGraph(y, error) {
 		progress.push({
 			Iteration: iteration,
 			x,
@@ -29,42 +29,37 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 		graph[1].y.push(y);
 	}
 
-	for (x = start; x <= end; ++x) {
-		const y = f(x);
-		const y_error = Math.abs(y);
+	for (x = start; x <= end; x += step, ++iteration) {
+		let y = f(x);
+		let currentError = Math.abs(y);
 
-		pushToGraph(x, y, y_error);
+		if (iteration < 100)
+			pushToGraph(y, currentError);
 
-		if (error_previous < y_error) {
-			rangeToRoute = x;
-			break;
-		} else error_previous = y_error;
-		++iteration;
-	}
+		if (previousError < currentError) {
+			if (error > Math.abs(step)) {
+				x -= step
 
-	error_previous = Infinity;
+				if (iteration >= 100) {
+					pushToGraph(y, currentError);
+				}
 
-	for (x = rangeToRoute - 1; x < rangeToRoute; x += error) {
-		const y = f(x);
-		const y_error = Math.abs(y);
+				return new RootOfEquationAnswer(
+					x,
+					iteration,
+					progress,
+					calculateExecutionTime(timeBegin),
+					graph
+				);
+			}
 
-		if (iteration % 10000 === 0) pushToGraph(x, y, y_error);
-
-		if (error_previous < y_error) {
-			pushToGraph(x, y, y_error);
-
-			return new RootOfEquationAnswer(
-				x,
-				iteration,
-				progress,
-				calculateExecutionTime(timeBegin),
-				graph
-			);
+			step /= -10;
 		}
-
-		error_previous = y_error;
-		++iteration;
+		
+		previousError = currentError;
 	}
+
+	return new CalcError("The answer is out of range.");
 }
 
 export function bisection(expr, xl, xr, error = 0.000001) {
