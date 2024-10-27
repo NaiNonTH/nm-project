@@ -31,7 +31,7 @@
 
 <h1>Graphical Method</h1>
 <aside style="color:red;text-align:center;">
-	<strong>Note:</strong> You may experience a lag for a short amount of time.
+	<strong>Note:</strong> Don't put in too wide of a range. I've warned you.
 </aside>
 
 <Math display="f(x) = %x" {expr} bind:isInvalid={expr_isInvalid} />

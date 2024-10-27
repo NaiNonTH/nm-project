@@ -211,10 +211,10 @@ export function jacobi(A, B, x0, error = 0.000001) {
 
 	let x1 = new Array(A.length).fill(0);
 
-	let iteration = 0;
+	let iteration = 1;
 	let progress = [];
 
-	while (iteration <= 99) {
+	while (iteration <= 100) {
 		for (let i = 0; i < A.length; ++i) {
 			let ans = B[i][0];
 
@@ -259,9 +259,9 @@ export function gaussSeidel(A, B, x0, error = 0.000001) {
 	let x1 = [...x0];
 
 	let progress = [];
-	let iteration = 0;
+	let iteration = 1;
 
-	while (iteration <= 99) {
+	while (iteration <= 100) {
 		for (let i = 0; i < A.length; ++i) {
 			let ans = B[i][0];
 
@@ -318,8 +318,16 @@ export function conjugateGradient(A, B, x, error = 0.000001) {
 	let calcError,
 		progress = [],
 		iteration = 0;
+		
+	progress.push({
+		iteration,
+		x: x.toArray().flat(),
+		error: NaN
+	});
 
 	do {
+		++iteration;
+		
 		let lambda = unaryMinus(
 			scalar(multiply(transpose(D), R)) / scalar(multiply(transpose(D), A, D))
 		);
@@ -338,9 +346,7 @@ export function conjugateGradient(A, B, x, error = 0.000001) {
 
 		let alpha = scalar(multiply(transpose(R), A, D)) / scalar(multiply(transpose(D), A, D));
 		D = add(unaryMinus(R), multiply(alpha, D));
-
-		++iteration;
-	} while (iteration <= 999);
+	} while (iteration <= 100);
 
 	return new LinearAlgebraAnswer(x.toArray().flat(), calculateExecutionTime(timeBegin), progress);
 }

@@ -71,7 +71,7 @@ export function bisection(expr, xl, xr, error = 0.000001) {
 		xm_error,
 		fxm,
 		cmp,
-		iteration = 0;
+		iteration = 1;
 
 	let progress = [];
 	let graph = [
@@ -99,7 +99,7 @@ export function bisection(expr, xl, xr, error = 0.000001) {
 		graph[1].y.push(fxm);
 
 		++iteration;
-	} while (iteration < 100 && (cmp == 0 || xm_error >= error));
+	} while (iteration <= 100 && (cmp == 0 || xm_error >= error));
 
 	return new RootOfEquationAnswer(
 		xm,
@@ -119,7 +119,7 @@ export function falsePosition(expr, xl, xr, error = 0.000001) {
 		x1_error,
 		fx1,
 		cmp,
-		iteration = 0;
+		iteration = 1;
 
 	let progress = [];
 	let graph = [
@@ -150,7 +150,7 @@ export function falsePosition(expr, xl, xr, error = 0.000001) {
 		graph[1].y.push(fx1);
 
 		++iteration;
-	} while (iteration < 100 && (cmp == 0 || x1_error >= error));
+	} while (iteration <= 100 && (cmp == 0 || x1_error >= error));
 
 	return new RootOfEquationAnswer(
 		x1,
@@ -171,7 +171,7 @@ export function onePoint(expr, init, error = 0.000001) {
 		x1_min = Infinity,
 		x1_max = -Infinity,
 		x_error,
-		iteration = 0;
+		iteration = 1;
 
 	let progress = [];
 	let graph = [new PlotlyLineGraph('Iteration')];
@@ -194,7 +194,7 @@ export function onePoint(expr, init, error = 0.000001) {
 		graph[0].y.push(x0, x1);
 
 		++iteration;
-	} while (iteration < 100 && x_error > error);
+	} while (iteration <= 100 && x_error > error);
 
 	if (!isFinite(x1_min) || !isFinite(x1_max) || isNaN(x1_min) || isNaN(x1_max))
 		return new RootOfEquationAnswer(x1, iteration, progress, calculateExecutionTime(timeBegin));
@@ -224,7 +224,7 @@ export function newtonRaphson(expr, init, error = 0.000001) {
 		x1,
 		x1_max = -Infinity,
 		x_error,
-		iteration = 0;
+		iteration = 1;
 
 	let progress = [];
 	let graph = [];
@@ -245,7 +245,7 @@ export function newtonRaphson(expr, init, error = 0.000001) {
 		graph.push(new PlotlyLineGraph(`f(x) @ ${iteration}`, {}, [x0, x1], [fn(x0), 0]));
 
 		++iteration;
-	} while (iteration < 100 && x_error > error);
+	} while (iteration <= 100 && x_error > error);
 
 	if (!isFinite(x1_max) || isNaN(x1_max))
 		return new RootOfEquationAnswer(x1, iteration, progress, calculateExecutionTime(timeBegin));
@@ -271,7 +271,7 @@ export function secantMethod(expr, init1, init2, error = 0.000001) {
 		x2,
 		x2_max = -Infinity,
 		x_error,
-		iteration = 0;
+		iteration = 1;
 
 	let progress = [];
 	let graph = [];
@@ -293,7 +293,7 @@ export function secantMethod(expr, init1, init2, error = 0.000001) {
 		graph.push(new PlotlyLineGraph(`f(x) @ ${iteration}`, {}, [x1, x2], [fn(x1), 0]));
 
 		++iteration;
-	} while (iteration < 100 && x_error > error);
+	} while (iteration <= 100 && x_error > error);
 
 	if (!isFinite(x2_max) || isNaN(x2_max))
 		return new RootOfEquationAnswer(x2, iteration, progress, calculateExecutionTime(timeBegin));
