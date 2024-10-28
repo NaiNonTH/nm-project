@@ -29,27 +29,35 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 		graph[1].y.push(y);
 	}
 
+	function answerFoundAction() {
+		if (iteration >= 100) {
+			pushToGraph(y, currentError);
+		}
+
+		return new RootOfEquationAnswer(
+			x,
+			iteration,
+			progress,
+			calculateExecutionTime(timeBegin),
+			graph
+		);
+	}
+
 	for (x = start; x <= end; x += step, ++iteration) {
 		let y = f(x);
 		let currentError = Math.abs(y);
 
 		if (iteration < 100) pushToGraph(y, currentError);
 
+		if (currentError < error) {
+			return answerFoundAction();
+		}
+
 		if (previousError < currentError) {
 			if (error > Math.abs(step)) {
 				x -= step;
-
-				if (iteration >= 100) {
-					pushToGraph(y, currentError);
-				}
-
-				return new RootOfEquationAnswer(
-					x,
-					iteration,
-					progress,
-					calculateExecutionTime(timeBegin),
-					graph
-				);
+				
+				return answerFoundAction();
 			}
 
 			step /= -10;
