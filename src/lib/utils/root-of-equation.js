@@ -33,12 +33,11 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 		let y = f(x);
 		let currentError = Math.abs(y);
 
-		if (iteration < 100)
-			pushToGraph(y, currentError);
+		if (iteration < 100) pushToGraph(y, currentError);
 
 		if (previousError < currentError) {
 			if (error > Math.abs(step)) {
-				x -= step
+				x -= step;
 
 				if (iteration >= 100) {
 					pushToGraph(y, currentError);
@@ -55,11 +54,11 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 
 			step /= -10;
 		}
-		
+
 		previousError = currentError;
 	}
 
-	return new CalcError("The answer is out of range.");
+	return new CalcError('The answer is out of range.');
 }
 
 export function bisection(expr, xl, xr, error = 0.000001) {

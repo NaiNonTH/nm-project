@@ -38,7 +38,14 @@
 <h1>Multiple Linear Regression</h1>
 <form on:submit|preventDefault={submit}>
 	<div class="same-line">
-		<Input label="Datasets Count" allowWheel type="number" name="i" placeholder="i" bind:value={k} />
+		<Input
+			label="Datasets Count"
+			allowWheel
+			type="number"
+			name="i"
+			placeholder="i"
+			bind:value={k}
+		/>
 		<Input
 			label="Points Count"
 			type="number"

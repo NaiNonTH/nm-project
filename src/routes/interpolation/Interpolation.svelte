@@ -42,7 +42,14 @@
 
 <form on:submit|preventDefault={submit}>
 	<div class="same-line">
-		<Input label="Data Count" allowWheel name="count" type="number" placeholder="3" bind:value={count} />
+		<Input
+			label="Data Count"
+			allowWheel
+			name="count"
+			type="number"
+			placeholder="3"
+			bind:value={count}
+		/>
 		<Input label="Missing x" name="x" type="number" placeholder="40331" bind:value={x} />
 	</div>
 	{#each Array(count) as _, i}

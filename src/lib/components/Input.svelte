@@ -16,7 +16,7 @@
 		if (!allowWheel) return;
 
 		event.preventDefault();
-		value -= Math.sign(event.deltaY)
+		value -= Math.sign(event.deltaY);
 	}
 </script>
 

@@ -318,7 +318,7 @@ export function conjugateGradient(A, B, x, error = 0.000001) {
 	let calcError,
 		progress = [],
 		iteration = 0;
-		
+
 	progress.push({
 		iteration,
 		x: x.toArray().flat(),
@@ -327,7 +327,7 @@ export function conjugateGradient(A, B, x, error = 0.000001) {
 
 	do {
 		++iteration;
-		
+
 		let lambda = unaryMinus(
 			scalar(multiply(transpose(D), R)) / scalar(multiply(transpose(D), A, D))
 		);
