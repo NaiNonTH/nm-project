@@ -3,5 +3,5 @@
 	import { jacobi } from '$lib/utils/linear-algebra.js';
 </script>
 
-<h1>Jacobi</h1>
+<h1>Jacobi Iteration</h1>
 <LinearAlgebra iterative func={jacobi} />

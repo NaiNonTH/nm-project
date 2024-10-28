@@ -16,7 +16,7 @@
 		<a href="/linear-algebra/lu-decomposition">LU Decomposition</a>
 	</li>
 	<li>
-		<a href="/linear-algebra/jacobi-method">Jacobi Method</a>
+		<a href="/linear-algebra/jacobi-iteration">Jacobi Iteration</a>
 	</li>
 	<li>
 		<a href="/linear-algebra/gauss-seidel">Gauss-Seidel</a>
