@@ -13,6 +13,7 @@
 			name="precision"
 			type="number"
 			bind:value={precision}
+			allowWheel
 		/>
 	</div>
 	<div id="output">

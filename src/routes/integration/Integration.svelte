@@ -44,6 +44,7 @@
 			placeholder="1"
 			bind:value={n}
 			hint={compositeHint}
+			allowWheel
 		/>
 	</div>
 	<div class="button-zone">

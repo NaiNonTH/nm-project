@@ -33,7 +33,7 @@
 <form on:submit|preventDefault={submit}>
 	<div class="same-line">
 		<Input label="Missing x" type="number" name="1" placeholder="65" bind:value={x} />
-		<Input label="Value of m" type="number" name="1" placeholder="m" bind:value={m} />
+		<Input label="Value of m" allowWheel type="number" name="1" placeholder="m" bind:value={m} />
 	</div>
 	<div class="same-line">
 		<Input
@@ -42,6 +42,7 @@
 			name="points"
 			placeholder="Points"
 			bind:value={points}
+			allowWheel
 		/>
 	</div>
 	{#each Array(points) as _, i}

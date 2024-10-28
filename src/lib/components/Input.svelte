@@ -8,8 +8,16 @@
 	export let step = 'any';
 	export let choices = ['None'];
 	export let value = type === 'selections' ? 0 : '';
+	export let allowWheel = false;
 
 	export let hint = '';
+
+	function valueChangeByWheel(event) {
+		if (!allowWheel) return;
+
+		event.preventDefault();
+		value -= Math.sign(event.deltaY)
+	}
 </script>
 
 <div>
@@ -34,7 +42,7 @@
 			type="number"
 			{name}
 			id={name}
-			on:wheel|preventDefault={(event) => (value -= Math.sign(event.deltaY))}
+			on:wheel={valueChangeByWheel}
 			on:focus={(event) => event.currentTarget.select()}
 			{step}
 		/>
