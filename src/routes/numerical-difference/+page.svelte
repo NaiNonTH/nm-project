@@ -13,6 +13,9 @@
 	let h;
 
 	let expr_isInvalid;
+	$: xIsInvalid = typeof x !== 'number';
+	$: hIsInvalid = typeof h !== 'number';
+	$: disabled = expr_isInvalid || xIsInvalid || hIsInvalid;
 
 	let result = null;
 
@@ -55,7 +58,20 @@
 		<Input label="h" name="expr" type="number" placeholder="0.25" bind:value={h} />
 	</div>
 	<div class="button-zone">
-		<button type="submit">Calculate</button>
+		<button {disabled} type="submit">Calculate</button>
+		{#if disabled}
+			<ul class="warning" role="tooltip">
+				{#if expr_isInvalid}
+					<li>Invalid Expression</li>
+				{/if}
+				{#if xIsInvalid}
+					<li>x is empty or not a number</li>
+				{/if}
+				{#if hIsInvalid}
+					<li>h is empty or not a number</li>
+				{/if}
+			</ul>
+		{/if}
 	</div>
 </form>
 
