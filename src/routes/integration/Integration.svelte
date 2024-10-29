@@ -6,16 +6,15 @@
 	export let func;
 	export let formula;
 	export let defaultRange = [2, 8];
-	export let minComposite = 1;
 	export let compositeHint;
 
 	let expr = formula;
 	let a;
 	let b;
-	let n = minComposite;
+	let n = 1;
 
-	$: n = Math.max(minComposite, Math.trunc(n));
-	$: display = `\\int_{${a || '?'}}^{${b || '?'}} = %x"`;
+	$: n = Math.max(1, Math.trunc(n));
+	$: display = `\\int_{${a || '?'}}^{${b || '?'}} = %x`;
 
 	let expr_isInvalid;
 	$: aIsEmpty = typeof a !== 'number';

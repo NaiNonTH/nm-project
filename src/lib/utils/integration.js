@@ -32,7 +32,7 @@ export function simpson(expr, x0, xn, n) {
 	const timeBegin = performance.now();
 
 	const f = (x) => evaluate(expr, { x });
-	const h = Math.abs(x0 - xn) / n;
+	let h = Math.abs(x0 - xn) / (2 * n);
 
 	let fsum = 0;
 	for (let x1 = x0 + h; x1 < xn; x1 += h + h) fsum += 4 * f(x1);
