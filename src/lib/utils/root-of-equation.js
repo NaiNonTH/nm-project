@@ -29,7 +29,7 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 		graph[1].y.push(y);
 	}
 
-	function answerFoundAction() {
+	function answerFoundAction(y, currentError) {
 		if (iteration >= 100) {
 			pushToGraph(y, currentError);
 		}
@@ -50,14 +50,14 @@ export function graphicalMethod(expr, start, end, error = 0.000001) {
 		if (iteration < 100) pushToGraph(y, currentError);
 
 		if (currentError < error) {
-			return answerFoundAction();
+			return answerFoundAction(y, currentError);
 		}
 
 		if (previousError < currentError) {
 			if (error > Math.abs(step)) {
 				x -= step;
-				
-				return answerFoundAction();
+
+				return answerFoundAction(y, currentError);
 			}
 
 			step /= -10;

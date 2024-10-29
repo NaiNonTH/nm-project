@@ -15,7 +15,7 @@ export function trapezoidal(expr, x0, xn, n) {
 	let fsum = 0;
 
 	for (let i = x0 + h; i < xn; i += h) {
-		let fi = f(i)
+		let fi = f(i);
 
 		fsum += fi;
 
@@ -28,13 +28,13 @@ export function trapezoidal(expr, x0, xn, n) {
 	graph[1].y.push(f(xn));
 
 	const answer = (h / 2) * (f(x0) + f(xn) + fsum);
-	
+
 	h = fix(h, 4);
 
 	const solution = [
 		true,
-		"I = \\frac{h}{2}[f({x_0})+f({x_n})+2\\Sigma_{i=1}^{n}f(x_i)]",
-		"h = \\frac{|{x_0}-{x_n}|}{n}",
+		'I = \\frac{h}{2}[f({x_0})+f({x_n})+2\\Sigma_{i=1}^{n}f(x_i)]',
+		'h = \\frac{|{x_0}-{x_n}|}{n}',
 		`h = \\frac{|${x0}-${xn}|}{${n}} =  ${h}`,
 		`I = \\frac{${h}}{2}(${fix(f(x0), 4)} + ${fix(f(xn), 4)} + ${fix(fsum, 4)})`,
 		`I = ${fix(answer, 4)}`
@@ -54,13 +54,13 @@ export function simpson(expr, x0, xn, n) {
 	for (let x2 = x0 + h + h; x2 < xn; x2 += h + h) fsum += 2 * f(x2);
 
 	const answer = (h / 3) * (f(x0) + f(xn) + fsum);
-	
+
 	h = fix(h, 4);
 
 	const solution = [
 		false,
-		"I = \\frac{h}{3}[f({x_0})+f({x_n})+4\\Sigma_{i=1,3,5...}^{n-1}f(x_i)+2\\Sigma_{i=2,4,6...}^{n-2}f(x_i)]",
-		"h = \\frac{|{x_0}-{x_n}|}{2n}",
+		'I = \\frac{h}{3}[f({x_0})+f({x_n})+4\\Sigma_{i=1,3,5...}^{n-1}f(x_i)+2\\Sigma_{i=2,4,6...}^{n-2}f(x_i)]',
+		'h = \\frac{|{x_0}-{x_n}|}{2n}',
 		`h = \\frac{|${x0}-${xn}|}{2\\times${n}} = ${h}`,
 		`I = \\frac{${h}}{3}(${fix(f(x0), 4)} + ${fix(f(xn), 4)} + ${fix(fsum, 4)})`,
 		`I = ${fix(answer, 4)}`
