@@ -62,12 +62,13 @@ export class IntegrationAnswer extends Answer {
 }
 
 export class DifferenceAnswer extends Answer {
-	constructor(value, error, executionTime) {
+	constructor(value, error, executionTime, solution = null) {
 		super();
 		this.topic = 'difference';
 		this.value = value;
 		this.error = error;
 		this.executionTime = executionTime;
+		this.solution = solution;
 	}
 }
 
