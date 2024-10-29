@@ -51,12 +51,13 @@ export class ExtrapolationAnswer extends Answer {
 }
 
 export class IntegrationAnswer extends Answer {
-	constructor(value, executionTime, graph = null) {
+	constructor(value, executionTime, graph = null, solution = null) {
 		super();
 		this.topic = 'integration';
 		this.value = value;
 		this.executionTime = executionTime;
 		this.graph = graph;
+		this.solution = solution;
 	}
 }
 

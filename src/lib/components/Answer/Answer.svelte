@@ -18,9 +18,7 @@
 	</div>
 	<div id="output">
 		<h2>Output</h2>
-		<p>
-			<slot {precision} name="output" />
-		</p>
+		<slot {precision} name="output" />
 	</div>
 	<slot {precision} name="other" />
 	<i>Time taken: <slot name="executionTime" />ms</i>
