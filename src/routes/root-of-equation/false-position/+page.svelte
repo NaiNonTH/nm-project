@@ -1,5 +1,5 @@
 <script>
-	import Math from '$lib/components/Math.svelte';
+	import MathDisplay from '$lib/components/MathDisplay.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import RootOfEquationAnswer from '$lib/components/Answer/RootOfEquationAnswer.svelte';
 
@@ -31,7 +31,7 @@
 
 <h1>False Position</h1>
 
-<Math display="f(x) = %x" {expr} bind:isInvalid={expr_isInvalid} />
+<MathDisplay display="f(x) = %x" {expr} bind:isInvalid={expr_isInvalid} />
 <form
 	on:submit|preventDefault={() => (result = rootOfEquation(falsePosition, expr, start, end, error))}
 >

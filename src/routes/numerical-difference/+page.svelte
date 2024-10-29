@@ -2,7 +2,7 @@
 	import Input from '$lib/components/Input.svelte';
 	import difference from '$lib/utils/difference.js';
 	import DifferenceAnswer from '$lib/components/Answer/DifferenceAnswer.svelte';
-	import Math from '$lib/components/Math.svelte';
+	import MathDisplay from '$lib/components/MathDisplay.svelte';
 
 	let direction;
 	let precision;
@@ -24,7 +24,7 @@
 </script>
 
 <h1>Numerical Difference</h1>
-<Math {expr} bind:display bind:isInvalid={expr_isInvalid} />
+<MathDisplay {expr} bind:display bind:isInvalid={expr_isInvalid} />
 <form on:submit|preventDefault={submit}>
 	<div class="same-line">
 		<Input

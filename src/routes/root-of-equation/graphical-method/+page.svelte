@@ -1,7 +1,7 @@
 <script>
 	import Input from '$lib/components/Input.svelte';
 	import RootOfEquationAnswer from '$lib/components/Answer/RootOfEquationAnswer.svelte';
-	import Math from '$lib/components/Math.svelte';
+	import MathDisplay from '$lib/components/MathDisplay.svelte';
 
 	import { rootOfEquation } from '$lib/utils/misc.js';
 	import { graphicalMethod } from '$lib/utils/root-of-equation.js';
@@ -34,7 +34,7 @@
 	<strong>Note:</strong> Don't put in too wide of a range. I've warned you.
 </aside>
 
-<Math display="f(x) = %x" {expr} bind:isInvalid={expr_isInvalid} />
+<MathDisplay display="f(x) = %x" {expr} bind:isInvalid={expr_isInvalid} />
 <form
 	on:submit|preventDefault={() =>
 		(result = rootOfEquation(graphicalMethod, expr, start, end, error))}

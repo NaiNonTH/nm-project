@@ -38,9 +38,10 @@
 				<details>
 					<summary>Solution</summary>
 					{#if result.solution}
-						{@const [isTrapezoidal, formula_I, formula_h, evaluate_h, evaluate_I, answer] = result.solution}
+						{@const [isTrapezoidal, formula_I, formula_h, evaluate_h, evaluate_I, answer] =
+							result.solution}
 						<p>
-							According to the {isTrapezoidal ? "Trapezoidal" : "Simpson's"} Rule:
+							According to the {isTrapezoidal ? 'Trapezoidal' : "Simpson's"} Rule:
 							<Katex expr={formula_I} />
 							<Katex expr={formula_h} />
 						</p>

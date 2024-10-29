@@ -1,6 +1,6 @@
 <script>
 	import Input from '$lib/components/Input.svelte';
-	import Math from '$lib/components/Math.svelte';
+	import MathDisplay from '$lib/components/MathDisplay.svelte';
 	import RootOfEquationAnswer from '$lib/components/Answer/RootOfEquationAnswer.svelte';
 
 	import { rootOfEquation } from '$lib/utils/misc.js';
@@ -24,7 +24,7 @@
 
 <h1>Secant Method</h1>
 
-<Math display={'x_{i+1} = %x'} {expr} bind:isInvalid={expr_isInvalid} />
+<MathDisplay display={'x_{i+1} = %x'} {expr} bind:isInvalid={expr_isInvalid} />
 <form
 	on:submit|preventDefault={() =>
 		(result = rootOfEquation(secantMethod, expr, init1, init2, error))}

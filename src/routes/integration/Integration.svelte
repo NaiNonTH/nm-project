@@ -1,6 +1,6 @@
 <script>
 	import Input from '$lib/components/Input.svelte';
-	import MathDisplay from '$lib/components/Math.svelte';
+	import MathDisplay from '$lib/components/MathDisplay.svelte';
 	import IntegrationAnswer from '$lib/components/Answer/IntegrationAnswer.svelte';
 
 	export let func;
