@@ -12,13 +12,17 @@
 			<details>
 				<summary>Solution</summary>
 				{#if result.solution}
-					{@const [formula, answer] = result.solution}
+					{@const [formula, evaluation, answer] = result.solution}
 					<p>
 						In this case, the formula used to approximate the derivative of the function will be...
 						<Katex expr={formula} />
 					</p>
 					<p>
-						And after a time-consuming calculation, we will get...
+						We then replace the x and h with our declared value.
+						<Katex expr={evaluation} />
+					</p>
+					<p>
+						Then, we will have our answer.
 						<Katex expr={answer} />
 					</p>
 				{/if}
