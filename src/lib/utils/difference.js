@@ -1,4 +1,4 @@
-import { derivative, evaluate, fix, or, parse } from 'mathjs';
+import { derivative, evaluate, fix, parse } from 'mathjs';
 import { DifferenceAnswer } from './classes.js';
 import { calculateExecutionTime } from './misc.js';
 
