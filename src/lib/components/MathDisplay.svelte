@@ -44,5 +44,6 @@
 		font-size: 1.77rem;
 		text-align: center;
 		border-bottom: 1px dashed #d8d8d8;
+		overflow-x: auto;
 	}
 </style>

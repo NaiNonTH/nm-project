@@ -18,5 +18,6 @@
 	div {
 		font-size: 1.17em;
 		line-height: 2.5em;
+		overflow-x: auto;
 	}
 </style>
