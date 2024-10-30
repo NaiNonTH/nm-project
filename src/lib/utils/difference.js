@@ -72,7 +72,5 @@ export default function (direction, precision, order, expr, x, h) {
 		`f${orderPrime[order]}(x) = ${fix(answer, 4)}`
 	];
 
-	console.log(solution[0]);
-
 	return new DifferenceAnswer(answer, error, calculateExecutionTime(timeBegin), solution);
 }
