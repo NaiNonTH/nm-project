@@ -308,6 +308,19 @@ ul.warning {
 	border-color: transparent transparent #fe0000;
 }
 
+.js-plotly-plot {
+	max-width: 100%;
+	overflow-x: auto;
+}
+.js-plotly-plot::after {
+	content: "Scroll here... (if you can) >>";
+	display: block;
+	text-align: center;
+	opacity: 0.35;
+
+	padding: 0.5em;
+}
+
 @media (max-width: 48rem) {
 	#site {
 		display: flex;
