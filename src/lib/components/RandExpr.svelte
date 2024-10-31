@@ -2,8 +2,7 @@
 	import MathDisplay from './MathDisplay.svelte';
 	import Input from './Input.svelte';
 	import { page } from '$app/stores';
-
-	let open = false;
+	import { pushState } from '$app/navigation';
 
 	let polynomial = 0;
 	let min;
@@ -11,7 +10,7 @@
 	let cMax;
 	let tp;
 
-	let display = '?';
+	let display;
 
 	let disabled = false;
 	let buttonName = 'Get Equation';
@@ -20,8 +19,8 @@
 	let errMessage = '';
 
 	function toggleEvent(e) {
-		if (e.altKey && e.code === 'KeyP') open = !open;
-		else if (e.code === 'Escape') open = false;
+		if (e.altKey && e.code === 'KeyP') pushState('', { randexpr: true });
+		else if (e.code === 'Escape' && $page.state.randexpr) history.back();
 	}
 	async function submit() {
 		if (onCooldown) {
@@ -66,17 +65,25 @@
 				buttonName = 'Get Equation';
 
 				onCooldown = false;
-			}, 1500);
+			}, 3000);
 		}
 	}
 </script>
 
 <svelte:document on:keydown={toggleEvent} />
 
-{#if open}
+{#if $page.state.randexpr}
 	<div class="modal">
 		<h2>Random Equation</h2>
-		<MathDisplay expr={display} />
+		<MathDisplay expr={display || '?'} />
+		<div class="copy-zone">
+			<button
+				class="copy"
+				disabled={!display}
+				type="button"
+				on:click={() => navigator.clipboard.writeText(display)}>Copy Equation</button
+			>
+		</div>
 		<form on:submit|preventDefault={submit}>
 			<div class="same-line">
 				<Input
@@ -121,7 +128,7 @@
 				<button {disabled} type="submit">{buttonName}</button>
 			</div>
 		</form>
-		<button on:click={() => (open = false)} class="close-btn" type="button">Close</button>
+		<button on:click={() => history.back()} class="close-btn" type="button">Close</button>
 	</div>
 	<div class="backdrop"></div>
 {/if}
@@ -152,12 +159,18 @@
 
 		background: #fffc;
 	}
-	div {
-		padding: 1rem;
-	}
 	.close-btn {
 		position: absolute;
 		top: 1rem;
 		right: 1rem;
+	}
+	div {
+		padding: 1rem;
+	}
+	.copy {
+		margin-left: auto;
+	}
+	.copy-zone {
+		display: flex;
 	}
 </style>

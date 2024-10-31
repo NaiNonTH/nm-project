@@ -1,4 +1,5 @@
 <script>
+	import RandExpr from '$lib/components/RandExpr.svelte';
 	import { page } from '$app/stores';
 	import '../app.css';
 
@@ -76,6 +77,7 @@
 <main>
 	<slot />
 </main>
+<RandExpr />
 <footer>
 	<strong>Numerical Method Project</strong>, an open-source University project by
 	<strong><a href="https://nons.page">nons.page</a></strong>.
