@@ -47,6 +47,13 @@ button:focus {
 	animation: ripple 0.2s forwards;
 }
 
+dt {
+	font-weight: bold;
+}
+dd {
+	margin-left: 2ch;
+}
+
 @keyframes ripple {
 	from {
 		box-shadow: 0 0 #4949af99;
@@ -176,7 +183,7 @@ main > section {
 	background: #fff;
 }
 
-.last-commit {
+.sidebar > *:not(nav) {
 	padding: 1rem;
 }
 

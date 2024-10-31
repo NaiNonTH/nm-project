@@ -22,10 +22,26 @@
 
 	$: noX = typeof x !== 'number';
 
-	$: disabled = noX || emptyDataInput;
+	let incrementing = false;
+	let coolingDown = false;
+	let progressing = false;
 
-	function submit() {
+	$: disabled = noX || emptyDataInput || progressing;
+
+	async function submit() {
+		progressing = true;
+
 		result = polynomialRegression(m, x, x_data, y_data);
+		
+		incrementing = true;
+		await fetch('/api/add-runs-count', { method: 'POST' });
+		incrementing = false;
+
+		coolingDown = true;
+		setTimeout(() => {
+			coolingDown = false;
+			progressing = false;
+		}, 3000)
 	}
 </script>
 
@@ -65,8 +81,16 @@
 		</div>
 	{/each}
 	<div class="button-zone">
-		<button {disabled} type="submit"> Calculate </button>
-		{#if disabled}
+		<button {disabled} type="submit">
+			{#if coolingDown}
+				Cooling down...
+			{:else if incrementing}
+				Saving...
+			{:else}
+				Calculate
+			{/if}
+		</button>
+		{#if disabled && !progressing}
 			<ul class="warning" role="tooltip">
 				{#if emptyDataInput}
 					<li>Not all points input are filled</li>

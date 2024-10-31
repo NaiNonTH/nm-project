@@ -21,12 +21,28 @@
 	$: bIsEmpty = typeof b !== 'number';
 	$: aIsMoreThanB = a >= b;
 
-	$: disabled = expr_isInvalid || aIsEmpty || bIsEmpty || aIsMoreThanB;
+	let incrementing = false;
+	let coolingDown = false;
+	let progressing = false;
+
+	$: disabled = expr_isInvalid || aIsEmpty || bIsEmpty || aIsMoreThanB || progressing;
 
 	let result = null;
 
-	function submit() {
+	async function submit() {
+		progressing = true;
+
 		result = func(expr, a, b, n);
+		
+		incrementing = true;
+		await fetch('/api/add-runs-count', { method: 'POST' });
+		incrementing = false;
+
+		coolingDown = true;
+		setTimeout(() => {
+			coolingDown = false;
+			progressing = false;
+		}, 3000)
 	}
 </script>
 
@@ -47,8 +63,16 @@
 		/>
 	</div>
 	<div class="button-zone">
-		<button {disabled} type="submit">Calculate</button>
-		{#if disabled}
+		<button {disabled} type="submit">
+			{#if coolingDown}
+				Cooling down...
+			{:else if incrementing}
+				Saving...
+			{:else}
+				Calculate
+			{/if}
+		</button>
+		{#if disabled && !progressing}
 			<ul class="warning" role="tooltip">
 				{#if expr_isInvalid}
 					<li>Invalid Expression</li>

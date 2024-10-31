@@ -26,12 +26,28 @@
 	$: xIsInvalid = iterative && x0.some((x) => typeof x !== 'number');
 	$: errorIsInvalid = iterative && typeof error !== 'number';
 
-	$: disabled = AisInvalid || BisInvalid || xIsInvalid || errorIsInvalid;
+	let incrementing = false;
+	let coolingDown = false;
+	let progressing = false;
 
-	function submit() {
+	$: disabled = AisInvalid || BisInvalid || xIsInvalid || errorIsInvalid || progressing;
+
+	async function submit() {
+		progressing = true;
+		
 		if (joinMatrix) result = func(joinedMatrix(A, B));
 		else if (iterative) result = func(A, B, x0, error);
 		else result = func(A, B);
+
+		incrementing = true;
+		await fetch('/api/add-runs-count', { method: 'POST' });
+		incrementing = false;
+
+		coolingDown = true;
+		setTimeout(() => {
+			coolingDown = false;
+			progressing = false;
+		}, 3000)
 	}
 </script>
 
@@ -54,8 +70,16 @@
 		</div>
 	{/if}
 	<div class="button-zone">
-		<button {disabled} type="submit"> Calculate </button>
-		{#if disabled}
+		<button {disabled} type="submit">
+			{#if coolingDown}
+				Cooling down...
+			{:else if incrementing}
+				Saving...
+			{:else}
+				Calculate
+			{/if}
+		</button>
+		{#if disabled && !progressing}
 			<ul class="warning" role="tooltip">
 				{#if AisInvalid || BisInvalid}
 					<li>Please fill in all slots in Matrix</li>

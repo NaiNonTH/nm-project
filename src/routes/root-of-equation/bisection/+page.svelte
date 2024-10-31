@@ -4,7 +4,7 @@
 	import RootOfEquationAnswer from '$lib/components/Answer/RootOfEquationAnswer.svelte';
 
 	import { bisection } from '$lib/utils/root-of-equation.js';
-	import { rootOfEquation } from '$lib/utils/misc.js';
+	import { exprHandler } from '$lib/utils/misc.js';
 
 	let expr = '',
 		start = 1.5,
@@ -18,23 +18,42 @@
 	$: errorIsEmpty = error === null;
 	$: errorIsInvalid = error <= 0;
 
+	let incrementing = false;
+	let coolingDown = false;
+	let progressing = false;
+
 	$: disabled =
 		expr_isInvalid ||
 		startMoreThanEnd ||
 		startIsEmpty ||
 		endIsEmpty ||
 		errorIsEmpty ||
-		errorIsInvalid;
+		errorIsInvalid ||
+		progressing;
 
 	let result;
+
+	async function submit() {
+		progressing = true;
+
+		result = exprHandler(bisection, expr, start, end, error);
+
+		incrementing = true;
+		await fetch('/api/add-runs-count', { method: 'POST' });
+		incrementing = false;
+
+		coolingDown = true;
+		setTimeout(() => {
+			coolingDown = false;
+			progressing = false;
+		}, 3000);
+	}
 </script>
 
 <h1>Bisection</h1>
 
 <MathDisplay display="f(x) = %x" {expr} bind:isInvalid={expr_isInvalid} />
-<form
-	on:submit|preventDefault={() => (result = rootOfEquation(bisection, expr, start, end, error))}
->
+<form on:submit|preventDefault={submit}>
 	<div class="same-line">
 		<Input
 			label="Math Formula"
@@ -48,8 +67,16 @@
 		<Input label="Error Threshold" type="number" name="error" bind:value={error} />
 	</div>
 	<div class="button-zone">
-		<button {disabled} type="submit"> Calculate </button>
-		{#if disabled}
+		<button {disabled} type="submit">
+			{#if coolingDown}
+				Cooling down...
+			{:else if incrementing}
+				Saving...
+			{:else}
+				Calculate
+			{/if}
+		</button>
+		{#if disabled && !progressing}
 			<ul class="warning" role="tooltip">
 				{#if expr_isInvalid}
 					<li>Invalid Expression.</li>

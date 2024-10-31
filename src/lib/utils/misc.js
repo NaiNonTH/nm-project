@@ -1,6 +1,6 @@
 import { CalcError } from './classes.js';
 
-export function rootOfEquation(func, expr, ...args) {
+export function exprHandler(func, expr, ...args) {
 	if (!expr) return new CalcError('Expression cannot be empty.');
 
 	try {

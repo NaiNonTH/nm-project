@@ -26,12 +26,28 @@
 
 	$: xIsInvalid = x.some((n, index) => index < k && typeof n !== 'number');
 
+	let incrementing = false;
+	let coolingDown = false;
+	let progressing = false;
+
 	$: disabled = data_isInvalid || xIsInvalid;
 
 	let result = null;
 
-	function submit() {
+	async function submit() {
+		progressing = true;
+
 		result = multiLinearRegression(x, xi, yi);
+		
+		incrementing = true;
+		await fetch('/api/add-runs-count', { method: 'POST' });
+		incrementing = false;
+
+		coolingDown = true;
+		setTimeout(() => {
+			coolingDown = false;
+			progressing = false;
+		}, 3000)
 	}
 </script>
 
@@ -90,8 +106,16 @@
 		</div>
 	{/each}
 	<div class="button-zone">
-		<button {disabled} type="submit">Calculate</button>
-		{#if disabled}
+		<button {disabled} type="submit">
+			{#if coolingDown}
+				Cooling down...
+			{:else if incrementing}
+				Saving...
+			{:else}
+				Calculate
+			{/if}
+		</button>
+		{#if disabled && !progressing}
 			<ul class="warning" role="tooltip">
 				{#if data_isInvalid}
 					<li>Please fill in all data input</li>

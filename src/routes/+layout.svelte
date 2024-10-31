@@ -73,6 +73,27 @@
 			</p>
 		{/if}
 	</div>
+	<div>
+		<h3>Info</h3>
+		<dl>
+			<dt>Visitors</dt>
+			<dd>
+				{#if data.visitors !== null}
+					{data.visitors}
+				{:else}
+					N/A
+				{/if}
+			</dd>
+			<dt>Runs</dt>
+			<dd>
+				{#if data.runs !== null}
+					{data.runs}
+				{:else}
+					N/A
+				{/if}
+			</dd>
+		</dl>
+	</div>
 </div>
 <main>
 	<slot />

@@ -24,7 +24,11 @@
 		x_data.some((num, i) => i < count && typeof num !== 'number') ||
 		y_data.some((num, i) => i < count && typeof num !== 'number');
 
-	$: disabled = dataIsNotFilledIn || invalidChecks || xIsEmpty;
+	let incrementing = false;
+	let coolingDown = false;
+	let progressing = false;
+
+	$: disabled = dataIsNotFilledIn || invalidChecks || xIsEmpty || progressing;
 
 	function toggleFilter(checked, i) {
 		if (!checked) filter.delete(i);
@@ -35,8 +39,20 @@
 
 	let result;
 
-	function submit() {
+	async function submit() {
+		progressing = true;
+
 		result = func(x, x_filtered, y_filtered);
+		
+		incrementing = true;
+		await fetch('/api/add-runs-count', { method: 'POST' });
+		incrementing = false;
+
+		coolingDown = true;
+		setTimeout(() => {
+			coolingDown = false;
+			progressing = false;
+		}, 3000)
 	}
 </script>
 
@@ -79,8 +95,16 @@
 		</div>
 	{/each}
 	<div class="button-zone">
-		<button {disabled} type="submit">Calculate</button>
-		{#if disabled}
+		<button {disabled} type="submit">
+			{#if coolingDown}
+				Cooling down...
+			{:else if incrementing}
+				Saving...
+			{:else}
+				Calculate
+			{/if}
+		</button>
+		{#if disabled && !progressing}
 			<ul class="warning" role="tooltip">
 				{#if dataIsNotFilledIn}
 					<li>Please fill in all data input.</li>

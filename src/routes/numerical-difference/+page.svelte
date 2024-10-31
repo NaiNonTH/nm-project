@@ -15,14 +15,31 @@
 	let expr_isInvalid;
 	$: xIsInvalid = typeof x !== 'number';
 	$: hIsInvalid = typeof h !== 'number';
-	$: disabled = expr_isInvalid || xIsInvalid || hIsInvalid;
+
+	let incrementing = false;
+	let coolingDown = false;
+	let progressing = false;
+
+	$: disabled = expr_isInvalid || xIsInvalid || hIsInvalid || progressing;
 
 	let result = null;
 
 	$: display = `f^{(${order + 1})}(x) = %x`;
 
-	function submit() {
+	async function submit() {
+		progressing = true;
+
 		result = difference(direction, precision, order, expr, x, h);
+		
+		incrementing = true;
+		await fetch('/api/add-runs-count', { method: 'POST' });
+		incrementing = false;
+
+		coolingDown = true;
+		setTimeout(() => {
+			coolingDown = false;
+			progressing = false;
+		}, 3000);
 	}
 </script>
 
@@ -58,8 +75,16 @@
 		<Input label="h" name="expr" type="number" placeholder="0.25" bind:value={h} />
 	</div>
 	<div class="button-zone">
-		<button {disabled} type="submit">Calculate</button>
-		{#if disabled}
+		<button {disabled} type="submit">
+			{#if coolingDown}
+				Cooling down...
+			{:else if incrementing}
+				Saving...
+			{:else}
+				Calculate
+			{/if}
+		</button>
+		{#if disabled && !progressing}
 			<ul class="warning" role="tooltip">
 				{#if expr_isInvalid}
 					<li>Invalid Expression</li>
