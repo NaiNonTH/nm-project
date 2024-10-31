@@ -9,7 +9,7 @@
 	};
 
 	export let expr;
-	export let display = '%s';
+	export let display = '%x';
 	export let isInvalid;
 
 	$: htmlExpr = function () {
