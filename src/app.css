@@ -313,7 +313,7 @@ ul.warning {
 	overflow-x: auto;
 }
 .js-plotly-plot::after {
-	content: "Scroll here... (if you can) >>";
+	content: 'Scroll here... (if you can) >>';
 	display: block;
 	text-align: center;
 	opacity: 0.35;
