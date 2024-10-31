@@ -11,9 +11,12 @@
 	export let allowWheel = false;
 
 	export let hint = '';
+	export let disabled = false;
+
+	export let optional = false;
 
 	function valueChangeByWheel(event) {
-		if (!allowWheel) return;
+		if (!allowWheel || event.currentTarget.disabled) return;
 
 		event.preventDefault();
 		value -= Math.sign(event.deltaY);
@@ -22,21 +25,27 @@
 
 <div>
 	{#if label}
-		<label for={name}>{label}:</label>
+		<label for={name}>
+			{#if !optional}
+				<abbr title="Required"><span style="color:red;">•</span></abbr>
+			{/if}
+			{label}:
+		</label>
 	{/if}
 	{#if type === 'text'}
 		<input
-			required
+			required={!optional}
 			{placeholder}
 			bind:value
 			type="text"
 			{name}
 			id={name}
 			on:focus={(event) => event.currentTarget.select()}
+			{disabled}
 		/>
 	{:else if type === 'number'}
 		<input
-			required
+			required={!optional}
 			{placeholder}
 			bind:value
 			type="number"
@@ -45,9 +54,10 @@
 			on:wheel={valueChangeByWheel}
 			on:focus={(event) => event.currentTarget.select()}
 			{step}
+			{disabled}
 		/>
 	{:else if type === 'selections'}
-		<select required bind:value {name} id={name}>
+		<select {disabled} required bind:value {name} id={name}>
 			{#each choices as title, value}
 				<option {value}>{title}</option>
 			{/each}
@@ -85,5 +95,8 @@
 	}
 	abbr svg {
 		vertical-align: middle;
+	}
+	abbr {
+		text-decoration: none;
 	}
 </style>
