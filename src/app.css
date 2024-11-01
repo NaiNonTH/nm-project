@@ -25,6 +25,7 @@ html {
 		'Helvetica Neue',
 		sans-serif;
 	background: #fafaff;
+	scroll-padding-top: 3rem;
 }
 
 a:not(:hover) {

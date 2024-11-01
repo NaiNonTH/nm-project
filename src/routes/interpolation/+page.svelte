@@ -1,12 +1,12 @@
 <h1>Interpolation</h1>
 <ul class="grid-list">
 	<li>
-		<a href="/interpolation/newton-divided-difference">Newton Divided-Difference</a>
+		<a href="/interpolation/newton-divided-difference#main">Newton Divided-Difference</a>
 	</li>
 	<li>
-		<a href="/interpolation/lagrange">Lagrange Interpolation</a>
+		<a href="/interpolation/lagrange#main">Lagrange Interpolation</a>
 	</li>
 	<li>
-		<a href="/interpolation/linear-spline">Linear Spline Interpolation</a>
+		<a href="/interpolation/linear-spline#main">Linear Spline Interpolation</a>
 	</li>
 </ul>
