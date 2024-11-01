@@ -40,13 +40,18 @@
 	<nav class="site-nav">
 		<ul>
 			<li>
-				<a data-icon="🏠" class="home" aria-current={$page.url.pathname === '/'} href="/#main">Home</a>
+				<a data-icon="🏠" class="home" aria-current={$page.url.pathname === '/'} href="/#main"
+					>Home</a
+				>
 			</li>
 		</ul>
 		<ul>
 			{#each links as { title, href }}
 				<li>
-					<a aria-current={$page.url.pathname.includes(href) && $page.status == 200} href="{href}#main">
+					<a
+						aria-current={$page.url.pathname.includes(href) && $page.status == 200}
+						href="{href}#main"
+					>
 						{title}
 					</a>
 				</li>
