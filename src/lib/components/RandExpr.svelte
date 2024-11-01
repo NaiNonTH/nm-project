@@ -187,23 +187,23 @@
 		display: flex;
 	}
 	.mobile-toggle {
-		display: none;
-
 		position: fixed;
-		bottom: 3.5rem;
-		right: 0.5em;
+		bottom: 1.5em;
+		right: 1.5em;
 
 		width: 3em;
 		height: 3em;
 		border-radius: 50%;
 
+		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
 
 	@media (max-width: 48rem) {
 		.mobile-toggle {
-			display: flex;
+			bottom: 3.5em;
+			right: 0.5em;
 		}
 	}
 </style>
