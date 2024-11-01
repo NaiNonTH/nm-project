@@ -90,33 +90,33 @@ export function multiLinearRegression(x, xi, yi) {
 
 	const { values: a_list } = gaussJordan(joinedMatrix(A, B));
 
-	const xi_dataGraph = xi.map(
-		(x, i) => new PlotlyLineGraph(`x${toSubset(i)}`, { mode: 'markers' }, x, yi[i])
-	);
+	// const xi_dataGraph = xi.map(
+	// 	(x, i) => new PlotlyLineGraph(`x${toSubset(i)}`, { mode: 'markers' }, x, yi[i])
+	// );
 
 	const f = (x) => sum(a_list.map((a, i) => a * (x[i - 1] || 1)));
 
-	let xi_min = Infinity;
-	for (const x_data of xi) {
-		for (const x of x_data) {
-			if (x < xi_min) xi_min = x;
-		}
-	}
+	// let xi_min = Infinity;
+	// for (const x_data of xi) {
+	// 	for (const x of x_data) {
+	// 		if (x < xi_min) xi_min = x;
+	// 	}
+	// }
 
-	let xi_max = -Infinity;
-	for (const x_data of xi) {
-		for (const x of x_data) {
-			if (x > xi_max) xi_max = x;
-		}
-	}
+	// let xi_max = -Infinity;
+	// for (const x_data of xi) {
+	// 	for (const x of x_data) {
+	// 		if (x > xi_max) xi_max = x;
+	// 	}
+	// }
 
 	const answer = f(x);
 
-	const graph = [
-		new PlotlyLineGraph('f^(x)', {}, ...createFunctionGraphData(f, xi_min, xi_max)),
-		...xi_dataGraph,
-		new PlotlyLineGraph('Answer', { stroke: 'red' }, [x], [answer])
-	];
+	// const graph = [
+	// 	new PlotlyLineGraph('f^(x)', {}, ...createFunctionGraphData(f, xi_min, xi_max)),
+	// 	...xi_dataGraph,
+	// 	new PlotlyLineGraph('Answer', { stroke: 'red' }, [x], [answer])
+	// ];
 
-	return new ExtrapolationAnswer(answer, calculateExecutionTime(timeBegin), graph);
+	return new ExtrapolationAnswer(answer, calculateExecutionTime(timeBegin));
 }

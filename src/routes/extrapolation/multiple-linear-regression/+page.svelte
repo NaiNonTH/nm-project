@@ -30,7 +30,7 @@
 	let coolingDown = false;
 	let progressing = false;
 
-	$: disabled = data_isInvalid || xIsInvalid;
+	$: disabled = data_isInvalid || xIsInvalid || progressing;
 
 	let result = null;
 
