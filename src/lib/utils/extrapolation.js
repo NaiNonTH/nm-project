@@ -1,6 +1,6 @@
 import { ExtrapolationAnswer, PlotlyLineGraph } from './classes';
 import { gaussJordan } from './linear-algebra';
-import { calculateExecutionTime, createFunctionGraphData, joinedMatrix, toSubset } from './misc';
+import { calculateExecutionTime, createFunctionGraphData, joinedMatrix } from './misc';
 
 function sum(data) {
 	return data.reduce((a, b) => a + b, 0);

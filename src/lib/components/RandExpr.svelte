@@ -17,7 +17,7 @@
 
 	let onCooldown = false;
 	let errMessage = '';
-	
+
 	let modal;
 
 	function toggleEvent(e) {
