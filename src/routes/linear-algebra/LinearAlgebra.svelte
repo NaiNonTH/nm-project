@@ -34,7 +34,7 @@
 
 	async function submit() {
 		progressing = true;
-		
+
 		if (joinMatrix) result = func(joinedMatrix(A, B));
 		else if (iterative) result = func(A, B, x0, error);
 		else result = func(A, B);
@@ -47,7 +47,7 @@
 		setTimeout(() => {
 			coolingDown = false;
 			progressing = false;
-		}, 3000)
+		}, 3000);
 	}
 </script>
 

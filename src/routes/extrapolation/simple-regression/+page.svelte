@@ -32,7 +32,7 @@
 		progressing = true;
 
 		result = polynomialRegression(m, x, x_data, y_data);
-		
+
 		incrementing = true;
 		await fetch('/api/add-runs-count', { method: 'POST' });
 		incrementing = false;
@@ -41,7 +41,7 @@
 		setTimeout(() => {
 			coolingDown = false;
 			progressing = false;
-		}, 3000)
+		}, 3000);
 	}
 </script>
 

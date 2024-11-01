@@ -30,7 +30,7 @@
 		progressing = true;
 
 		result = difference(direction, precision, order, expr, x, h);
-		
+
 		incrementing = true;
 		await fetch('/api/add-runs-count', { method: 'POST' });
 		incrementing = false;
