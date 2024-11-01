@@ -39,6 +39,7 @@ button {
 	background: #1f1f6b;
 	border-radius: 0.5em;
 }
+.jump:hover,
 button:not(:disabled):hover,
 button:focus {
 	background: #4949af;
@@ -47,11 +48,38 @@ button:focus {
 	animation: ripple 0.2s forwards;
 }
 
-dt {
+.jump {
+	display: none;
+
+	position: fixed;
+	bottom: 0.5rem;
+	left: 0.5rem;
+	right: 0.5rem;
+
+	text-align: center;
+	padding: 0.5em;
+
+	background: #1f1f6b;
+	color: white;
+	border-radius: 2rem;
+}
+
+dl {
+	display: flex;
+	flex-wrap: wrap;
+
+	text-align: center;
 	font-weight: bold;
 }
+dl div {
+	flex: 1 1 10rem;
+	padding: 1em;
+}
 dd {
-	margin-left: 2ch;
+	font-size: 1.618em;
+	margin: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 @keyframes ripple {
@@ -183,7 +211,7 @@ main > section {
 	background: #fff;
 }
 
-.sidebar > *:not(nav) {
+.last-commit {
 	padding: 1rem;
 }
 
@@ -271,6 +299,7 @@ table {
 	width: 100%;
 	border-collapse: collapse;
 }
+dl div:nth-child(odd),
 table tr:nth-child(odd) td {
 	background: #fafaff;
 }
@@ -333,7 +362,7 @@ ul.warning {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		margin: 3rem 4px;
+		margin: 3rem 4px 6rem;
 	}
 	header,
 	footer {
@@ -350,5 +379,8 @@ ul.warning {
 	}
 	.site-nav {
 		align-self: unset;
+	}
+	.jump {
+		display: block;
 	}
 }

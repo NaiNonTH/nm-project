@@ -17,6 +17,8 @@
 
 	let onCooldown = false;
 	let errMessage = '';
+	
+	let modal;
 
 	function toggleEvent(e) {
 		if (e.altKey && e.code === 'KeyP') pushState('', { randexpr: true });
@@ -50,6 +52,8 @@
 			if (response.ok) {
 				const { answer } = await response.json();
 				display = answer;
+
+				modal.scrollTo({ top: 0, behavior: 'smooth' });
 			} else {
 				console.log(response);
 				errMessage = `[${response.status}] ${response.statusText}`;
@@ -72,8 +76,17 @@
 
 <svelte:document on:keydown={toggleEvent} />
 
+<button class="mobile-toggle" on:click={() => pushState('', { randexpr: true })} type="button">
+	<svg width="24" height="24" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+		<path
+			d="M1919.989 168.955V394.95h-832.716l-476.16 1251.388-212.78-4.743-194.373-588.537H-.01V827.176h285.515l107.294 77.59L513.08 1268.89 903.857 241.802l105.6-72.847zM1265.72 788.99l240.177 240.176 240.162-240.12 159.7 159.586-240.2 240.197 240.2 240.198-159.7 159.586-240.163-240.12-240.176 240.177-159.698-159.7 240.183-240.141-240.183-240.14 159.698-159.7Z"
+			fill-rule="evenodd"
+			fill="#fff"
+		/>
+	</svg>
+</button>
 {#if $page.state.randexpr}
-	<div class="modal">
+	<div bind:this={modal} class="modal">
 		<h2>Random Equation</h2>
 		<MathDisplay expr={display || '?'} />
 		<div class="copy-zone">
@@ -172,5 +185,25 @@
 	}
 	.copy-zone {
 		display: flex;
+	}
+	.mobile-toggle {
+		display: none;
+
+		position: fixed;
+		bottom: 3.5rem;
+		right: 0.5em;
+
+		width: 3em;
+		height: 3em;
+		border-radius: 50%;
+
+		align-items: center;
+		justify-content: center;
+	}
+
+	@media (max-width: 48rem) {
+		.mobile-toggle {
+			display: flex;
+		}
 	}
 </style>

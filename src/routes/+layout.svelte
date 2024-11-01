@@ -61,6 +61,28 @@
 			</li>
 		</ul>
 	</nav>
+	<dl aria-label="Visitors and Runs count">
+		<div>
+			<dt>Visitors</dt>
+			<dd>
+				{#if data.visitors !== null}
+					{data.visitors.toLocaleString()}
+				{:else}
+					N/A
+				{/if}
+			</dd>
+		</div>
+		<div>
+			<dt>Runs</dt>
+			<dd>
+				{#if data.runs !== null}
+					{data.runs.toLocaleString()}
+				{:else}
+					N/A
+				{/if}
+			</dd>
+		</div>
+	</dl>
 	<div class="last-commit">
 		<h3>Last Commit:</h3>
 		{#if data.lastCommit}
@@ -73,33 +95,15 @@
 			</p>
 		{/if}
 	</div>
-	<div>
-		<h3>Info</h3>
-		<dl>
-			<dt>Visitors</dt>
-			<dd>
-				{#if data.visitors !== null}
-					{data.visitors}
-				{:else}
-					N/A
-				{/if}
-			</dd>
-			<dt>Runs</dt>
-			<dd>
-				{#if data.runs !== null}
-					{data.runs}
-				{:else}
-					N/A
-				{/if}
-			</dd>
-		</dl>
-	</div>
 </div>
-<main>
+<main id="main">
 	<slot />
 </main>
 <RandExpr />
+<a class="jump" href="#main">Jump to Main</a>
 <footer>
-	<strong>Numerical Method Project</strong>, an open-source University project by
-	<strong><a href="https://nons.page">nons.page</a></strong>.
+	<strong>Numerical Method Project</strong>, an
+	<a target="_blank" href="https://github.com/NaiNonTH/nm-project">open-source</a>
+	University project by
+	<strong><a target="_blank" href="https://nons.page">nons.page</a></strong>.
 </footer>
