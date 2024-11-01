@@ -41,7 +41,7 @@
 		bind:value={size}
 	/>
 </div>
-<div class="matrix-input same-line">
+<div class="matrix-input">
 	<div style:grid-template-columns="repeat({size}, 3.5rem)" class="a-input">
 		{#each Array(size) as _, i}
 			{#each Array(size) as _, j}
@@ -76,11 +76,21 @@
 
 <style>
 	.size-config {
+		margin: 1rem auto;
 		align-items: center;
 	}
 
 	.matrix-input {
 		gap: 8px;
+		overflow-x: auto;
+		flex-wrap: nowrap;
+
+		display: flex;
+		flex-wrap: nowrap;
+
+		max-width: -moz-fit-content;
+		max-width: fit-content;
+		margin: auto;
 	}
 	.matrix-input > *:not(.equals) {
 		display: grid;
