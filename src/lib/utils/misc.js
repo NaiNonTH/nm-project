@@ -51,18 +51,25 @@ export function matrixIsInvalid(matrix, determinedRows, determinedCols) {
 	return false;
 }
 
-export function createFunctionGraphData(f, x0, x1) {
+export function createFunctionGraphData(f, x0, x1, round = true, extend = 2) {
 	if (x0 === x1) return [[x0], [x1]];
+	
+	let start = Math.min(x0, x1);
+	let end = Math.max(x0, x1);
 
-	x0 = Math.floor(Math.min(x0, x1));
-	x1 = Math.ceil(Math.max(x0, x1));
+	if (round) {
+		start = Math.floor(start); 
+		end = Math.ceil(end);
+	}
 
 	let x_data = [];
 	let y_data = [];
-	let step = Math.abs(x1 - x0) * 0.025;
+	let step = Math.abs(start - end) * 0.025;
 
-	let start = x0 - 2;
-	let end = x1 + 2;
+	if (extend) {
+		start -= extend;
+		end += extend;
+	}
 
 	for (let x = start; x <= end + step; x += step) {
 		x_data.push(x);
