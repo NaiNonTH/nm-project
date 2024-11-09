@@ -89,17 +89,16 @@
 		</div>
 	</dl>
 	{#if data.lastCommitRequest}
-	<div class="last-commit">
-		<h3>Last Commit:</h3>
+		<div class="last-commit">
+			<h3>Last Commit:</h3>
 			<p>
 				{#await data.lastCommitRequest}
 					Fetching...
 				{:then { data }}
 					{@const lastCommit = data[0]}
 					{@const commit = lastCommit.commit}
-					<a target="_blank" href={lastCommit.html_url}>{commit.message}</a> by {commit.author.name} ({new Date(
-						commit.author.date
-					).toLocaleString()})
+					<a target="_blank" href={lastCommit.html_url}>{commit.message}</a> by {commit.author.name}
+					({new Date(commit.author.date).toLocaleString()})
 				{:catch err}
 					<strong>[Error]</strong> {err}
 				{/await}

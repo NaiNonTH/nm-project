@@ -53,12 +53,12 @@ export function matrixIsInvalid(matrix, determinedRows, determinedCols) {
 
 export function createFunctionGraphData(f, x0, x1, round = true, extend = 2) {
 	if (x0 === x1) return [[x0], [x1]];
-	
+
 	let start = Math.min(x0, x1);
 	let end = Math.max(x0, x1);
 
 	if (round) {
-		start = Math.floor(start); 
+		start = Math.floor(start);
 		end = Math.ceil(end);
 	}
 

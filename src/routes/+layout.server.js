@@ -8,14 +8,13 @@ export async function load({ fetch, cookies }) {
 
 	let promises = [];
 
-	const lastCommitRequest = octokit
-	 	.request('GET /repos/{owner}/{repo}/commits', {
-	 		owner: 'NaiNonTH',
-	 		repo: 'nm-project',
-	 		headers: {
-	 			'X-GitHub-Api-Version': '2022-11-28'
-	 		}
-	 	});
+	const lastCommitRequest = octokit.request('GET /repos/{owner}/{repo}/commits', {
+		owner: 'NaiNonTH',
+		repo: 'nm-project',
+		headers: {
+			'X-GitHub-Api-Version': '2022-11-28'
+		}
+	});
 
 	promises.push(fetch('/api/get-info').catch((err) => err));
 
@@ -25,7 +24,7 @@ export async function load({ fetch, cookies }) {
 		cookies.set('visited', true, { path: '/' });
 	}
 
-	const [ info ] = await Promise.all(promises);
+	const [info] = await Promise.all(promises);
 
 	if (info.ok) {
 		const { visitors, runs } = await info.json();

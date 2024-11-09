@@ -46,7 +46,7 @@ export function trapezoidal(expr, x0, xn, n) {
 function LString(xs, i, n) {
 	let over = '';
 	let under = '';
-	
+
 	for (let j = 0; j <= n; ++j) {
 		if (i !== j) {
 			over += `(${xs[j]}-x)`;
@@ -54,7 +54,7 @@ function LString(xs, i, n) {
 		}
 	}
 
-	return `${over} / ${under}`
+	return `${over} / ${under}`;
 }
 
 function lagrangeString(xs, ys, start, n) {
@@ -63,8 +63,7 @@ function lagrangeString(xs, ys, start, n) {
 	for (let i = start; i <= start + n; ++i) {
 		str += `(${LString(xs, i, n)})*${ys[i]}`;
 
-		if (i != start + n)
-			str += "+";
+		if (i != start + n) str += '+';
 	}
 
 	return str;
@@ -75,9 +74,7 @@ export function simpson(expr, a, b, n) {
 
 	const f = (x) => evaluate(expr, { x });
 	let h = Math.abs(a - b) / (2 * n);
-	const graph = [
-		new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(f, a, b, true, false))
-	];
+	const graph = [new PlotlyLineGraph('f(x)', {}, ...createFunctionGraphData(f, a, b, true, false))];
 
 	const xs = [];
 	const ys = [];
@@ -90,19 +87,13 @@ export function simpson(expr, a, b, n) {
 	const n_capped = Math.min(n, 10);
 
 	for (let i = 0; i < 2 * n_capped; i += 2) {
-		const lagF = x => evaluate(lagrangeString(xs, ys, 0, i + 2), { x });
+		const lagF = (x) => evaluate(lagrangeString(xs, ys, 0, i + 2), { x });
 
 		graph.push(
 			new PlotlyLineGraph(
 				`@ ${xs[i].toFixed(2)}`,
 				{ fill: 'tozeroy' },
-				...createFunctionGraphData(
-					lagF,
-					xs[i],
-					xs[i + 2],
-					false,
-					false
-				)
+				...createFunctionGraphData(lagF, xs[i], xs[i + 2], false, false)
 			)
 		);
 	}
@@ -114,8 +105,7 @@ export function simpson(expr, a, b, n) {
 		if (i != 0 && i != ys.length - 1) {
 			if (i % 2 == 1) {
 				fsum += 4 * y;
-			}
-			else {
+			} else {
 				fsum += 2 * y;
 			}
 		}
