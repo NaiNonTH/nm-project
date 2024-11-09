@@ -352,6 +352,27 @@ ul.warning {
 	padding: 0.5em;
 }
 
+.loading::after {
+	content: '';
+	width: 1em;
+	height: 1em;
+	display: inline-block;
+
+	border-radius: 50%;
+	background: conic-gradient(#dcdcff 0 25%, #bcbdf5 0 50%, #dcdcff 0 75%, #bcbdf5 0 100%);
+
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0);
+	}
+	to {
+		transform: rotate(1turn);
+	}
+}
+
 @media (max-width: 48rem) {
 	#site {
 		display: flex;

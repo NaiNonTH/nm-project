@@ -96,7 +96,7 @@
 				{#if visitors !== null}
 					{visitors.toLocaleString()}
 				{:else}
-					...
+					<span class="loading"></span>
 				{/if}
 			</dd>
 		</div>
@@ -106,22 +106,22 @@
 				{#if runs !== null}
 					{runs.toLocaleString()}
 				{:else}
-					...
+					<span class="loading"></span>
 				{/if}
 			</dd>
 		</div>
 	</dl>
 	<div class="last-commit js">
 		<h3>Last Commit:</h3>
-		{#if lastCommit}
-			{@const { commit } = lastCommit}
-			<p>
+		<p>
+			{#if lastCommit}
+				{@const { commit } = lastCommit}
 				<a target="_blank" href={lastCommit.html_url}>{commit.message}</a> by {commit.author.name}
 				({new Date(commit.author.date).toLocaleString()})
-			</p>
-		{:else}
-			<p>Fetching...</p>
-		{/if}
+			{:else}
+				<span class="loading"></span>
+			{/if}
+		</p>
 	</div>
 </div>
 <main id="main">
