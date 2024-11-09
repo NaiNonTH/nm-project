@@ -2,8 +2,7 @@
 	import RandExpr from '$lib/components/RandExpr.svelte';
 	import { page } from '$app/stores';
 	import '../app.css';
-
-	export let data;
+	import { onMount } from 'svelte';
 
 	const links = [
 		{
@@ -31,7 +30,31 @@
 			href: '/numerical-difference'
 		}
 	];
+
+	let visitors = null,
+		runs = null,
+		lastCommit = null;
+
+	onMount(function () {
+		fetch('/api/get-info')
+			.then((res) => res.json())
+			.then((json) => ({ visitors, runs } = json));
+
+		fetch('https://api.github.com/repos/NaiNonTH/nm-project/commits')
+			.then((res) => res.json())
+			.then((json) => (lastCommit = json[0]));
+	});
 </script>
+
+<svelte:head>
+	<noscript>
+		<style>
+			.js {
+				display: none;
+			}
+		</style>
+	</noscript>
+</svelte:head>
 
 <header>
 	<h1><span aria-hidden="true">🧮</span> Numerical Method Project</h1>
@@ -66,46 +89,40 @@
 			</li>
 		</ul>
 	</nav>
-	<dl aria-label="Visitors and Runs count">
+	<dl class="js" aria-label="Visitors and Runs count">
 		<div>
 			<dt>Visitors</dt>
 			<dd>
-				{#if data.visitors !== null}
-					{data.visitors.toLocaleString()}
+				{#if visitors !== null}
+					{visitors.toLocaleString()}
 				{:else}
-					N/A
+					...
 				{/if}
 			</dd>
 		</div>
 		<div>
 			<dt>Runs</dt>
 			<dd>
-				{#if data.runs !== null}
-					{data.runs.toLocaleString()}
+				{#if runs !== null}
+					{runs.toLocaleString()}
 				{:else}
-					N/A
+					...
 				{/if}
 			</dd>
 		</div>
 	</dl>
-	{#if data.lastCommitRequest}
-		<div class="last-commit">
-			<h3>Last Commit:</h3>
+	<div class="last-commit js">
+		<h3>Last Commit:</h3>
+		{#if lastCommit}
+			{@const { commit } = lastCommit}
 			<p>
-				{#await data.lastCommitRequest}
-					Fetching...
-				{:then { data }}
-					{@const lastCommit = data[0]}
-					{@const commit = lastCommit.commit}
-					<a target="_blank" href={lastCommit.html_url}>{commit.message}</a> by {commit.author.name}
-					({new Date(commit.author.date).toLocaleString()})
-				{:catch err}
-					<strong>[Error]</strong> {err}
-				{/await}
-				<noscript style="color:red;">Please enable JavaScript.</noscript>
+				<a target="_blank" href={lastCommit.html_url}>{commit.message}</a> by {commit.author.name}
+				({new Date(commit.author.date).toLocaleString()})
 			</p>
-		</div>
-	{/if}
+		{:else}
+			<p>Fetching...</p>
+		{/if}
+	</div>
 </div>
 <main id="main">
 	<slot />
