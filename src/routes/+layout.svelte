@@ -88,18 +88,25 @@
 			</dd>
 		</div>
 	</dl>
+	{#if data.lastCommitRequest}
 	<div class="last-commit">
 		<h3>Last Commit:</h3>
-		{#if data.lastCommit}
-			{@const lastCommit = data.lastCommit}
-			{@const commit = lastCommit.commit}
 			<p>
-				<a target="_blank" href={lastCommit.html_url}>{commit.message}</a> by {commit.author.name} ({new Date(
-					commit.author.date
-				).toLocaleString()})
+				{#await data.lastCommitRequest}
+					Fetching...
+				{:then { data }}
+					{@const lastCommit = data[0]}
+					{@const commit = lastCommit.commit}
+					<a target="_blank" href={lastCommit.html_url}>{commit.message}</a> by {commit.author.name} ({new Date(
+						commit.author.date
+					).toLocaleString()})
+				{:catch err}
+					<strong>[Error]</strong> {err}
+				{/await}
+				<noscript style="color:red;">Please enable JavaScript.</noscript>
 			</p>
-		{/if}
-	</div>
+		</div>
+	{/if}
 </div>
 <main id="main">
 	<slot />
